@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Direction Artistique</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F5F2ED;
+    --bg2: #EDEAE3;
+    --white: #FFFFFF;
+    --black: #111111;
+    --ink: #1A1A1A;
+    --muted: #888880;
+    --border: rgba(0,0,0,0.09);
+    --accent-blue: #1A3FFF;
+    --accent-orange: #FF4F1A;
+    --accent-lime: #8DC63F;
+    --font-display: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* COVER */
+  .cover {
+    min-height: 100vh;
+    background: var(--white);
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    padding: 48px 64px;
+    border-bottom: 2px solid var(--black);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 80px;
+  }
+
+  .cover-logo {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+
+  .cover-badge {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+    border-radius: 100px;
+    background: var(--bg);
+  }
+
+  .cover-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: end;
+  }
+
+  .cover-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent-orange);
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  .cover-title {
+    font-family: var(--font-display);
+    font-size: clamp(52px, 8vw, 104px);
+    font-weight: 800;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+  }
+
+  .cover-title .outline {
+    color: transparent;
+    -webkit-text-stroke: 2px var(--ink);
+  }
+
+  .cover-desc {
+    font-size: 17px;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.75;
+    margin-bottom: 40px;
+    border-left: 3px solid var(--accent-orange);
+    padding-left: 20px;
+  }
+
+  .cover-meta-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .cover-meta-list li {
+    font-size: 13px;
+    color: var(--muted);
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  .cover-meta-list li::before {
+    content: '';
+    width: 20px;
+    height: 1px;
+    background: var(--border);
+    display: inline-block;
+    flex-shrink: 0;
+  }
+
+  .cover-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-top: 40px;
+    border-top: 1px solid var(--border);
+    margin-top: 80px;
+  }
+
+  .cover-date { font-size: 12px; color: var(--muted); letter-spacing: 0.08em; }
+
+  .cover-num {
+    font-family: var(--font-display);
+    font-size: 120px;
+    font-weight: 800;
+    color: var(--bg2);
+    line-height: 1;
+    user-select: none;
+  }
+
+  /* SECTION */
+  .section { padding: 80px 64px; border-bottom: 1px solid var(--border); background: var(--white); }
+  .section.alt { background: var(--bg); }
+
+  .section-header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 56px; }
+  .section-idx { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+  .section-title { font-family: var(--font-display); font-size: clamp(28px, 4vw, 44px); font-weight: 800; letter-spacing: -0.025em; color: var(--ink); }
+
+  /* PALETTE */
+  .palette-row {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    margin-bottom: 40px;
+  }
+
+  .swatch {
+    aspect-ratio: 1 / 1.4;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 14px;
+  }
+
+  .swatch-name { font-family: var(--font-display); font-size: 12px; font-weight: 700; line-height: 1.2; margin-bottom: 3px; }
+  .swatch-hex { font-family: 'Courier New', monospace; font-size: 10px; opacity: 0.65; margin-bottom: 2px; }
+  .swatch-role { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.55; }
+  .palette-note { font-size: 13px; color: var(--muted); max-width: 640px; line-height: 1.7; }
+
+  /* TYPO */
+  .typo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-bottom: 48px; }
+
+  .typo-card {
+    background: var(--bg);
+    padding: 40px;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .typo-card:first-child { border-radius: 16px 0 0 16px; }
+  .typo-card:last-child  { border-radius: 0 16px 16px 0; }
+  .typo-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); font-weight: 500; margin-bottom: 20px; }
+  .typo-sample-display { font-family: var(--font-display); font-size: 80px; font-weight: 800; letter-spacing: -0.04em; line-height: 0.85; color: var(--ink); }
+  .typo-sample-body { font-family: var(--font-body); font-size: 18px; font-weight: 300; line-height: 1.7; color: #555; }
+
+  .typo-specs { margin-top: 20px; border-top: 1px solid var(--border); padding-top: 16px; }
+  .spec-row { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); padding: 5px 0; border-bottom: 1px solid var(--border); }
+  .spec-row span:last-child { color: var(--ink); font-weight: 500; font-family: 'Courier New', monospace; }
+
+  .typo-scale { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .scale-row { display: flex; align-items: baseline; gap: 24px; padding: 16px 24px; border-bottom: 1px solid var(--border); background: var(--white); }
+  .scale-row:last-child { border-bottom: none; }
+  .scale-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); width: 80px; flex-shrink: 0; font-weight: 500; }
+  .scale-example { flex: 1; }
+
+  /* COMPOSANTS */
+  .comp-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+  .comp-card { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: 32px; }
+  .comp-card-title { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; font-weight: 500; }
+
+  .btn-primary { display: inline-flex; align-items: center; background: var(--ink); color: var(--white); font-family: var(--font-display); font-size: 13px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 14px 28px; border-radius: 100px; cursor: pointer; border: none; margin: 0 6px 10px 0; }
+  .btn-outline { display: inline-flex; align-items: center; background: transparent; color: var(--ink); font-family: var(--font-display); font-size: 13px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 13px 27px; border-radius: 100px; cursor: pointer; border: 2px solid var(--ink); margin: 0 6px 10px 0; }
+  .btn-accent { display: inline-flex; align-items: center; background: var(--accent-orange); color: var(--white); font-family: var(--font-display); font-size: 13px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 14px 28px; border-radius: 100px; cursor: pointer; border: none; margin-top: 4px; }
+
+  .tags-demo { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; padding: 5px 13px; border-radius: 100px; border: 1.5px solid var(--border); color: var(--muted); background: var(--white); }
+  .tag.active { border-color: var(--ink); color: var(--ink); font-weight: 600; }
+  .tag.orange { border-color: var(--accent-orange); color: var(--accent-orange); }
+  .tag.blue   { border-color: var(--accent-blue);   color: var(--accent-blue); }
+
+  .stat-big { font-family: var(--font-display); font-size: 68px; font-weight: 800; letter-spacing: -0.04em; line-height: 1; color: var(--ink); }
+  .stat-label { font-size: 13px; color: var(--muted); margin-top: 6px; font-weight: 300; line-height: 1.4; max-width: 180px; }
+
+  .event-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .event-info { flex: 1; }
+  .event-tags { display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap; }
+  .event-name { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--ink); letter-spacing: -0.01em; }
+  .event-date { font-size: 12px; color: var(--muted); margin-top: 4px; }
+  .event-btn { background: var(--ink); color: var(--white); font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 10px 20px; border-radius: 100px; border: none; cursor: pointer; white-space: nowrap; margin-left: 20px; }
+
+  /* LAYOUT DEMO */
+  .layout-demo { border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 24px; }
+  .layout-nav { display: flex; justify-content: space-between; align-items: center; padding: 16px 28px; border-bottom: 1px solid var(--border); background: var(--white); }
+  .layout-logo { font-family: var(--font-display); font-size: 16px; font-weight: 800; letter-spacing: -0.02em; color: var(--ink); }
+  .layout-nav-links { display: flex; gap: 28px; list-style: none; }
+  .layout-nav-links li { font-size: 13px; color: var(--muted); font-weight: 400; cursor: pointer; }
+  .layout-nav-links li.active { color: var(--ink); font-weight: 600; }
+
+  .layout-hero { padding: 64px 48px; background: var(--white); border-bottom: 1px solid var(--border); }
+  .layout-hero-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-orange); font-weight: 600; margin-bottom: 16px; }
+  .layout-hero-title { font-family: var(--font-display); font-size: 48px; font-weight: 800; letter-spacing: -0.03em; line-height: 0.92; color: var(--ink); margin-bottom: 24px; }
+  .layout-hero-title .ol { color: transparent; -webkit-text-stroke: 2px var(--ink); }
+  .layout-hero-sub { font-size: 15px; color: var(--muted); font-weight: 300; max-width: 440px; line-height: 1.65; }
+
+  .layout-stats { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--bg2); }
+  .layout-stat { padding: 28px; border-right: 1px solid var(--border); }
+  .layout-stat:last-child { border-right: none; }
+  .layout-stat-num { font-family: var(--font-display); font-size: 36px; font-weight: 800; letter-spacing: -0.03em; color: var(--ink); }
+  .layout-stat-label { font-size: 12px; color: var(--muted); margin-top: 4px; line-height: 1.4; }
+
+  /* TOV */
+  .tov-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 40px; }
+  .tov-card { border-radius: 16px; padding: 32px; border: 1px solid var(--border); }
+  .tov-card.do   { background: #F0FFF4; border-color: #86EFAC; }
+  .tov-card.dont { background: #FFF5F5; border-color: #FCA5A5; }
+  .tov-heading { font-family: var(--font-display); font-size: 13px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 20px; }
+  .tov-card.do   .tov-heading { color: #16A34A; }
+  .tov-card.dont .tov-heading { color: #DC2626; }
+  .tov-item { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px; font-size: 14px; line-height: 1.5; color: #444; }
+  .tov-item .icon { flex-shrink: 0; font-size: 16px; margin-top: 1px; }
+
+  /* BACK COVER */
+  .back-cover {
+    min-height: 60vh;
+    background: var(--ink);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 80px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .back-cover::before {
+    content: '';
+    position: absolute;
+    bottom: -120px; right: -120px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(255,79,26,0.18) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .back-title { font-family: var(--font-display); font-size: clamp(40px, 6vw, 80px); font-weight: 800; letter-spacing: -0.03em; color: var(--white); line-height: 0.95; max-width: 700px; }
+  .back-title .hl { color: var(--accent-orange); }
+  .back-bottom { display: flex; justify-content: space-between; align-items: flex-end; }
+  .back-tagline { font-size: 14px; color: rgba(255,255,255,0.35); font-weight: 300; }
+  .back-logo { font-family: var(--font-display); font-size: 13px; font-weight: 800; color: rgba(255,255,255,0.18); letter-spacing: 0.05em; }
+
+  .caption { font-size: 12px; color: var(--muted); margin-top: 10px; font-style: italic; }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-topbar">
+    <span class="cover-logo">Direction Artistique</span>
+    <span class="cover-badge">Style Guide · v1.0 · 2026</span>
+  </div>
+
+  <div class="cover-hero">
+    <div>
+      <p class="cover-eyebrow">Inspiré de Founders Mesh</p>
+      <h1 class="cover-title">
+        Bold.<br>
+        <span class="outline">Clean.</span><br>
+        Human.
+      </h1>
+    </div>
+    <div>
+      <p class="cover-desc">
+        Une direction visuelle qui allie typographie percutante, 
+        palette épurée et mise en page éditoriale. 
+        Énergie startup, exécution premium.
+      </p>
+      <ul class="cover-meta-list">
+        <li>Couleurs — Blanc, Crème, Noir + 3 accents</li>
+        <li>Typographies — Syne (Display) · DM Sans (Body)</li>
+        <li>Ton — Direct, sans bullshit, chaleureux</li>
+        <li>Layouts — Grille 12 col, espacement généreux</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="cover-bottom">
+    <span class="cover-date">Mars 2026</span>
+    <span class="cover-num">DA</span>
+  </div>
+</div>
+
+<!-- 01 · PALETTE -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-idx">01 —</span>
+    <h2 class="section-title">Palette de couleurs</h2>
+  </div>
+
+  <div class="palette-row">
+    <div class="swatch" style="background:#FFFFFF; border-right:1px solid #E8E8E8;">
+      <span class="swatch-role" style="color:#999">Base</span>
+      <span class="swatch-name" style="color:#111">Blanc</span>
+      <span class="swatch-hex" style="color:#999">#FFFFFF</span>
+    </div>
+    <div class="swatch" style="background:#F5F2ED; border-right:1px solid #E8E3DC;">
+      <span class="swatch-role" style="color:#999">Fond alt</span>
+      <span class="swatch-name" style="color:#111">Crème</span>
+      <span class="swatch-hex" style="color:#999">#F5F2ED</span>
+    </div>
+    <div class="swatch" style="background:#1A1A1A; border-right:1px solid #2a2a2a;">
+      <span class="swatch-role" style="color:rgba(255,255,255,0.45)">Principal</span>
+      <span class="swatch-name" style="color:#fff">Encre</span>
+      <span class="swatch-hex" style="color:rgba(255,255,255,0.5)">#1A1A1A</span>
+    </div>
+    <div class="swatch" style="background:#FF4F1A; border-right:1px solid rgba(0,0,0,0.1);">
+      <span class="swatch-role" style="color:rgba(255,255,255,0.6)">Accent 1</span>
+      <span class="swatch-name" style="color:#fff">Orange</span>
+      <span class="swatch-hex" style="color:rgba(255,255,255,0.65)">#FF4F1A</span>
+    </div>
+    <div class="swatch" style="background:#1A3FFF; border-right:1px solid rgba(0,0,0,0.1);">
+      <span class="swatch-role" style="color:rgba(255,255,255,0.6)">Accent 2</span>
+      <span class="swatch-name" style="color:#fff">Bleu</span>
+      <span class="swatch-hex" style="color:rgba(255,255,255,0.65)">#1A3FFF</span>
+    </div>
+    <div class="swatch" style="background:#8DC63F;">
+      <span class="swatch-role" style="color:rgba(0,0,0,0.45)">Accent 3</span>
+      <span class="swatch-name" style="color:#111">Lime</span>
+      <span class="swatch-hex" style="color:rgba(0,0,0,0.5)">#8DC63F</span>
+    </div>
+  </div>
+
+  <p class="palette-note">La base blanche et crème crée de l'espace et de la clarté. Le noir encre assure contraste et lisibilité. Les trois accents sont utilisés avec parcimonie — <strong>un seul par section</strong> — pour ponctuer sans saturer.</p>
+</div>
+
+<!-- 02 · TYPOGRAPHIE -->
+<div class="section alt">
+  <div class="section-header">
+    <span class="section-idx">02 —</span>
+    <h2 class="section-title">Typographie</h2>
+  </div>
+
+  <div class="typo-grid">
+    <div class="typo-card">
+      <div>
+        <p class="typo-label">Display — Syne</p>
+        <div class="typo-sample-display">Aa Bb<br>Cc Dd</div>
+      </div>
+      <div class="typo-specs">
+        <div class="spec-row"><span>Famille</span><span>Syne</span></div>
+        <div class="spec-row"><span>Poids</span><span>700 · 800</span></div>
+        <div class="spec-row"><span>Usage</span><span>Titres, Chiffres, Nav</span></div>
+        <div class="spec-row"><span>Tracking</span><span>-0.03em à -0.04em</span></div>
+      </div>
+    </div>
+    <div class="typo-card">
+      <div>
+        <p class="typo-label">Corps — DM Sans</p>
+        <p class="typo-sample-body">Une communauté construite pour celles et ceux qui font vraiment les choses. Pas de bullshit, juste des connexions qui comptent.</p>
+      </div>
+      <div class="typo-specs">
+        <div class="spec-row"><span>Famille</span><span>DM Sans</span></div>
+        <div class="spec-row"><span>Poids</span><span>300 · 400 · 500</span></div>
+        <div class="spec-row"><span>Usage</span><span>Corps, UI, Labels</span></div>
+        <div class="spec-row"><span>Line height</span><span>1.6 · 1.75</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="typo-scale">
+    <div class="scale-row">
+      <span class="scale-label">H1</span>
+      <span class="scale-example" style="font-family:'Syne',sans-serif; font-size:52px; font-weight:800; letter-spacing:-0.04em; line-height:1; color:var(--ink);">When Founders Mesh</span>
+    </div>
+    <div class="scale-row">
+      <span class="scale-label">H2</span>
+      <span class="scale-example" style="font-family:'Syne',sans-serif; font-size:36px; font-weight:800; letter-spacing:-0.03em; color:var(--ink);">The Future Happens.</span>
+    </div>
+    <div class="scale-row">
+      <span class="scale-label">H3</span>
+      <span class="scale-example" style="font-family:'Syne',sans-serif; font-size:24px; font-weight:700; letter-spacing:-0.02em; color:var(--ink);">Sail & Scale · Croissant Edition</span>
+    </div>
+    <div class="scale-row">
+      <span class="scale-label">Body</span>
+      <span class="scale-example" style="font-family:'DM Sans',sans-serif; font-size:16px; font-weight:400; color:#444; line-height:1.65;">Curated rooms for Seed–Series A founders, select investors, and partners.</span>
+    </div>
+    <div class="scale-row">
+      <span class="scale-label">Label</span>
+      <span class="scale-example" style="font-family:'DM Sans',sans-serif; font-size:11px; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted);">Amsterdam · February 26</span>
+    </div>
+  </div>
+</div>
+
+<!-- 03 · COMPOSANTS -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-idx">03 —</span>
+    <h2 class="section-title">Composants UI</h2>
+  </div>
+
+  <div class="comp-grid">
+    <div class="comp-card">
+      <p class="comp-card-title">Boutons</p>
+      <button class="btn-primary">Buy tickets</button>
+      <button class="btn-outline">Learn more</button>
+      <br>
+      <button class="btn-accent">RSVP Now →</button>
+    </div>
+
+    <div class="comp-card">
+      <p class="comp-card-title">Tags & Labels</p>
+      <div class="tags-demo">
+        <span class="tag active">sail &amp; scale</span>
+        <span class="tag">Amsterdam</span>
+        <span class="tag orange">investors</span>
+        <span class="tag blue">AI founders</span>
+        <span class="tag">cozy location</span>
+        <span class="tag">B2B SaaS</span>
+        <span class="tag">high energy</span>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <p class="comp-card-title">Stats Display</p>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+        <div>
+          <div class="stat-big">750<span style="color:var(--accent-orange)">+</span></div>
+          <div class="stat-label">Membres actifs dans la communauté</div>
+        </div>
+        <div>
+          <div class="stat-big" style="font-size:48px;">50:50</div>
+          <div class="stat-label">Répartition fondateurs &amp; investisseurs</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="comp-card-title" style="margin-bottom:16px;">Carte Événement</p>
+  <div class="event-card">
+    <div class="event-info">
+      <div class="event-tags">
+        <span class="tag" style="font-size:10px; padding:3px 10px;">On a boat</span>
+        <span class="tag orange" style="font-size:10px; padding:3px 10px;">Founders only</span>
+      </div>
+      <div class="event-name">Sail & Scale: AI, Actually Edition</div>
+      <div class="event-date">30 July · 17:30 · Amsterdam</div>
+    </div>
+    <button class="event-btn">Buy tickets</button>
+  </div>
+  <div class="event-card" style="background:var(--bg);">
+    <div class="event-info">
+      <div class="event-tags">
+        <span class="tag" style="font-size:10px; padding:3px 10px;">Flagship</span>
+        <span class="tag blue" style="font-size:10px; padding:3px 10px;">Invitation only</span>
+      </div>
+      <div class="event-name">Founders Mesh Paris · Salon Edition</div>
+      <div class="event-date">4 March · 19:00 · Paris</div>
+    </div>
+    <button class="event-btn" style="background:var(--accent-blue);">RSVP</button>
+  </div>
+</div>
+
+<!-- 04 · LAYOUT -->
+<div class="section alt">
+  <div class="section-header">
+    <span class="section-idx">04 —</span>
+    <h2 class="section-title">Mise en page</h2>
+  </div>
+
+  <div class="layout-demo">
+    <div class="layout-nav">
+      <span class="layout-logo">YourBrand</span>
+      <ul class="layout-nav-links">
+        <li class="active">Home</li>
+        <li>Événements</li>
+        <li>Communauté</li>
+        <li>Partners</li>
+      </ul>
+      <button class="btn-primary" style="font-size:12px; padding:10px 20px;">Join us</button>
+    </div>
+    <div class="layout-hero">
+      <p class="layout-hero-label">Amsterdam · Paris · Los Angeles</p>
+      <h2 class="layout-hero-title">
+        When Founders<br>
+        <span class="ol">Mesh,</span> The Future<br>Happens.
+      </h2>
+      <p class="layout-hero-sub">Curated rooms for Seed–Series A founders, select investors, and partners who are actively building.</p>
+    </div>
+    <div class="layout-stats">
+      <div class="layout-stat">
+        <div class="layout-stat-num">750<span style="color:var(--accent-orange)">+</span></div>
+        <div class="layout-stat-label">Big thinkers & deal makers</div>
+      </div>
+      <div class="layout-stat">
+        <div class="layout-stat-num">50:50</div>
+        <div class="layout-stat-label">Gender split in the room</div>
+      </div>
+      <div class="layout-stat">
+        <div class="layout-stat-num">20<span style="color:var(--accent-blue)">+</span></div>
+        <div class="layout-stat-label">Editions of meshing minds</div>
+      </div>
+      <div class="layout-stat">
+        <div class="layout-stat-num">3</div>
+        <div class="layout-stat-label">Cities · Amsterdam, Paris, LA</div>
+      </div>
+    </div>
+  </div>
+  <p class="caption">↑ Wireframe illustratif : nav minimaliste → hero typographique → stats chiffrées en bande</p>
+</div>
+
+<!-- 05 · TON -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-idx">05 —</span>
+    <h2 class="section-title">Ton & Voix</h2>
+  </div>
+
+  <div class="tov-grid">
+    <div class="tov-card do">
+      <p class="tov-heading">✓ À faire</p>
+      <div class="tov-item"><span class="icon">✦</span><span><strong>Direct et percutant</strong> — "No suits, no B.S." plutôt que "Rejoignez notre communauté professionnelle"</span></div>
+      <div class="tov-item"><span class="icon">✦</span><span><strong>Confiant sans arrogance</strong> — "Not your average networking event" assume une posture forte</span></div>
+      <div class="tov-item"><span class="icon">✦</span><span><strong>Spécifique</strong> — "Seed–Series A founders" plutôt que "entrepreneurs"</span></div>
+      <div class="tov-item"><span class="icon">✦</span><span><strong>Chaleureux et humain</strong> — titres qui parlent comme de vraies personnes</span></div>
+    </div>
+    <div class="tov-card dont">
+      <p class="tov-heading">✗ À éviter</p>
+      <div class="tov-item"><span class="icon">✕</span><span>Jargon corporate vide — "synergies", "solutions innovantes", "écosystème"</span></div>
+      <div class="tov-item"><span class="icon">✕</span><span>Formules génériques — "Bienvenue sur notre site", "N'hésitez pas à nous contacter"</span></div>
+      <div class="tov-item"><span class="icon">✕</span><span>Surabondance de majuscules et d'exclamations — perte de crédibilité</span></div>
+      <div class="tov-item"><span class="icon">✕</span><span>Promesses vagues — préférer des faits concrets et des chiffres réels</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- BACK COVER -->
+<div class="back-cover">
+  <h2 class="back-title">
+    Bold type.<br>
+    White space.<br>
+    <span class="hl">Real energy.</span>
+  </h2>
+  <div class="back-bottom">
+    <p class="back-tagline">Direction Artistique · Inspirée Founders Mesh · 2026</p>
+    <span class="back-logo">DA v1.0</span>
+  </div>
+</div>
+
+</body>
+</html>
