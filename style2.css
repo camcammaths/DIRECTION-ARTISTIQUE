@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prépa Brevet — Maths</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+
+:root {
+  --blue:    #0021BC;
+  --blue-lt: #BDD4E7;
+  --orange:  #EE6E34;
+  --rose:    #D0A6C6;
+  --bg:      #EDEEF0;   /* gris froid Founders Mesh */
+  --white:   #FFFFFF;
+  --ink:     rgb(25,8,6);
+  --ink2:    #3A3D6B;
+  --muted:   #8A8DAA;
+  --line:    rgba(0,33,188,0.10);
+  --fd: 'Plus Jakarta Sans', sans-serif;
+  --fb: 'DM Sans', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--ink); font-family: var(--fb); -webkit-font-smoothing: antialiased; }
+
+/* ════════════════════════════
+   NAV — style Founders Mesh
+════════════════════════════ */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 28px 48px 0;
+  position: relative;
+  z-index: 10;
+}
+
+.nav-logo {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  cursor: pointer;
+}
+
+.nav-logo-top {
+  font-family: var(--fb);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+}
+
+.nav-logo-bottom {
+  font-family: var(--fd);
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.nav-logo-bottom span { color: var(--blue); }
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+}
+
+.nav-links li {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--ink);
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.15s;
+}
+.nav-links li:hover { opacity: 1; }
+.nav-links li.on { opacity: 1; font-weight: 500; }
+
+.nav-cta {
+  font-family: var(--fd);
+  font-size: 13px;
+  font-weight: 600;
+  background: var(--blue);
+  color: #fff;
+  padding: 11px 24px;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  letter-spacing: -0.01em;
+  transition: opacity 0.15s;
+}
+.nav-cta:hover { opacity: 0.85; }
+
+/* ════════════════════════════
+   HERO — typo massive flush left
+   + blocs couleur proportionnels droite
+════════════════════════════ */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 80vh;
+  padding: 48px 48px 0;
+  gap: 48px;
+  align-items: end;
+}
+
+.hero-left {
+  padding-bottom: 48px;
+}
+
+.hero-eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--orange);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+.hero-eyebrow::before { content:''; width:20px; height:2px; background:var(--orange); border-radius:2px; display:inline-block; }
+
+.hero-h1 {
+  font-family: var(--fd);
+  font-size: clamp(56px, 7.5vw, 108px);
+  font-weight: 500;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  text-transform: lowercase;
+  margin-bottom: 40px;
+}
+
+.hero-h1 .ghost {
+  color: transparent;
+  -webkit-text-stroke: 2.5px var(--blue);
+}
+
+.hero-h1 .accent { color: var(--orange); }
+
+.hero-desc {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--muted);
+  max-width: 400px;
+  border-left: 3px solid var(--blue-lt);
+  padding-left: 18px;
+  margin-bottom: 36px;
+}
+
+.hero-btns { display: flex; gap: 12px; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--fd);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 13px 28px;
+  border-radius: 100px;
+  cursor: pointer;
+  border: none;
+  text-transform: lowercase;
+  letter-spacing: -0.01em;
+  transition: opacity 0.15s;
+}
+.btn:hover { opacity: 0.85; }
+.btn-blue    { background: var(--blue); color: #fff; }
+.btn-orange  { background: var(--orange); color: #fff; }
+.btn-ghost   { background: transparent; color: var(--ink); border: 1.5px solid rgba(0,0,0,0.15); padding: 12px 26px; }
+
+/* Blocs couleur proportionnels (like Founders Mesh) */
+.hero-right {
+  padding-bottom: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 24px;
+}
+
+.proportion-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+  display: flex;
+  gap: 28px;
+  margin-bottom: 4px;
+}
+
+.proportion-label span { display: flex; align-items: center; gap: 6px; }
+.proportion-label span::before { content:''; width:8px; height:8px; border-radius:3px; display:inline-block; flex-shrink:0; }
+.pl-blue::before  { background: var(--blue); }
+.pl-rose::before  { background: var(--rose); }
+.pl-orange::before { background: var(--orange); }
+
+.blocks-row {
+  display: flex;
+  gap: 8px;
+  height: 130px;
+}
+
+.block {
+  border-radius: 16px;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  padding: 14px 18px;
+  font-family: var(--fd);
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  flex-shrink: 0;
+}
+
+.block-blue   { background: var(--blue);   color: rgba(255,255,255,0.85); flex: 4; }
+.block-rose   { background: var(--rose);   color: rgba(255,255,255,0.85); flex: 1.5; }
+.block-orange { background: var(--orange); color: rgba(255,255,255,0.85); flex: 1; }
+
+.blocks-legend {
+  font-family: var(--fd);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--blue);
+  letter-spacing: -0.01em;
+  text-align: right;
+}
+
+/* Tags éparpillés — style Founders Mesh */
+.tags-scatter-wrap {
+  position: relative;
+  height: 180px;
+  margin-top: 8px;
+}
+
+.stag {
+  position: absolute;
+  font-family: var(--fd);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 100px;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+  cursor: default;
+  transition: transform 0.2s;
+}
+.stag:hover { transform: scale(1.05) !important; }
+
+.stag-blue   { background: var(--blue);   color: #fff; }
+.stag-rose   { background: var(--rose);   color: #fff; }
+.stag-orange { background: var(--orange); color: #fff; }
+.stag-lt     { background: var(--blue-lt); color: var(--blue); }
+.stag-ink    { background: var(--ink);    color: #fff; }
+.stag-white  { background: var(--white);  color: var(--ink); border: 1.5px solid rgba(0,0,0,0.1); }
+
+.tags-legend {
+  font-family: var(--fd);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--blue);
+  letter-spacing: -0.01em;
+  text-align: right;
+  margin-top: 4px;
+}
+
+/* ════════════════════════════
+   DIVIDER LINE
+════════════════════════════ */
+.divider {
+  height: 1px;
+  background: rgba(0,0,0,0.1);
+  margin: 0 48px;
+}
+
+/* ════════════════════════════
+   STATS STRIP — Founders Mesh style
+════════════════════════════ */
+.stats-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 0 48px;
+}
+
+.stat-cell {
+  padding: 40px 32px;
+  border-right: 1px solid rgba(0,0,0,0.08);
+}
+.stat-cell:last-child { border-right: none; }
+
+.stat-n {
+  font-family: var(--fd);
+  font-size: 64px;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--ink);
+  text-transform: lowercase;
+  margin-bottom: 8px;
+}
+
+.stat-l {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 300;
+  line-height: 1.5;
+  max-width: 180px;
+}
+
+/* ════════════════════════════
+   SECTION
+════════════════════════════ */
+.sec {
+  padding: 72px 48px;
+  border-top: 1px solid rgba(0,0,0,0.08);
+}
+
+.sec-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 40px;
+}
+
+.sec-title {
+  font-family: var(--fd);
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 500;
+  color: var(--ink);
+  text-transform: lowercase;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.see-all {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--blue);
+  cursor: pointer;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+/* ════════════════════════════
+   CHAPITRES — 3 colonnes
+════════════════════════════ */
+.chap-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+.chap-card {
+  background: var(--white);
+  padding: 32px;
+  cursor: pointer;
+  transition: background 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+.chap-card:hover { background: #F4F5F8; }
+.chap-card:first-child { border-radius: 16px 0 0 16px; }
+.chap-card:last-child  { border-radius: 0 16px 16px 0; }
+.chap-card:nth-child(3) { border-radius: 0; }
+.chap-card:nth-child(4) { border-radius: 16px 0 0 16px; margin-top: 2px; }
+.chap-card:nth-child(6) { border-radius: 0 16px 16px 0; }
+
+.chap-num {
+  font-family: var(--fd);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+.chap-title {
+  font-family: var(--fd);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--ink);
+  text-transform: lowercase;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+  line-height: 1.15;
+}
+
+.chap-meta {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+.chap-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.ctag {
+  font-family: var(--fb);
+  font-size: 10px;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 100px;
+  border: 1.5px solid rgba(0,0,0,0.1);
+  color: var(--muted);
+  background: transparent;
+}
+.ctag.b { background: #EEF2FF; border-color: var(--blue); color: var(--blue); }
+.ctag.o { background: #FFF0E8; border-color: var(--orange); color: var(--orange); }
+.ctag.r { background: #F9F0F7; border-color: var(--rose); color: #8B5A7A; }
+
+.chap-bar-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.chap-bar {
+  flex: 1;
+  height: 5px;
+  background: rgba(0,0,0,0.07);
+  border-radius: 100px;
+  overflow: hidden;
+}
+.chap-bar-fill { height: 100%; border-radius: 100px; }
+
+.chap-pct {
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* ════════════════════════════
+   EXERCICES LIST
+════════════════════════════ */
+.ex-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.fbtn {
+  font-family: var(--fb);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 7px 18px;
+  border-radius: 100px;
+  border: 1.5px solid rgba(0,0,0,0.12);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.fbtn.on  { background: var(--ink); border-color: var(--ink); color: #fff; }
+.fbtn:hover:not(.on) { border-color: var(--blue); color: var(--blue); }
+
+.ex-row {
+  display: grid;
+  grid-template-columns: 56px 1fr auto auto;
+  align-items: center;
+  gap: 24px;
+  padding: 22px 28px;
+  background: var(--white);
+  border-radius: 14px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: box-shadow 0.15s;
+}
+.ex-row:hover { box-shadow: 0 2px 20px rgba(0,33,188,0.07); }
+.ex-row.done  { background: rgba(255,255,255,0.5); }
+
+.ex-idx {
+  font-family: var(--fd);
+  font-size: 28px;
+  font-weight: 500;
+  color: rgba(0,0,0,0.1);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  text-transform: lowercase;
+}
+
+.ex-info {}
+.ex-rtags { display: flex; gap: 6px; margin-bottom: 7px; }
+.ex-name {
+  font-family: var(--fd);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink);
+  text-transform: lowercase;
+  letter-spacing: -0.02em;
+  margin-bottom: 3px;
+}
+.ex-meta { font-size: 12px; color: var(--muted); font-weight: 300; }
+
+.ex-score {
+  font-family: var(--fd);
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  text-align: right;
+  min-width: 64px;
+}
+
+.ex-action {
+  font-family: var(--fd);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  text-transform: lowercase;
+}
+.ea-blue   { background: var(--blue); color: #fff; }
+.ea-ghost  { background: rgba(0,0,0,0.06); color: var(--ink); }
+.ea-orange { background: var(--orange); color: #fff; }
+
+/* ════════════════════════════
+   MON PARCOURS
+════════════════════════════ */
+.parcours-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-bottom: 2px;
+}
+
+.p-block {
+  background: var(--white);
+  padding: 36px;
+}
+.p-block:nth-child(1) { border-radius: 16px 0 0 0; }
+.p-block:nth-child(2) { border-radius: 0 16px 0 0; }
+
+.p-block-num {
+  font-family: var(--fd);
+  font-size: 72px;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  text-transform: lowercase;
+  margin-bottom: 8px;
+}
+
+.p-block-lbl { font-size: 13px; color: var(--muted); font-weight: 300; line-height: 1.5; max-width: 200px; }
+
+.prog-list { display: flex; flex-direction: column; gap: 10px; }
+
+.prog-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 72px 110px;
+  align-items: center;
+  gap: 20px;
+  padding: 18px 24px;
+  background: var(--white);
+  border-radius: 12px;
+}
+.prog-row:first-child { border-radius: 0 0 0 16px; }
+.prog-row:last-child  { border-radius: 0 0 16px 16px; }
+
+.prog-name {
+  font-family: var(--fd);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  text-transform: lowercase;
+  letter-spacing: -0.01em;
+}
+
+.prog-bar { height: 7px; background: rgba(0,0,0,0.07); border-radius: 100px; overflow: hidden; }
+.prog-bar-fill { height: 100%; border-radius: 100px; }
+
+.prog-pct {
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: right;
+}
+
+.prog-btn {
+  font-family: var(--fd);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  text-transform: lowercase;
+  text-align: center;
+  transition: opacity 0.15s;
+}
+.prog-btn:hover { opacity: 0.8; }
+
+/* ════════════════════════════
+   RESSOURCES
+════════════════════════════ */
+.res-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+.res-card {
+  background: var(--white);
+  overflow: hidden;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.res-card:hover { background: #F4F5F8; }
+.res-card:first-child { border-radius: 16px 0 0 16px; }
+.res-card:last-child  { border-radius: 0 16px 16px 0; }
+
+.res-card-top {
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 44px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.res-card-body { padding: 22px; }
+
+.res-type {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.res-name {
+  font-family: var(--fd);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  text-transform: lowercase;
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+
+.res-meta { font-size: 12px; color: var(--muted); font-weight: 300; }
+
+/* ════════════════════════════
+   FOOTER — email géant Founders Mesh
+════════════════════════════ */
+.footer-top {
+  padding: 56px 48px 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 48px;
+  border-top: 1px solid rgba(0,0,0,0.08);
+}
+
+.footer-logo {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-logo-top {
+  font-family: var(--fb);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.footer-logo-bottom {
+  font-family: var(--fd);
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  line-height: 0.95;
+  margin-bottom: 14px;
+}
+
+.footer-logo-bottom span { color: var(--blue); }
+
+.footer-desc {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 300;
+  line-height: 1.65;
+}
+
+.footer-col-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+.footer-links li {
+  font-size: 14px;
+  color: rgba(0,0,0,0.45);
+  cursor: pointer;
+  font-weight: 300;
+  transition: color 0.15s;
+}
+.footer-links li:hover { color: var(--ink); }
+
+/* Email géant — signature Founders Mesh */
+.footer-email-wrap {
+  padding: 0 48px 0;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.footer-email {
+  font-family: var(--fd);
+  font-size: clamp(28px, 4.8vw, 64px);
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.04em;
+  text-transform: lowercase;
+  line-height: 1.1;
+  padding: 32px 0;
+  cursor: pointer;
+  transition: color 0.15s;
+  text-decoration: none;
+}
+.footer-email:hover { color: var(--blue); }
+
+.footer-arrow {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-arrow svg { width: 42px; height: 42px; }
+
+/* Barre bleue bas */
+.footer-bar {
+  background: var(--blue);
+  padding: 18px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-bar-links { display: flex; gap: 48px; }
+.footer-bar-links a {
+  font-family: var(--fd);
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+.footer-bar-links a:hover { color: #fff; }
+
+.footer-bar-copy {
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+  font-weight: 300;
+}
+
+/* ════════════════════════════
+   PAGE SWITCHER
+════════════════════════════ */
+.page { display: none; }
+.page.active { display: block; }
+
+.ps {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ink);
+  border-radius: 100px;
+  padding: 7px;
+  display: flex;
+  gap: 4px;
+  z-index: 200;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.22);
+}
+
+.ps-btn {
+  font-family: var(--fd);
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.4);
+  background: transparent;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 100px;
+  cursor: pointer;
+  text-transform: lowercase;
+  letter-spacing: -0.01em;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.ps-btn.on { background: var(--white); color: var(--blue); }
+
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════
+     PAGE 1 — ACCUEIL
+══════════════════════════════════ -->
+<div class="page active" id="page-accueil">
+
+<nav class="nav">
+  <div class="nav-logo" onclick="showPage('accueil')">
+    <span class="nav-logo-top">prépa</span>
+    <span class="nav-logo-bottom">bre<span>.</span>vet</span>
+  </div>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li class="on" onclick="showPage('accueil')">accueil</li>
+      <li onclick="showPage('exercices')">exercices</li>
+      <li onclick="showPage('parcours')">mon parcours</li>
+      <li onclick="showPage('ressources')">ressources</li>
+    </ul>
+    <button class="nav-cta" onclick="showPage('exercices')">commencer →</button>
+  </div>
+</nav>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Brevet 2026 · Mathématiques</p>
+    <h1 class="hero-h1">
+      prépare,<br>
+      entraîne-toi,<br>
+      réussis.
+    </h1>
+    <p class="hero-desc">Des exercices progressifs sur tout le programme de 3ème. Corrections détaillées, suivi de progression, annales officielles.</p>
+    <div class="hero-btns">
+      <button class="btn btn-blue" onclick="showPage('exercices')">voir les exercices →</button>
+      <button class="btn btn-ghost" onclick="showPage('parcours')">mon parcours</button>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <!-- Blocs couleur proportionnels -->
+    <div class="proportion-label">
+      <span class="pl-blue">73% algèbre & géométrie</span>
+      <span class="pl-rose">17% stats</span>
+      <span class="pl-orange">10% annales</span>
+    </div>
+    <div class="blocks-row">
+      <div class="block block-blue">73%</div>
+      <div class="block block-rose">17%</div>
+      <div class="block block-orange">10%</div>
+    </div>
+    <div class="blocks-legend">Répartition des exercices</div>
+
+    <!-- Tags chapitres éparpillés -->
+    <div class="tags-scatter-wrap">
+      <span class="stag stag-blue"  style="top:10px;  left:60px;  transform:rotate(-4deg);">géométrie</span>
+      <span class="stag stag-ink"   style="top:5px;   left:220px; transform:rotate(3deg);">algèbre</span>
+      <span class="stag stag-orange"style="top:60px;  left:20px;  transform:rotate(-2deg);">fractions</span>
+      <span class="stag stag-lt"    style="top:55px;  left:185px; transform:rotate(5deg);">pythagore</span>
+      <span class="stag stag-rose"  style="top:60px;  left:345px; transform:rotate(-3deg);">statistiques</span>
+      <span class="stag stag-white" style="top:115px; left:40px;  transform:rotate(2deg);">équations</span>
+      <span class="stag stag-blue"  style="top:110px; left:200px; transform:rotate(-5deg);">annales</span>
+      <span class="stag stag-ink"   style="top:115px; left:340px; transform:rotate(3deg);">thales</span>
+    </div>
+    <div class="tags-legend">Chapitres au programme</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- Stats -->
+<div class="stats-strip">
+  <div class="stat-cell">
+    <div class="stat-n" style="color:var(--blue);">180+</div>
+    <div class="stat-l">exercices couvrant tout le programme brevet maths</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-n">12</div>
+    <div class="stat-l">chapitres du programme de 3ème entièrement couverts</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-n" style="color:var(--orange);">100%</div>
+    <div class="stat-l">annales corrigées depuis 2018 intégrées</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-n">7🔥</div>
+    <div class="stat-l">jours de série — reste en forme jusqu'au brevet</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- Chapitres -->
+<div class="sec">
+  <div class="sec-head">
+    <h2 class="sec-title">les chapitres</h2>
+    <span class="see-all" onclick="showPage('exercices')">tous les exercices →</span>
+  </div>
+  <div class="chap-grid">
+
+    <div class="chap-card" style="border-radius:16px 0 0 0;">
+      <div class="chap-num">01</div>
+      <div class="chap-title">géométrie</div>
+      <div class="chap-meta">42 exercices · niveaux 1 à 4</div>
+      <div class="chap-tags">
+        <span class="ctag b">pythagore</span>
+        <span class="ctag">thales</span>
+        <span class="ctag">trigonométrie</span>
+      </div>
+      <div class="chap-bar-wrap">
+        <div class="chap-bar"><div class="chap-bar-fill" style="width:78%;background:var(--blue);"></div></div>
+        <span class="chap-pct" style="color:var(--blue);">78%</span>
+      </div>
+    </div>
+
+    <div class="chap-card" style="border-radius:0;">
+      <div class="chap-num">02</div>
+      <div class="chap-title">algèbre</div>
+      <div class="chap-meta">38 exercices · niveaux 1 à 5</div>
+      <div class="chap-tags">
+        <span class="ctag o">équations</span>
+        <span class="ctag">inéquations</span>
+        <span class="ctag">fonctions</span>
+      </div>
+      <div class="chap-bar-wrap">
+        <div class="chap-bar"><div class="chap-bar-fill" style="width:45%;background:var(--orange);"></div></div>
+        <span class="chap-pct" style="color:var(--orange);">45%</span>
+      </div>
+    </div>
+
+    <div class="chap-card" style="border-radius:0 16px 0 0;">
+      <div class="chap-num">03</div>
+      <div class="chap-title">statistiques & probabilités</div>
+      <div class="chap-meta">28 exercices · niveaux 1 à 3</div>
+      <div class="chap-tags">
+        <span class="ctag r">moyenne</span>
+        <span class="ctag">médiane</span>
+        <span class="ctag">probabilités</span>
+      </div>
+      <div class="chap-bar-wrap">
+        <div class="chap-bar"><div class="chap-bar-fill" style="width:91%;background:var(--rose);"></div></div>
+        <span class="chap-pct" style="color:#8B5A7A;">91%</span>
+      </div>
+    </div>
+
+    <div class="chap-card" style="border-radius:0 0 0 16px;margin-top:2px;">
+      <div class="chap-num">04</div>
+      <div class="chap-title">calcul numérique</div>
+      <div class="chap-meta">32 exercices · niveaux 1 à 4</div>
+      <div class="chap-tags">
+        <span class="ctag b">fractions</span>
+        <span class="ctag">puissances</span>
+        <span class="ctag">racines</span>
+      </div>
+      <div class="chap-bar-wrap">
+        <div class="chap-bar"><div class="chap-bar-fill" style="width:55%;background:var(--blue);"></div></div>
+        <span class="chap-pct" style="color:var(--blue);">55%</span>
+      </div>
+    </div>
+
+    <div class="chap-card" style="border-radius:0;margin-top:2px;">
+      <div class="chap-num">05</div>
+      <div class="chap-title">grandeurs & mesures</div>
+      <div class="chap-meta">24 exercices · niveaux 1 à 3</div>
+      <div class="chap-tags">
+        <span class="ctag o">aires</span>
+        <span class="ctag">volumes</span>
+        <span class="ctag">conversions</span>
+      </div>
+      <div class="chap-bar-wrap">
+        <div class="chap-bar"><div class="chap-bar-fill" style="width:30%;background:var(--orange);"></div></div>
+        <span class="chap-pct" style="color:var(--orange);">30%</span>
+      </div>
+    </div>
+
+    <div class="chap-card" style="border-radius:0 0 16px 0;margin-top:2px;">
+      <div class="chap-num">06</div>
+      <div class="chap-title">annales brevet</div>
+      <div class="chap-meta">16 sujets · 2018 → 2024</div>
+      <div class="chap-tags">
+        <span class="ctag r">officiel</span>
+        <span class="ctag">corrigé</span>
+        <span class="ctag">chronométré</span>
+      </div>
+      <div class="chap-bar-wrap">
+        <div class="chap-bar"><div class="chap-bar-fill" style="width:12%;background:var(--rose);"></div></div>
+        <span class="chap-pct" style="color:#8B5A7A;">12%</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="footer-top">
+  <div>
+    <div class="footer-logo">
+      <span class="footer-logo-top">prépa</span>
+      <span class="footer-logo-bottom">bre<span>.</span>vet</span>
+    </div>
+    <p class="footer-desc">La plateforme d'entraînement au brevet des collèges. Exercices progressifs, corrections détaillées, suivi personnalisé.</p>
+  </div>
+  <div>
+    <div class="footer-col-title">matières</div>
+    <ul class="footer-links">
+      <li>mathématiques</li>
+      <li>français</li>
+      <li>histoire-géo</li>
+      <li>sciences</li>
+    </ul>
+  </div>
+  <div>
+    <div class="footer-col-title">navigation</div>
+    <ul class="footer-links">
+      <li onclick="showPage('exercices')">exercices</li>
+      <li onclick="showPage('parcours')">mon parcours</li>
+      <li onclick="showPage('ressources')">ressources</li>
+    </ul>
+  </div>
+  <div>
+    <div class="footer-col-title">contact</div>
+    <ul class="footer-links">
+      <li>nous écrire</li>
+      <li>instagram</li>
+      <li>newsletter</li>
+    </ul>
+  </div>
+</div>
+
+<div class="footer-email-wrap">
+  <a class="footer-email">bonjour@prepabrevet.fr</a>
+  <div class="footer-arrow">
+    <svg viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8 8h26v26M8 34L34 8" stroke="rgb(25,8,6)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+</div>
+
+<div class="footer-bar">
+  <div class="footer-bar-links">
+    <a>Instagram</a>
+    <a>Newsletter</a>
+    <a>LinkedIn</a>
+  </div>
+  <span class="footer-bar-copy">© 2026 Prépa Brevet — tous droits réservés</span>
+</div>
+
+</div><!-- /page accueil -->
+
+
+<!-- ══════════════════════════════════
+     PAGE 2 — EXERCICES
+══════════════════════════════════ -->
+<div class="page" id="page-exercices">
+
+<nav class="nav">
+  <div class="nav-logo" onclick="showPage('accueil')">
+    <span class="nav-logo-top">prépa</span>
+    <span class="nav-logo-bottom">bre<span>.</span>vet</span>
+  </div>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li onclick="showPage('accueil')">accueil</li>
+      <li class="on">exercices</li>
+      <li onclick="showPage('parcours')">mon parcours</li>
+      <li onclick="showPage('ressources')">ressources</li>
+    </ul>
+    <button class="nav-cta" onclick="showPage('exercices')">commencer →</button>
+  </div>
+</nav>
+
+<div style="padding:56px 48px 32px;">
+  <p class="hero-eyebrow" style="margin-bottom:16px;">Mathématiques · Brevet 2026</p>
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:0;">
+    <h1 style="font-family:var(--fd);font-size:clamp(52px,7vw,96px);font-weight:500;line-height:1.0;letter-spacing:-0.04em;color:var(--ink);text-transform:lowercase;">
+      tous les<br><span style="color:var(--blue);">exercices</span>
+    </h1>
+    <div style="text-align:right;padding-bottom:8px;">
+      <div style="font-family:var(--fd);font-size:64px;font-weight:500;letter-spacing:-0.04em;color:var(--blue);line-height:1;text-transform:lowercase;">62%</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:4px;">ta progression globale</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider" style="margin:0 48px;"></div>
+
+<div class="sec" style="padding-top:40px;">
+  <div class="ex-filters">
+    <button class="fbtn on">tous</button>
+    <button class="fbtn">géométrie</button>
+    <button class="fbtn">algèbre</button>
+    <button class="fbtn">statistiques</button>
+    <button class="fbtn">calcul</button>
+    <button class="fbtn">annales</button>
+    <span style="width:1px;background:rgba(0,0,0,0.12);height:28px;margin:0 4px;display:inline-block;vertical-align:middle;"></span>
+    <button class="fbtn">facile</button>
+    <button class="fbtn">moyen</button>
+    <button class="fbtn">difficile</button>
+  </div>
+
+  <div class="ex-row">
+    <div class="ex-idx">01</div>
+    <div class="ex-info">
+      <div class="ex-rtags"><span class="ctag b">géométrie</span><span class="ctag">facile</span></div>
+      <div class="ex-name">théorème de pythagore — introduction</div>
+      <div class="ex-meta">8 questions · ~10 min</div>
+    </div>
+    <div class="ex-score" style="color:rgba(0,0,0,0.15);">—</div>
+    <button class="ex-action ea-blue">commencer ▶</button>
+  </div>
+
+  <div class="ex-row">
+    <div class="ex-idx">02</div>
+    <div class="ex-info">
+      <div class="ex-rtags"><span class="ctag b">géométrie</span><span class="ctag o">moyen</span></div>
+      <div class="ex-name">pythagore — calcul de longueurs manquantes</div>
+      <div class="ex-meta">12 questions · ~15 min</div>
+    </div>
+    <div class="ex-score" style="color:rgba(0,0,0,0.15);">—</div>
+    <button class="ex-action ea-blue">commencer ▶</button>
+  </div>
+
+  <div class="ex-row done">
+    <div class="ex-idx" style="color:var(--blue);opacity:1;">03</div>
+    <div class="ex-info">
+      <div class="ex-rtags"><span class="ctag r">réussi ✓</span><span class="ctag">statistiques</span></div>
+      <div class="ex-name">moyenne et médiane</div>
+      <div class="ex-meta">10 questions · ~12 min · fait le 5 mars 2026</div>
+    </div>
+    <div class="ex-score" style="color:var(--blue);">87%</div>
+    <button class="ex-action ea-ghost">refaire</button>
+  </div>
+
+  <div class="ex-row done">
+    <div class="ex-idx" style="color:var(--orange);opacity:1;">04</div>
+    <div class="ex-info">
+      <div class="ex-rtags"><span class="ctag o">à revoir</span><span class="ctag">algèbre</span></div>
+      <div class="ex-name">équations du premier degré</div>
+      <div class="ex-meta">15 questions · ~20 min · fait le 3 mars 2026</div>
+    </div>
+    <div class="ex-score" style="color:var(--orange);">52%</div>
+    <button class="ex-action ea-orange">refaire ↑</button>
+  </div>
+
+  <div class="ex-row">
+    <div class="ex-idx">05</div>
+    <div class="ex-info">
+      <div class="ex-rtags"><span class="ctag b">calcul</span><span class="ctag">facile</span></div>
+      <div class="ex-name">fractions — addition et soustraction</div>
+      <div class="ex-meta">10 questions · ~12 min</div>
+    </div>
+    <div class="ex-score" style="color:rgba(0,0,0,0.15);">—</div>
+    <button class="ex-action ea-blue">commencer ▶</button>
+  </div>
+
+  <div class="ex-row">
+    <div class="ex-idx">06</div>
+    <div class="ex-info">
+      <div class="ex-rtags"><span class="ctag r">annale</span><span class="ctag o">difficile</span></div>
+      <div class="ex-name">brevet 2023 — sujet complet officiel</div>
+      <div class="ex-meta">25 questions · ~2h · chronométré</div>
+    </div>
+    <div class="ex-score" style="color:rgba(0,0,0,0.15);">—</div>
+    <button class="ex-action" style="background:var(--rose);color:var(--ink);">commencer ▶</button>
+  </div>
+
+</div>
+
+<!-- Footer minimal -->
+<div class="footer-email-wrap" style="border-top:1px solid rgba(0,0,0,0.08);">
+  <a class="footer-email">bonjour@prepabrevet.fr</a>
+  <div class="footer-arrow">
+    <svg viewBox="0 0 42 42" fill="none"><path d="M8 8h26v26M8 34L34 8" stroke="rgb(25,8,6)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+</div>
+
+<div class="footer-bar">
+  <div class="footer-bar-links">
+    <a>Instagram</a>
+    <a>Newsletter</a>
+    <a>LinkedIn</a>
+  </div>
+  <span class="footer-bar-copy">© 2026 Prépa Brevet</span>
+</div>
+
+</div><!-- /page exercices -->
+
+
+<!-- ══════════════════════════════════
+     PAGE 3 — MON PARCOURS
+══════════════════════════════════ -->
+<div class="page" id="page-parcours">
+
+<nav class="nav">
+  <div class="nav-logo" onclick="showPage('accueil')">
+    <span class="nav-logo-top">prépa</span>
+    <span class="nav-logo-bottom">bre<span>.</span>vet</span>
+  </div>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li onclick="showPage('accueil')">accueil</li>
+      <li onclick="showPage('exercices')">exercices</li>
+      <li class="on">mon parcours</li>
+      <li onclick="showPage('ressources')">ressources</li>
+    </ul>
+    <button class="nav-cta" onclick="showPage('exercices')">commencer →</button>
+  </div>
+</nav>
+
+<div style="padding:56px 48px 0;">
+  <p class="hero-eyebrow" style="margin-bottom:16px;">Tableau de bord</p>
+  <h1 style="font-family:var(--fd);font-size:clamp(52px,7vw,96px);font-weight:500;line-height:1.0;letter-spacing:-0.04em;color:var(--ink);text-transform:lowercase;margin-bottom:48px;">
+    mon<br><span style="-webkit-text-stroke:2.5px var(--blue);color:transparent;">parcours</span>
+  </h1>
+</div>
+
+<div class="divider"></div>
+
+<!-- 4 gros chiffres -->
+<div class="stats-strip">
+  <div class="stat-cell">
+    <div class="stat-n" style="color:var(--blue);">62%</div>
+    <div class="stat-l">progression globale sur tous les chapitres</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-n" style="color:var(--orange);">7🔥</div>
+    <div class="stat-l">jours de série consécutifs</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-n">42</div>
+    <div class="stat-l">exercices terminés sur 180</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-n" style="color:var(--rose);">74%</div>
+    <div class="stat-l">score moyen sur les exercices réalisés</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- Progression chapitres -->
+<div class="sec">
+  <div class="sec-head">
+    <h2 class="sec-title">progression par chapitre</h2>
+  </div>
+
+  <div style="background:var(--white);border-radius:16px;overflow:hidden;">
+    <div class="prog-row" style="border-radius:16px 16px 0 0;">
+      <div class="prog-name">📐 géométrie</div>
+      <div class="prog-bar"><div class="prog-bar-fill" style="width:78%;background:var(--blue);"></div></div>
+      <div class="prog-pct" style="color:var(--blue);">78%</div>
+      <button class="prog-btn" style="background:var(--blue);color:#fff;">continuer →</button>
+    </div>
+    <div class="prog-row" style="border-top:1px solid rgba(0,0,0,0.05);border-radius:0;">
+      <div class="prog-name">🔢 algèbre</div>
+      <div class="prog-bar"><div class="prog-bar-fill" style="width:45%;background:var(--orange);"></div></div>
+      <div class="prog-pct" style="color:var(--orange);">45%</div>
+      <button class="prog-btn" style="background:var(--orange);color:#fff;">continuer →</button>
+    </div>
+    <div class="prog-row" style="border-top:1px solid rgba(0,0,0,0.05);border-radius:0;">
+      <div class="prog-name">📊 statistiques</div>
+      <div class="prog-bar"><div class="prog-bar-fill" style="width:91%;background:var(--rose);"></div></div>
+      <div class="prog-pct" style="color:#8B5A7A;">91%</div>
+      <button class="prog-btn" style="background:var(--rose);color:var(--ink);">revoir →</button>
+    </div>
+    <div class="prog-row" style="border-top:1px solid rgba(0,0,0,0.05);border-radius:0;">
+      <div class="prog-name">🔢 calcul numérique</div>
+      <div class="prog-bar"><div class="prog-bar-fill" style="width:55%;background:var(--blue);"></div></div>
+      <div class="prog-pct" style="color:var(--blue);">55%</div>
+      <button class="prog-btn" style="background:var(--blue);color:#fff;">continuer →</button>
+    </div>
+    <div class="prog-row" style="border-top:1px solid rgba(0,0,0,0.05);border-radius:0;">
+      <div class="prog-name">📏 grandeurs</div>
+      <div class="prog-bar"><div class="prog-bar-fill" style="width:30%;background:var(--orange);"></div></div>
+      <div class="prog-pct" style="color:var(--orange);">30%</div>
+      <button class="prog-btn" style="background:var(--orange);color:#fff;">commencer →</button>
+    </div>
+    <div class="prog-row" style="border-top:1px solid rgba(0,0,0,0.05);border-radius:0 0 16px 16px;">
+      <div class="prog-name">📋 annales</div>
+      <div class="prog-bar"><div class="prog-bar-fill" style="width:12%;background:var(--rose);"></div></div>
+      <div class="prog-pct" style="color:#8B5A7A;">12%</div>
+      <button class="prog-btn" style="background:var(--rose);color:var(--ink);">commencer →</button>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="footer-email-wrap" style="border-top:1px solid rgba(0,0,0,0.08);">
+  <a class="footer-email">bonjour@prepabrevet.fr</a>
+  <div class="footer-arrow">
+    <svg viewBox="0 0 42 42" fill="none"><path d="M8 8h26v26M8 34L34 8" stroke="rgb(25,8,6)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+</div>
+
+<div class="footer-bar">
+  <div class="footer-bar-links">
+    <a>Instagram</a>
+    <a>Newsletter</a>
+    <a>LinkedIn</a>
+  </div>
+  <span class="footer-bar-copy">© 2026 Prépa Brevet</span>
+</div>
+
+</div><!-- /page parcours -->
+
+
+<!-- ══════════════════════════════════
+     PAGE 4 — RESSOURCES
+══════════════════════════════════ -->
+<div class="page" id="page-ressources">
+
+<nav class="nav">
+  <div class="nav-logo" onclick="showPage('accueil')">
+    <span class="nav-logo-top">prépa</span>
+    <span class="nav-logo-bottom">bre<span>.</span>vet</span>
+  </div>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li onclick="showPage('accueil')">accueil</li>
+      <li onclick="showPage('exercices')">exercices</li>
+      <li onclick="showPage('parcours')">mon parcours</li>
+      <li class="on">ressources</li>
+    </ul>
+    <button class="nav-cta" onclick="showPage('exercices')">commencer →</button>
+  </div>
+</nav>
+
+<div style="padding:56px 48px 48px;">
+  <p class="hero-eyebrow" style="margin-bottom:16px;">Outils & documents</p>
+  <h1 style="font-family:var(--fd);font-size:clamp(52px,7vw,96px);font-weight:500;line-height:1.0;letter-spacing:-0.04em;color:var(--ink);text-transform:lowercase;margin-bottom:16px;">
+    toutes les<br>
+    <span style="-webkit-text-stroke:2.5px var(--blue);color:transparent;">ressources</span><br>
+    pour <span style="color:var(--orange);">réussir.</span>
+  </h1>
+  <p style="font-size:15px;color:var(--muted);font-weight:300;line-height:1.65;max-width:500px;border-left:3px solid var(--blue-lt);padding-left:18px;">Fiches de révision, vidéos explicatives, annales officielles et formulaires — tout ce qu'il te faut.</p>
+</div>
+
+<div class="divider"></div>
+
+<div class="sec">
+  <div class="sec-head"><h2 class="sec-title">fiches de révision</h2></div>
+  <div class="res-grid">
+    <div class="res-card">
+      <div class="res-card-top" style="background:#EEF2FF;">📐</div>
+      <div class="res-card-body">
+        <div class="res-type">Fiche PDF</div>
+        <div class="res-name">géométrie — toutes les formules essentielles</div>
+        <div class="res-meta">4 pages · mis à jour 2026</div>
+      </div>
+    </div>
+    <div class="res-card">
+      <div class="res-card-top" style="background:#FFF0E8;">🔢</div>
+      <div class="res-card-body">
+        <div class="res-type">Fiche PDF</div>
+        <div class="res-name">algèbre — méthodes de résolution d'équations</div>
+        <div class="res-meta">3 pages · mis à jour 2026</div>
+      </div>
+    </div>
+    <div class="res-card">
+      <div class="res-card-top" style="background:#F9F0F7;">📊</div>
+      <div class="res-card-body">
+        <div class="res-type">Fiche PDF</div>
+        <div class="res-name">statistiques — moyenne, médiane, diagrammes</div>
+        <div class="res-meta">2 pages · mis à jour 2026</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sec" style="padding-top:0;border-top:none;">
+  <div class="sec-head"><h2 class="sec-title">annales officielles</h2></div>
+  <div class="res-grid">
+    <div class="res-card">
+      <div class="res-card-top" style="background:rgba(0,33,188,0.06);">📋</div>
+      <div class="res-card-body">
+        <div class="res-type">Annale officielle</div>
+        <div class="res-name">brevet 2024 — session normale</div>
+        <div class="res-meta">Sujet + corrigé · 2h</div>
+      </div>
+    </div>
+    <div class="res-card">
+      <div class="res-card-top" style="background:rgba(0,33,188,0.06);">📋</div>
+      <div class="res-card-body">
+        <div class="res-type">Annale officielle</div>
+        <div class="res-name">brevet 2023 — session normale</div>
+        <div class="res-meta">Sujet + corrigé · 2h</div>
+      </div>
+    </div>
+    <div class="res-card">
+      <div class="res-card-top" style="background:rgba(0,33,188,0.06);">📋</div>
+      <div class="res-card-body">
+        <div class="res-type">Annale officielle</div>
+        <div class="res-name">brevet 2022 — session normale</div>
+        <div class="res-meta">Sujet + corrigé · 2h</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Email géant footer -->
+<div style="padding:52px 48px 32px;border-top:1px solid rgba(0,0,0,0.08);">
+  <p style="font-family:var(--fd);font-size:clamp(28px,4vw,52px);font-weight:500;line-height:1.0;letter-spacing:-0.03em;color:var(--ink);text-transform:lowercase;margin-bottom:24px;">
+    les ressources c'est bien,<br>
+    <span style="color:var(--rose);">pratiquer</span> c'est <span style="-webkit-text-stroke:2px var(--blue);color:transparent;">mieux.</span>
+  </p>
+  <button class="btn btn-orange" onclick="showPage('exercices')" style="font-size:15px;padding:16px 36px;">s'entraîner maintenant →</button>
+</div>
+
+<div class="footer-email-wrap" style="border-top:1px solid rgba(0,0,0,0.08);">
+  <a class="footer-email">bonjour@prepabrevet.fr</a>
+  <div class="footer-arrow">
+    <svg viewBox="0 0 42 42" fill="none"><path d="M8 8h26v26M8 34L34 8" stroke="rgb(25,8,6)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+</div>
+
+<div class="footer-bar">
+  <div class="footer-bar-links">
+    <a>Instagram</a>
+    <a>Newsletter</a>
+    <a>LinkedIn</a>
+  </div>
+  <span class="footer-bar-copy">© 2026 Prépa Brevet</span>
+</div>
+
+</div><!-- /page ressources -->
+
+
+<!-- Page switcher -->
+<div class="ps">
+  <button class="ps-btn on" onclick="showPage('accueil')" id="ps-accueil">accueil</button>
+  <button class="ps-btn" onclick="showPage('exercices')" id="ps-exercices">exercices</button>
+  <button class="ps-btn" onclick="showPage('parcours')" id="ps-parcours">mon parcours</button>
+  <button class="ps-btn" onclick="showPage('ressources')" id="ps-ressources">ressources</button>
+</div>
+
+<script>
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.querySelectorAll('.ps-btn').forEach(b => b.classList.remove('on'));
+  document.getElementById('ps-' + id).classList.add('on');
+  window.scrollTo(0,0);
+}
+</script>
+
+</body>
+</html>
