@@ -1,0 +1,1601 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prépa Brevet — Maths</title>
+
+<style>
+:root {
+  --blue:#0021BC;--blue-lt:#BDD4E7;--orange:#EE6E34;--rose:#D0A6C6;
+  --bg:#EDEEF0;--white:#FFFFFF;--ink:rgb(25,8,6);--muted:#8A8DAA;
+  --fd:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  --fb:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--fb);-webkit-font-smoothing:antialiased}
+.page{display:none}.page.active{display:block}
+
+/* NAV */
+.nav{display:flex;justify-content:space-between;align-items:flex-start;padding:28px 48px 0;z-index:10;position:relative}
+.logo{cursor:pointer}
+.logo-top{font-size:13px;color:var(--ink);display:block}
+.logo-bot{font-family:var(--fd);font-size:36px;font-weight:800;letter-spacing:-.04em;line-height:.9;text-transform:uppercase;display:block}
+.logo-bot span{color:var(--blue)}
+.nav-r{display:flex;align-items:center;gap:32px}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links li{font-size:14px;opacity:.6;cursor:pointer;transition:opacity .15s}
+.nav-links li:hover,.nav-links li.on{opacity:1}
+.nav-links li.on{font-weight:500}
+.cta{font-family:var(--fd);font-size:13px;font-weight:600;background:var(--blue);color:#fff;padding:11px 24px;border-radius:100px;border:none;cursor:pointer;transition:opacity .15s}
+.cta:hover{opacity:.85}
+
+/* UTILS */
+.divider{height:1px;background:rgba(0,0,0,.1);margin:0 48px}
+.eyebrow{font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--orange);display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:'';width:20px;height:2px;background:var(--orange);border-radius:2px;display:inline-block}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--fd);font-size:13px;font-weight:600;padding:13px 28px;border-radius:100px;cursor:pointer;border:none;text-transform:lowercase;transition:opacity .15s}
+.btn:hover{opacity:.85}
+.btn-blue{background:var(--blue);color:#fff}
+.btn-orange{background:var(--orange);color:#fff}
+.btn-ghost{background:transparent;color:var(--ink);border:1.5px solid rgba(0,0,0,.15);padding:12px 26px}
+.ctag{font-size:10px;font-weight:500;padding:4px 12px;border-radius:100px;border:1.5px solid rgba(0,0,0,.1);color:var(--muted);background:transparent}
+.ctag.b{background:#EEF2FF;border-color:var(--blue);color:var(--blue)}
+.ctag.o{background:#FFF0E8;border-color:var(--orange);color:var(--orange)}
+.ctag.r{background:#F9F0F7;border-color:var(--rose);color:#8B5A7A}
+
+/* STATS STRIP */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);padding:0 48px}
+.stat{padding:40px 32px;border-right:1px solid rgba(0,0,0,.08)}
+.stat:last-child{border-right:none}
+.stat-n{font-family:var(--fd);font-size:64px;font-weight:500;letter-spacing:-.04em;line-height:1;text-transform:lowercase;margin-bottom:8px}
+.stat-l{font-size:13px;color:var(--muted);font-weight:300;line-height:1.5;max-width:180px}
+
+/* SECTION */
+.sec{padding:56px 48px;border-top:1px solid rgba(0,0,0,.08)}
+.sec-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:36px}
+.sec-title{font-family:var(--fd);font-size:clamp(28px,3.5vw,48px);font-weight:500;text-transform:lowercase;letter-spacing:-.03em;line-height:1}
+.see-all{font-size:13px;font-weight:500;color:var(--blue);cursor:pointer}
+
+/* CARDS ANNALES */
+.chap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.chap-card{background:var(--white);padding:28px;cursor:pointer;transition:background .15s}
+.chap-card:hover{background:#F4F5F8}
+.chap-card:nth-child(1){border-radius:16px 0 0 0}
+.chap-card:nth-child(3){border-radius:0 16px 0 0}
+.chap-card:nth-child(4){border-radius:0 0 0 0;margin-top:2px}
+.chap-card:nth-child(6){border-radius:0 0 16px 0;margin-top:2px}
+.chap-card:nth-child(5){margin-top:2px}
+.chap-num{font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.chap-title{font-family:var(--fd);font-size:18px;font-weight:500;text-transform:lowercase;letter-spacing:-.02em;margin-bottom:4px}
+.chap-meta{font-size:12px;color:var(--muted);font-weight:300;margin-bottom:16px}
+.chap-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.bar-wrap{display:flex;align-items:center;gap:10px}
+.bar{flex:1;height:5px;background:rgba(0,0,0,.07);border-radius:100px;overflow:hidden}
+.bar-fill{height:100%;border-radius:100px}
+.bar-pct{font-family:'Courier New',monospace;font-size:11px;font-weight:700;white-space:nowrap}
+
+/* FOOTER */
+.footer-top{padding:48px 48px 36px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:40px;border-top:1px solid rgba(0,0,0,.08)}
+.footer-logo-bot{font-family:var(--fd);font-size:26px;font-weight:800;letter-spacing:-.04em;text-transform:uppercase;line-height:.95;margin-bottom:12px}
+.footer-logo-bot span{color:var(--blue)}
+.footer-desc{font-size:12px;color:var(--muted);font-weight:300;line-height:1.65}
+.footer-col-title{font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-links li{font-size:13px;color:rgba(0,0,0,.45);cursor:pointer;font-weight:300}
+.footer-links li:hover{color:var(--ink)}
+.footer-email-wrap{padding:0 48px;border-top:1px solid rgba(0,0,0,.08);display:flex;align-items:center;gap:16px}
+.footer-email{font-family:var(--fd);font-size:clamp(24px,4vw,56px);font-weight:500;color:var(--ink);letter-spacing:-.04em;text-transform:lowercase;padding:28px 0;text-decoration:none;transition:color .15s}
+.footer-email:hover{color:var(--blue)}
+.footer-bar{background:var(--blue);padding:16px 48px;display:flex;justify-content:space-between;align-items:center}
+.footer-bar-links{display:flex;gap:40px}
+.footer-bar-links a{font-size:13px;font-weight:500;color:rgba(255,255,255,.7);text-decoration:none;cursor:pointer}
+.footer-bar-links a:hover{color:#fff}
+.footer-bar-copy{font-size:12px;color:rgba(255,255,255,.35)}
+
+/* PAGE PARCOURS */
+.prog-row{display:grid;grid-template-columns:1fr 1fr 80px 110px;align-items:center;gap:16px;padding:16px 22px;background:var(--white)}
+.prog-name{font-family:var(--fd);font-size:14px;font-weight:500;text-transform:lowercase;letter-spacing:-.01em}
+.prog-bar{height:7px;background:rgba(0,0,0,.07);border-radius:100px;overflow:hidden}
+.prog-bar-fill{height:100%;border-radius:100px}
+.prog-pct{font-family:'Courier New',monospace;font-size:13px;font-weight:700;text-align:right}
+.prog-btn{font-family:var(--fd);font-size:11px;font-weight:600;padding:7px 12px;border-radius:100px;border:none;cursor:pointer;text-transform:lowercase;text-align:center}
+
+/* PAGE RESSOURCES */
+.res-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.res-card{background:var(--white);overflow:hidden;cursor:pointer;transition:background .15s}
+.res-card:hover{background:#F4F5F8}
+.res-card:first-child{border-radius:16px 0 0 16px}
+.res-card:last-child{border-radius:0 16px 16px 0}
+.res-card-top{height:100px;display:flex;align-items:center;justify-content:center;font-size:40px;border-bottom:1px solid rgba(0,0,0,.06)}
+.res-card-body{padding:20px}
+.res-type{font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.res-name{font-family:var(--fd);font-size:14px;font-weight:500;text-transform:lowercase;letter-spacing:-.01em;margin-bottom:4px;line-height:1.3}
+.res-meta{font-size:12px;color:var(--muted);font-weight:300}
+
+/* PAGE ABONNEMENT */
+.pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:820px}
+.plan{border-radius:20px;padding:40px}
+.plan-free{background:var(--white);border:2px solid rgba(0,0,0,.06)}
+.plan-pro{background:var(--blue)}
+.plan-label{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;margin-bottom:18px}
+.plan-price{font-family:var(--fd);font-size:68px;font-weight:500;letter-spacing:-.04em;line-height:1;text-transform:lowercase;margin-bottom:4px}
+.plan-period{font-size:13px;margin-bottom:28px}
+.plan-features{display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
+.plan-feat{display:flex;align-items:center;gap:10px;font-size:13px}
+.feat-check{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0}
+.plan-cta{width:100%;font-family:var(--fd);font-size:14px;font-weight:600;border:none;border-radius:100px;padding:15px;cursor:pointer;text-transform:lowercase}
+
+/* PAGE GENERER */
+.gen-layout{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 90px)}
+.gen-left{padding:48px;border-right:1px solid rgba(0,0,0,.08);display:flex;flex-direction:column;gap:40px}
+.gen-right{padding:48px;display:flex;flex-direction:column;gap:32px}
+.gen-label{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.duree-list{display:flex;flex-direction:column;gap:8px}
+.duree-chip{width:100%;font-family:var(--fd);font-size:12px;font-weight:500;padding:7px 11px;border-radius:7px;border:1.5px solid rgba(0,0,0,.08);background:var(--white);color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .15s;letter-spacing:-.01em}
+.duree-chip:hover{border-color:var(--blue);color:var(--blue)}
+.duree-chip.sel{background:var(--blue);border-color:var(--blue);color:#fff}
+.duree-sub{font-size:12px;font-weight:300;opacity:.6;font-family:var(--fb)}
+.notions-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.notion-chip{font-size:11px;padding:7px 10px;border-radius:7px;border:1.5px solid rgba(0,0,0,.08);background:var(--white);color:var(--ink);cursor:pointer;text-align:left;display:flex;align-items:center;gap:7px;transition:all .15s}
+.notion-chip:hover{border-color:var(--blue);color:var(--blue)}
+.notion-chip.sel{background:#EEF2FF;border-color:var(--blue);color:var(--blue);font-weight:500}
+.notion-chip.all-chip{grid-column:1/-1;font-family:var(--fd);font-size:14px;font-weight:500}
+.notion-chip.all-chip.sel{background:var(--ink);border-color:var(--ink);color:#fff}
+.ncheck{width:18px;height:18px;border-radius:5px;border:1.5px solid rgba(0,0,0,.15);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;transition:all .15s}
+.notion-chip.sel .ncheck{background:var(--blue);border-color:var(--blue);color:#fff}
+.notion-chip.all-chip.sel .ncheck{background:#fff;border-color:#fff;color:var(--ink)}
+.corr-list{display:flex;flex-direction:column;gap:8px}
+.corr-chip{width:100%;display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:9px;border:1.5px solid rgba(0,0,0,.08);background:var(--white);cursor:pointer;transition:all .15s}
+.corr-chip:hover{border-color:var(--blue)}
+.corr-chip.sel{background:#EEF2FF;border-color:var(--blue)}
+.corr-icon{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.corr-title{font-family:var(--fd);font-size:14px;font-weight:500;color:var(--ink);letter-spacing:-.01em;margin-bottom:2px}
+.corr-chip.sel .corr-title{color:var(--blue)}
+.corr-sub{font-size:12px;color:var(--muted);font-weight:300}
+.ccheck{width:20px;height:20px;border-radius:6px;border:1.5px solid rgba(0,0,0,.15);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;transition:all .15s}
+.corr-chip.sel .ccheck{background:var(--blue);border-color:var(--blue);color:#fff}
+.gen-recap{background:var(--white);border-radius:18px;padding:28px;display:flex;flex-direction:column;gap:18px}
+.recap-title{font-family:var(--fd);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.recap-big{font-family:var(--fd);font-size:56px;font-weight:500;letter-spacing:-.04em;line-height:1;color:var(--blue);text-transform:lowercase}
+.recap-tags{display:flex;flex-wrap:wrap;gap:6px}
+.recap-tag{font-size:11px;font-weight:500;padding:4px 12px;border-radius:100px;background:#EEF2FF;color:var(--blue);border:1px solid var(--blue-lt)}
+.recap-tag.all{background:var(--ink);color:#fff;border-color:var(--ink)}
+.gen-cta{display:flex;flex-direction:column;gap:10px}
+.gen-btn{font-family:var(--fd);font-size:12px;font-weight:600;padding:11px;border-radius:100px;border:none;cursor:pointer;text-transform:lowercase;text-align:center;transition:opacity .15s}
+.gen-btn:hover{opacity:.85}
+.gen-btn-blue{background:var(--blue);color:#fff}
+.gen-btn-ghost{background:transparent;color:var(--muted);border:1.5px solid rgba(0,0,0,.12)}
+
+/* PAGE BREVET */
+.brevet-loading{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 0;gap:20px}
+.spinner{width:40px;height:40px;border:3px solid rgba(0,33,188,.15);border-top-color:var(--blue);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.brevet-ex{background:var(--white);border-radius:18px;padding:32px;margin-bottom:14px}
+.brevet-ex-num{font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px}
+.brevet-ex-titre{font-family:var(--fd);font-size:20px;font-weight:500;text-transform:lowercase;letter-spacing:-.02em;display:block}
+.brevet-enonce{font-size:14px;line-height:1.75;color:#3A3D6B;background:rgba(0,33,188,.03);border-left:3px solid var(--blue-lt);padding:14px 18px;border-radius:0 10px 10px 0;margin:18px 0 22px}
+.brevet-q{margin-bottom:20px}
+.brevet-q-row{display:flex;align-items:baseline;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+.brevet-q-id{font-family:var(--fd);font-size:13px;font-weight:700;color:var(--blue);flex-shrink:0}
+.brevet-q-text{font-size:14px;color:var(--ink);line-height:1.5;flex:1}
+.brevet-q-pts{font-size:11px;font-weight:700;color:var(--orange);background:#FFF0E8;padding:3px 10px;border-radius:100px;white-space:nowrap}
+.brevet-answer{width:100%;font-family:var(--fb);font-size:14px;color:var(--ink);background:#FAFAFA;border:1.5px solid rgba(0,0,0,.08);border-radius:10px;padding:12px 14px;resize:vertical;transition:border-color .15s;line-height:1.6}
+.brevet-answer:focus{outline:none;border-color:var(--blue);background:var(--white)}
+.brevet-answer::placeholder{color:var(--muted)}
+.brevet-answer:disabled{opacity:.6;cursor:not-allowed}
+/* QCM boutons */
+.qcm-options{display:flex;flex-direction:column;gap:8px;margin-top:16px}
+.qcm-btn{display:flex;align-items:center;gap:0;border-radius:12px;border:1.5px solid rgba(0,0,0,.08);background:var(--white);cursor:pointer;transition:all .18s;user-select:none;font-family:var(--fb);text-align:left;width:100%;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.qcm-btn:hover:not(:disabled){border-color:var(--blue);box-shadow:0 3px 10px rgba(0,33,188,.1);transform:translateX(3px)}
+.qcm-btn.selected{border-color:var(--blue);box-shadow:0 3px 10px rgba(0,33,188,.12)}
+.qcm-btn.correct{border-color:#22C55E;box-shadow:0 3px 10px rgba(34,197,94,.15);pointer-events:none}
+.qcm-btn.wrong{border-color:#EF4444;box-shadow:0 3px 10px rgba(239,68,68,.12);pointer-events:none}
+.qcm-btn.missed{border-color:#22C55E;opacity:.75;pointer-events:none}
+.qcm-btn:disabled{cursor:not-allowed}
+.qcm-btn-letter{width:52px;min-height:52px;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:15px;font-weight:800;flex-shrink:0;transition:all .18s;color:var(--muted);background:rgba(0,0,0,.03);border-right:1.5px solid rgba(0,0,0,.06);letter-spacing:-.01em}
+.qcm-btn.selected .qcm-btn-letter{background:var(--blue);color:#fff;border-right-color:var(--blue)}
+.qcm-btn.correct .qcm-btn-letter{background:#22C55E;color:#fff;border-right-color:#22C55E}
+.qcm-btn.wrong .qcm-btn-letter{background:#EF4444;color:#fff;border-right-color:#EF4444}
+.qcm-btn.missed .qcm-btn-letter{background:#22C55E;color:#fff;border-right-color:#22C55E}
+.qcm-btn-label{font-size:14px;color:var(--ink);line-height:1.45;flex:1;padding:14px 18px}
+.qcm-btn.selected .qcm-btn-label{color:var(--blue);font-weight:500}
+.qcm-btn.correct .qcm-btn-label{color:#166534;font-weight:500}
+.qcm-btn.wrong .qcm-btn-label{color:#991B1B}
+.qcm-btn-icon{font-size:16px;padding-right:16px;opacity:0;transition:opacity .15s}
+.qcm-btn.correct .qcm-btn-icon,.qcm-btn.wrong .qcm-btn-icon{opacity:1}
+.corr-btn{font-size:12px;font-weight:600;padding:8px 20px;border-radius:100px;border:1.5px solid var(--blue);background:transparent;color:var(--blue);cursor:pointer;transition:all .15s;margin-top:6px}
+.corr-btn:hover{background:var(--blue);color:#fff}
+.corr-btn:disabled{opacity:.4;cursor:not-allowed}
+.q-feedback{margin-top:10px;padding:12px 16px;border-radius:10px;font-size:13px;line-height:1.6;display:none}
+.q-feedback.ok{background:#EDFBF0;border-left:3px solid #22C55E;color:#166534}
+.q-feedback.bof{background:#FFFBEB;border-left:3px solid #F59E0B;color:#92400E}
+.q-feedback.ko{background:#FEF2F2;border-left:3px solid #EF4444;color:#991B1B}
+.q-pts-earned{font-weight:700;margin-right:6px}
+.ex-score-bar{margin-top:18px;padding-top:16px;border-top:1px solid rgba(0,0,0,.06)}
+.ex-score-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.ex-score-label{font-size:12px;color:var(--muted)}
+.ex-score-val{font-size:13px;font-weight:600;color:var(--ink)}
+.ex-bar{height:7px;background:rgba(0,0,0,.06);border-radius:100px;overflow:hidden}
+.ex-bar-fill{height:100%;border-radius:100px;background:var(--blue);transition:width .5s ease}
+.score-panel{background:var(--blue);border-radius:20px;padding:36px;margin-top:12px;display:none}
+.score-panel-inner{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center}
+.score-note{font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:8px}
+.score-big{font-size:72px;font-weight:700;color:#fff;line-height:1;letter-spacing:-.04em}
+.score-mention{display:inline-block;font-size:14px;font-weight:700;padding:6px 20px;border-radius:100px;margin-top:12px;text-transform:lowercase;letter-spacing:-.01em}
+.score-bars{display:flex;flex-direction:column;gap:10px}
+.score-ex-row{display:flex;align-items:center;gap:10px}
+.score-ex-name{font-size:12px;color:rgba(255,255,255,.7);width:90px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.score-ex-bar{flex:1;height:6px;background:rgba(255,255,255,.15);border-radius:100px;overflow:hidden}
+.score-ex-fill{height:100%;border-radius:100px;background:#fff;transition:width .6s ease}
+.score-ex-pts{font-size:11px;font-weight:600;color:rgba(255,255,255,.6);flex-shrink:0;width:44px;text-align:right}
+
+/* PAGE PARCOURS TABLEAU DE BORD */
+.mention-scale{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:0}
+.mention-card{background:var(--white);border-radius:14px;padding:22px;border-top:4px solid transparent;position:relative}
+.mention-card.current{background:var(--blue)}
+.mention-card-label{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+.mention-card-note{font-family:var(--fd);font-size:34px;font-weight:500;letter-spacing:-.03em;line-height:1;margin-bottom:4px}
+.mention-card-range{font-size:12px;font-weight:300;margin-bottom:14px}
+.mention-bar{height:5px;background:rgba(0,0,0,.06);border-radius:100px;overflow:hidden}
+.mention-bar-fill{height:100%;border-radius:100px}
+.mention-card-sub{font-size:11px;margin-top:7px;font-weight:300}
+.mention-badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--orange);color:#fff;font-family:var(--fd);font-size:9px;font-weight:700;padding:3px 12px;border-radius:100px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+</style>
+</head>
+<body>
+
+<!-- ═══════ PAGE ACCUEIL ═══════ -->
+<div class="page active" id="page-accueil">
+<nav class="nav">
+  <div class="logo" onclick="showPage('accueil')">
+    <span class="logo-top">prépa</span>
+    <span class="logo-bot">bre<span>.</span>vet</span>
+  </div>
+  <div class="nav-r">
+    <ul class="nav-links">
+      <li class="on" onclick="showPage('accueil')">accueil</li>
+      <li onclick="showPage('parcours')">mon parcours</li>
+      <li onclick="showPage('ressources')">ressources</li>
+      <li onclick="showPage('abonnement')" style="color:var(--orange);opacity:1;font-weight:600">s'inscrire ✦</li>
+    </ul>
+    <button class="cta" onclick="showPage('generer')">générer un brevet →</button>
+  </div>
+</nav>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;min-height:78vh;padding:48px 48px 0;gap:48px;align-items:end">
+  <div style="padding-bottom:48px">
+    <p class="eyebrow" style="margin-bottom:24px">Brevet 2026 · Mathématiques</p>
+    <h1 style="font-family:var(--fd);font-size:clamp(56px,7.5vw,104px);font-weight:500;line-height:1;letter-spacing:-.03em;text-transform:lowercase;margin-bottom:36px">prépare,<br>entraîne-toi,<br>réussis.</h1>
+    <p style="font-size:15px;font-weight:300;line-height:1.75;color:var(--muted);max-width:400px;border-left:3px solid var(--blue-lt);padding-left:18px;margin-bottom:32px">Entraîne-toi sur les vrais sujets du brevet — en conditions réelles, avec le chrono. Toutes les annales officielles depuis 2018, corrigées.</p>
+    <div style="display:flex;gap:12px">
+      <button class="btn btn-blue" onclick="showPage('generer')">générer un brevet →</button>
+      <button class="btn btn-ghost" onclick="showPage('parcours')">mon parcours</button>
+    </div>
+  </div>
+  <div style="padding-bottom:48px;display:flex;flex-direction:column;justify-content:flex-end;gap:20px">
+    <div style="font-size:12px;color:var(--muted);display:flex;gap:24px">
+      <span style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:3px;background:var(--blue);display:inline-block"></span>7 sessions</span>
+      <span style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:3px;background:var(--rose);display:inline-block"></span>session normale</span>
+      <span style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:3px;background:var(--orange);display:inline-block"></span>remplacement</span>
+    </div>
+    <div style="display:flex;gap:8px;height:120px">
+      <div style="background:var(--blue);border-radius:14px;flex:4;display:flex;align-items:flex-end;padding:12px 16px;font-family:var(--fd);font-size:18px;font-weight:600;color:rgba(255,255,255,.85)">2018—2021</div>
+      <div style="background:var(--rose);border-radius:14px;flex:1.5;display:flex;align-items:flex-end;padding:12px 16px;font-family:var(--fd);font-size:18px;font-weight:600;color:rgba(255,255,255,.85)">2022—23</div>
+      <div style="background:var(--orange);border-radius:14px;flex:1;display:flex;align-items:flex-end;padding:12px 16px;font-family:var(--fd);font-size:16px;font-weight:600;color:rgba(255,255,255,.85)">2024</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="stats">
+  <div class="stat"><div class="stat-n" style="color:var(--blue)">16</div><div class="stat-l">sujets officiels du brevet de maths</div></div>
+  <div class="stat"><div class="stat-n">2018</div><div class="stat-l">première annale disponible — 6 ans de sujets</div></div>
+  <div class="stat"><div class="stat-n" style="color:var(--orange)">100%</div><div class="stat-l">corrigées question par question, avec la méthode</div></div>
+  <div class="stat"><div class="stat-n">2h⏱</div><div class="stat-l">durée max par sujet — comme le vrai brevet</div></div>
+</div>
+
+<div class="divider"></div>
+
+<div class="sec">
+  <div class="sec-head">
+    <h2 class="sec-title">les annales disponibles</h2>
+    <span class="see-all" onclick="showPage('accueil')">voir les annales →</span>
+  </div>
+  <div class="chap-grid">
+    <div class="chap-card"><div class="chap-num">2024</div><div class="chap-title">brevet 2024</div><div class="chap-meta">Session normale · juin 2024 · 2h</div><div class="chap-tags"><span class="ctag b">officiel</span><span class="ctag">corrigé</span><span class="ctag r">chronométré</span></div><div class="bar-wrap"><div class="bar"><div class="bar-fill" style="width:0%;background:var(--blue)"></div></div><span class="bar-pct" style="color:var(--muted)">—</span></div></div>
+    <div class="chap-card"><div class="chap-num">2023</div><div class="chap-title">brevet 2023</div><div class="chap-meta">Session normale · juin 2023 · 2h</div><div class="chap-tags"><span class="ctag b">officiel</span><span class="ctag">corrigé</span></div><div class="bar-wrap"><div class="bar"><div class="bar-fill" style="width:87%;background:var(--blue)"></div></div><span class="bar-pct" style="color:var(--blue)">87%</span></div></div>
+    <div class="chap-card"><div class="chap-num">2022</div><div class="chap-title">brevet 2022</div><div class="chap-meta">Session normale · juin 2022 · 2h</div><div class="chap-tags"><span class="ctag b">officiel</span><span class="ctag o">en cours</span></div><div class="bar-wrap"><div class="bar"><div class="bar-fill" style="width:52%;background:var(--orange)"></div></div><span class="bar-pct" style="color:var(--orange)">52%</span></div></div>
+    <div class="chap-card"><div class="chap-num">2021</div><div class="chap-title">brevet 2021</div><div class="chap-meta">Session normale · juin 2021 · 2h</div><div class="chap-tags"><span class="ctag b">officiel</span><span class="ctag">corrigé</span></div><div class="bar-wrap"><div class="bar"><div class="bar-fill" style="width:0%"></div></div><span class="bar-pct" style="color:var(--muted)">—</span></div></div>
+    <div class="chap-card"><div class="chap-num">2020</div><div class="chap-title">brevet 2020</div><div class="chap-meta">Session de remplacement · 2h</div><div class="chap-tags"><span class="ctag b">officiel</span><span class="ctag">corrigé</span></div><div class="bar-wrap"><div class="bar"><div class="bar-fill" style="width:0%"></div></div><span class="bar-pct" style="color:var(--muted)">—</span></div></div>
+    <div class="chap-card"><div class="chap-num">2018</div><div class="chap-title">brevet 2018 → 2019</div><div class="chap-meta">2 sujets officiels · corrigés</div><div class="chap-tags"><span class="ctag b">officiel</span><span class="ctag r">réussi ✓</span></div><div class="bar-wrap"><div class="bar"><div class="bar-fill" style="width:100%;background:var(--rose)"></div></div><span class="bar-pct" style="color:#8B5A7A">100%</span></div></div>
+  </div>
+</div>
+
+<div class="footer-top">
+  <div><div class="footer-logo-bot">bre<span>.</span>vet</div><p class="footer-desc">La plateforme d'entraînement au brevet des collèges. Exercices progressifs, corrections détaillées, suivi personnalisé.</p></div>
+  <div><div class="footer-col-title">Notions</div><ul class="footer-links"><li>mathématiques</li><li>français</li><li>histoire-géo</li><li>sciences</li></ul></div>
+  <div><div class="footer-col-title">Navigation</div><ul class="footer-links"><li onclick="showPage('parcours')">mon parcours</li><li onclick="showPage('ressources')">ressources</li></ul></div>
+  <div><div class="footer-col-title">Contact</div><ul class="footer-links"><li>nous écrire</li><li>instagram</li><li>newsletter</li></ul></div>
+</div>
+<div class="footer-email-wrap"><a class="footer-email"><span class="__cf_email__" data-cfemail="44272b2a302527300434362134252636213221306a2236">[email&#160;protected]</span></a><div style="flex-shrink:0;width:48px;height:48px;display:flex;align-items:center;justify-content:center"><svg width="36" height="36" viewBox="0 0 42 42" fill="none"><path d="M8 8h26v26M8 34L34 8" stroke="rgb(25,8,6)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+<div class="footer-bar"><div class="footer-bar-links"><a>Instagram</a><a>Newsletter</a><a>LinkedIn</a></div><span class="footer-bar-copy">© 2026 Prépa Brevet — tous droits réservés</span></div>
+</div>
+
+<!-- ═══════ PAGE PARCOURS ═══════ -->
+<div class="page" id="page-parcours">
+<nav class="nav">
+  <div class="logo" onclick="showPage('accueil')"><span class="logo-top">prépa</span><span class="logo-bot">bre<span>.</span>vet</span></div>
+  <div class="nav-r">
+    <ul class="nav-links">
+      <li onclick="showPage('accueil')">accueil</li>
+      <li class="on">mon parcours</li><li onclick="showPage('ressources')">ressources</li>
+      <li onclick="showPage('abonnement')" style="color:var(--orange);opacity:1;font-weight:600">s'inscrire ✦</li>
+    </ul>
+    <button class="cta" onclick="showPage('generer')">générer un brevet →</button>
+  </div>
+</nav>
+
+<div style="padding:44px 48px 0;display:grid;grid-template-columns:1fr auto;align-items:end;gap:32px">
+  <div>
+    <p class="eyebrow" style="margin-bottom:14px">Tableau de bord</p>
+    <h1 style="font-family:var(--fd);font-size:clamp(48px,5.5vw,80px);font-weight:500;line-height:1;letter-spacing:-.04em;text-transform:lowercase">mon<br><span style="color:var(--ink)">parcours</span></h1>
+  </div>
+  <div style="background:var(--blue);border-radius:18px;padding:24px 32px;text-align:center;margin-bottom:0">
+    <div style="font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:6px">mention actuelle</div>
+    <div id="mention-actuelle-label" style="font-family:var(--fd);font-size:38px;font-weight:500;letter-spacing:-.03em;color:#fff;line-height:1;text-transform:lowercase">—</div>
+    <div id="mention-actuelle-note" style="font-size:12px;color:rgba(255,255,255,.5);margin-top:5px">aucun brevet réalisé</div>
+  </div>
+</div>
+
+<div class="divider" style="margin-top:36px"></div>
+
+<div class="stats">
+  <div class="stat"><div class="stat-n" id="stat-moy" style="color:var(--blue)">—</div><div class="stat-l">moyenne générale sur 20</div></div>
+  <div class="stat"><div class="stat-n" style="color:var(--orange)">7🔥</div><div class="stat-l">jours de série consécutifs</div></div>
+  <div class="stat"><div class="stat-n" id="stat-nb">0</div><div class="stat-l">brevets réalisés</div></div>
+  <div class="stat"><div class="stat-n" style="color:var(--rose)">+2,4</div><div class="stat-l">points gagnés ce mois</div></div>
+</div>
+
+<div class="divider"></div>
+
+<div class="sec" style="padding-bottom:40px">
+  <div class="sec-head"><h2 class="sec-title">échelle des mentions</h2></div>
+  <div class="mention-scale">
+    <div class="mention-card" style="border-top-color:#8A8DAA">
+      <div class="mention-card-label" style="color:#8A8DAA">admis</div>
+      <div class="mention-card-note" style="color:var(--ink)">10</div>
+      <div class="mention-card-range" style="color:var(--muted)">à 11,9 / 20</div>
+      <div class="mention-bar"><div class="mention-bar-fill" style="width:0%;background:#8A8DAA"></div></div>
+      <div class="mention-card-sub" style="color:var(--muted)">non atteint</div>
+    </div>
+    <div class="mention-card" style="border-top-color:var(--blue-lt)">
+      <div class="mention-card-label" style="color:#5a7a9a">assez bien</div>
+      <div class="mention-card-note" style="color:var(--ink)">12</div>
+      <div class="mention-card-range" style="color:var(--muted)">à 13,9 / 20</div>
+      <div class="mention-bar"><div class="mention-bar-fill" style="width:0%;background:var(--blue-lt)"></div></div>
+      <div class="mention-card-sub" style="color:var(--muted)">non atteint</div>
+    </div>
+    <div class="mention-card current" style="border-top-color:rgba(255,255,255,.3)">
+      <div class="mention-badge">ton niveau ✦</div>
+      <div class="mention-card-label" style="color:rgba(255,255,255,.6)">bien</div>
+      <div class="mention-card-note" style="color:#fff">14</div>
+      <div class="mention-card-range" style="color:rgba(255,255,255,.5)">à 15,9 / 20</div>
+      <div class="mention-bar" style="background:rgba(255,255,255,.15)"><div class="mention-bar-fill" style="width:74%;background:#fff"></div></div>
+      <div class="mention-card-sub" style="color:rgba(255,255,255,.6)">14,8 / 20 · 74%</div>
+    </div>
+    <div class="mention-card" style="border-top-color:var(--orange)">
+      <div class="mention-card-label" style="color:var(--orange)">très bien</div>
+      <div class="mention-card-note" style="color:var(--ink)">16</div>
+      <div class="mention-card-range" style="color:var(--muted)">à 17,9 / 20</div>
+      <div class="mention-bar"><div class="mention-bar-fill" style="width:0%;background:var(--orange)"></div></div>
+      <div class="mention-card-sub" style="color:var(--orange);font-weight:500">encore 1,2 pt →</div>
+    </div>
+    <div class="mention-card" style="border-top-color:var(--rose)">
+      <div class="mention-card-label" style="color:#8B5A7A">félicitations</div>
+      <div class="mention-card-note" style="color:var(--ink)">18</div>
+      <div class="mention-card-range" style="color:var(--muted)">à 20 / 20</div>
+      <div class="mention-bar"><div class="mention-bar-fill" style="width:0%;background:var(--rose)"></div></div>
+      <div class="mention-card-sub" style="color:var(--muted)">non atteint</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="sec" style="padding-bottom:40px">
+  <div class="sec-head"><h2 class="sec-title">historique des brevets</h2><span class="see-all" onclick="showPage('generer')">générer un nouveau →</span></div>
+  <div id="histo-dynamique"><p style="color:var(--muted);font-size:14px;padding:20px 0">Aucun brevet réalisé pour l'instant. <span style="color:var(--blue);cursor:pointer" onclick="showPage('generer')">Génère ton premier brevet →</span></p></div>
+</div>
+
+<div class="divider"></div>
+
+<div class="sec" style="padding-bottom:52px">
+  <div class="sec-head"><h2 class="sec-title">progression par notion</h2></div>
+  <div style="background:var(--white);border-radius:16px;overflow:hidden">
+    <div class="prog-row" style="border-radius:16px 16px 0 0"><div class="prog-name">Géométrie</div><div class="prog-bar"><div class="prog-bar-fill" style="width:82%;background:var(--blue)"></div></div><div class="prog-pct" style="color:var(--blue)">16,5/20</div><button class="prog-btn" style="background:var(--blue);color:#fff">continuer →</button></div>
+    <div class="prog-row" style="border-top:1px solid rgba(0,0,0,.05)"><div class="prog-name">Statistiques</div><div class="prog-bar"><div class="prog-bar-fill" style="width:70%;background:var(--blue)"></div></div><div class="prog-pct" style="color:var(--blue)">14,0/20</div><button class="prog-btn" style="background:var(--blue);color:#fff">continuer →</button></div>
+    <div class="prog-row" style="border-top:1px solid rgba(0,0,0,.05)"><div class="prog-name">Algèbre</div><div class="prog-bar"><div class="prog-bar-fill" style="width:67%;background:var(--orange)"></div></div><div class="prog-pct" style="color:var(--orange)">13,5/20</div><button class="prog-btn" style="background:var(--orange);color:#fff">continuer →</button></div>
+    <div class="prog-row" style="border-top:1px solid rgba(0,0,0,.05)"><div class="prog-name">Probabilités</div><div class="prog-bar"><div class="prog-bar-fill" style="width:60%;background:var(--orange)"></div></div><div class="prog-pct" style="color:var(--orange)">12,0/20</div><button class="prog-btn" style="background:var(--orange);color:#fff">continuer →</button></div>
+    <div class="prog-row" style="border-top:1px solid rgba(0,0,0,.05)"><div class="prog-name">Arithmétique</div><div class="prog-bar"><div class="prog-bar-fill" style="width:50%;background:var(--rose)"></div></div><div class="prog-pct" style="color:#8B5A7A">10,0/20</div><button class="prog-btn" style="background:var(--rose);color:var(--ink)">travailler →</button></div>
+    <div class="prog-row" style="border-top:1px solid rgba(0,0,0,.05);border-radius:0 0 16px 16px"><div class="prog-name">Algorithmique</div><div class="prog-bar"><div class="prog-bar-fill" style="width:0%"></div></div><div class="prog-pct" style="color:var(--muted)">—</div><button class="prog-btn" style="background:var(--muted);color:#fff">commencer →</button></div>
+  </div>
+</div>
+
+<div class="footer-email-wrap" style="border-top:1px solid rgba(0,0,0,.08)"><a class="footer-email"><span class="__cf_email__" data-cfemail="5b3834352f3a382f1b2b293e2b3a39293e2d3e2f753d29">[email&#160;protected]</span></a></div>
+<div class="footer-bar"><div class="footer-bar-links"><a>Instagram</a><a>Newsletter</a><a>LinkedIn</a></div><span class="footer-bar-copy">© 2026 Prépa Brevet</span></div>
+</div>
+
+<!-- ═══════ PAGE RESSOURCES ═══════ -->
+<div class="page" id="page-ressources">
+<nav class="nav">
+  <div class="logo" onclick="showPage('accueil')"><span class="logo-top">prépa</span><span class="logo-bot">bre<span>.</span>vet</span></div>
+  <div class="nav-r">
+    <ul class="nav-links">
+      <li onclick="showPage('accueil')">accueil</li>
+      <li onclick="showPage('parcours')">mon parcours</li><li class="on">ressources</li>
+      <li onclick="showPage('abonnement')" style="color:var(--orange);opacity:1;font-weight:600">s'inscrire ✦</li>
+    </ul>
+    <button class="cta" onclick="showPage('generer')">générer un brevet →</button>
+  </div>
+</nav>
+<div style="padding:48px 48px 40px">
+  <p class="eyebrow" style="margin-bottom:14px">Outils &amp; documents</p>
+  <h1 style="font-family:var(--fd);font-size:clamp(48px,6vw,88px);font-weight:500;line-height:1;letter-spacing:-.04em;text-transform:lowercase;margin-bottom:14px">toutes les<br><span style="color:var(--ink)">ressources</span><br>pour <span style="color:var(--orange)">réussir.</span></h1>
+  <p style="font-size:14px;color:var(--muted);font-weight:300;line-height:1.65;max-width:480px;border-left:3px solid var(--blue-lt);padding-left:16px">Fiches de révision, annales officielles et formulaires — tout ce qu'il te faut.</p>
+</div>
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-head"><h2 class="sec-title">fiches de révision</h2></div>
+  <div class="res-grid">
+    <div class="res-card"><div class="res-card-body"><div class="res-type">Fiche PDF</div><div class="res-name">géométrie — toutes les formules essentielles</div><div class="res-meta">4 pages · mis à jour 2026</div></div></div>
+    <div class="res-card"><div class="res-card-body"><div class="res-type">Fiche PDF</div><div class="res-name">algèbre — méthodes de résolution d'équations</div><div class="res-meta">3 pages · mis à jour 2026</div></div></div>
+    <div class="res-card"><div class="res-card-body"><div class="res-type">Fiche PDF</div><div class="res-name">statistiques — moyenne, médiane, diagrammes</div><div class="res-meta">2 pages · mis à jour 2026</div></div></div>
+  </div>
+</div>
+<div class="sec" style="padding-top:0;border-top:none">
+  <div class="sec-head"><h2 class="sec-title">annales officielles</h2></div>
+  <div class="res-grid">
+    <div class="res-card"><div class="res-card-body"><div class="res-type">Annale officielle</div><div class="res-name">brevet 2024 — session normale</div><div class="res-meta">Sujet + corrigé · 2h</div></div></div>
+    <div class="res-card"><div class="res-card-body"><div class="res-type">Annale officielle</div><div class="res-name">brevet 2023 — session normale</div><div class="res-meta">Sujet + corrigé · 2h</div></div></div>
+    <div class="res-card"><div class="res-card-body"><div class="res-type">Annale officielle</div><div class="res-name">brevet 2022 — session normale</div><div class="res-meta">Sujet + corrigé · 2h</div></div></div>
+  </div>
+</div>
+<div style="padding:40px 48px;border-top:1px solid rgba(0,0,0,.08)">
+  <p style="font-family:var(--fd);font-size:clamp(24px,3.5vw,48px);font-weight:500;line-height:1;letter-spacing:-.03em;text-transform:lowercase;margin-bottom:20px">les ressources c'est bien,<br><span style="color:var(--rose)">pratiquer</span> c'est <span style="color:var(--ink)">mieux.</span></p>
+  <button class="btn btn-orange" onclick="showPage('generer')" style="font-size:14px;padding:14px 32px">générer un brevet →</button>
+</div>
+<div class="footer-email-wrap" style="border-top:1px solid rgba(0,0,0,.08)"><a class="footer-email"><span class="__cf_email__" data-cfemail="73101c1d071210073303011603121101160516075d1501">[email&#160;protected]</span></a></div>
+<div class="footer-bar"><div class="footer-bar-links"><a>Instagram</a><a>Newsletter</a><a>LinkedIn</a></div><span class="footer-bar-copy">© 2026 Prépa Brevet</span></div>
+</div>
+
+<!-- ═══════ PAGE ABONNEMENT ═══════ -->
+<div class="page" id="page-abonnement">
+<nav class="nav">
+  <div class="logo" onclick="showPage('accueil')"><span class="logo-top">prépa</span><span class="logo-bot">bre<span>.</span>vet</span></div>
+  <div class="nav-r">
+    <ul class="nav-links">
+      <li onclick="showPage('accueil')">accueil</li>
+      <li onclick="showPage('parcours')">mon parcours</li><li onclick="showPage('ressources')">ressources</li>
+      <li style="color:var(--orange);opacity:1;font-weight:600">s'inscrire ✦</li>
+    </ul>
+    <button class="cta" onclick="showPage('generer')">générer un brevet →</button>
+  </div>
+</nav>
+<div style="padding:48px 48px 40px">
+  <p class="eyebrow" style="margin-bottom:14px">Choisis ton offre</p>
+  <h1 style="font-family:var(--fd);font-size:clamp(48px,6vw,88px);font-weight:500;line-height:1;letter-spacing:-.04em;text-transform:lowercase;margin-bottom:16px">simple.<br>sans surprise.</h1>
+  <p style="font-size:14px;color:var(--muted);font-weight:300;line-height:1.65;max-width:460px;border-left:3px solid var(--blue-lt);padding-left:16px">Commence gratuitement, passe premium quand tu es prêt. Aucun engagement.</p>
+</div>
+<div class="divider"></div>
+<div class="stats">
+  <div class="stat"><div class="stat-n" style="color:var(--blue)">+2k</div><div class="stat-l">élèves déjà inscrits</div></div>
+  <div class="stat"><div class="stat-n" style="color:var(--orange)">87%</div><div class="stat-l">ont progressé en premium</div></div>
+  <div class="stat"><div class="stat-n">16</div><div class="stat-l">annales accessibles en premium</div></div>
+  <div class="stat"><div class="stat-n">7j</div><div class="stat-l">essai gratuit sans CB</div></div>
+</div>
+<div class="divider"></div>
+<div style="padding:48px">
+  <div class="pricing-grid">
+    <div class="plan plan-free" style="display:flex;flex-direction:column">
+      <div style="height:220px">
+        <div class="plan-label" style="color:var(--muted)">Offre gratuite</div>
+        <div class="plan-price" style="color:var(--ink)">0€</div>
+        <div class="plan-period" style="color:var(--muted)">pour toujours · sans CB</div>
+      </div>
+      <div class="plan-features">
+        <div class="plan-feat"><span class="feat-check" style="background:#EEF2FF;color:var(--blue)">✓</span><span style="color:var(--ink)">3 annales accessibles</span></div>
+        <div class="plan-feat"><span class="feat-check" style="background:#EEF2FF;color:var(--blue)">✓</span><span style="color:var(--ink)">résultats basiques</span></div>
+        <div class="plan-feat" style="opacity:.35"><span class="feat-check" style="background:rgba(0,0,0,.05)">✕</span><span style="color:var(--muted)">corrections détaillées</span></div>
+        <div class="plan-feat" style="opacity:.35"><span class="feat-check" style="background:rgba(0,0,0,.05)">✕</span><span style="color:var(--muted)">suivi de progression</span></div>
+        <div class="plan-feat" style="opacity:.35"><span class="feat-check" style="background:rgba(0,0,0,.05)">✕</span><span style="color:var(--muted)">brevets générés par IA</span></div>
+      </div>
+      <button class="plan-cta" style="font-family:var(--fd);font-weight:600;margin-top:auto;background:transparent;border:1.5px solid rgba(0,0,0,.15);color:var(--ink)">commencer gratuitement</button>
+    </div>
+    <div class="plan plan-pro" style="display:flex;flex-direction:column">
+      <div style="height:220px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px">
+          <div class="plan-label" style="color:rgba(255,255,255,.5)">Offre premium</div>
+          <span style="background:var(--orange);color:#fff;font-family:var(--fd);font-size:10px;font-weight:700;padding:4px 12px;border-radius:100px;text-transform:uppercase">populaire</span>
+        </div>
+        <div style="display:flex;gap:8px;margin-bottom:16px">
+          <button id="tog-month" onclick="togglePricing('month')" style="font-family:var(--fd);font-size:12px;font-weight:600;padding:6px 16px;border-radius:100px;border:none;cursor:pointer;background:rgba(255,255,255,.2);color:#fff">mensuel</button>
+          <button id="tog-year" onclick="togglePricing('year')" style="font-family:var(--fd);font-size:12px;font-weight:600;padding:6px 16px;border-radius:100px;border:none;cursor:pointer;background:transparent;color:rgba(255,255,255,.5)">annuel −30%</button>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:2px">
+          <div id="price-main" style="font-family:var(--fd);font-size:68px;font-weight:500;letter-spacing:-.04em;line-height:1;color:#fff">9€</div>
+          <div id="price-period" style="font-size:13px;color:rgba(255,255,255,.5)">/mois</div>
+        </div>
+        <div id="price-sub" style="font-size:12px;color:rgba(255,255,255,.4)">7 jours essai gratuit sans CB</div>
+      </div>
+      <div class="plan-features">
+        <div class="plan-feat"><span class="feat-check" style="background:rgba(255,255,255,.15);color:#fff">✓</span><span style="color:rgba(255,255,255,.9)">toutes les annales (16 sujets)</span></div>
+        <div class="plan-feat"><span class="feat-check" style="background:rgba(255,255,255,.15);color:#fff">✓</span><span style="color:rgba(255,255,255,.9)">corrections détaillées</span></div>
+        <div class="plan-feat"><span class="feat-check" style="background:rgba(255,255,255,.15);color:#fff">✓</span><span style="color:rgba(255,255,255,.9)">suivi de progression</span></div>
+        <div class="plan-feat"><span class="feat-check" style="background:rgba(255,255,255,.15);color:#fff">✓</span><span style="color:rgba(255,255,255,.9)">brevets générés par IA</span></div>
+        <div class="plan-feat"><span class="feat-check" style="background:rgba(255,255,255,.15);color:#fff">✓</span><span style="color:rgba(255,255,255,.9)">sans publicité</span></div>
+      </div>
+      <button style="width:100%;font-family:var(--fd);font-size:14px;font-weight:600;background:var(--orange);color:#fff;border:none;border-radius:100px;padding:15px;cursor:pointer;text-transform:lowercase;margin-top:auto">commencer l'essai gratuit →</button>
+    </div>
+  </div>
+</div>
+<div class="footer-email-wrap" style="border-top:1px solid rgba(0,0,0,.08)"><a class="footer-email"><span class="__cf_email__" data-cfemail="ff9c90918b9e9c8bbf8f8d9a8f9e9d8d9a899a8bd1998d">[email&#160;protected]</span></a></div>
+<div class="footer-bar"><div class="footer-bar-links"><a>Instagram</a><a>Newsletter</a><a>LinkedIn</a></div><span class="footer-bar-copy">© 2026 Prépa Brevet</span></div>
+</div>
+
+<!-- ═══════ PAGE GÉNÉRER ═══════ -->
+<div class="page" id="page-generer">
+<nav class="nav">
+  <div class="logo" onclick="showPage('accueil')"><span class="logo-top">prépa</span><span class="logo-bot">bre<span>.</span>vet</span></div>
+  <div class="nav-r">
+    <ul class="nav-links">
+      <li onclick="showPage('accueil')">accueil</li>
+      <li onclick="showPage('parcours')">mon parcours</li><li onclick="showPage('ressources')">ressources</li>
+      <li onclick="showPage('abonnement')" style="color:var(--orange);opacity:1;font-weight:600">s'inscrire ✦</li>
+    </ul>
+    <button class="cta" onclick="showPage('generer')">générer un brevet →</button>
+  </div>
+</nav>
+<div class="divider"></div>
+<div class="gen-layout">
+
+  <div class="gen-left">
+    <div>
+      <p class="eyebrow" style="margin-bottom:16px">Brevet 2026 · Mathématiques</p>
+      <h1 style="font-family:var(--fd);font-size:clamp(38px,4.5vw,64px);font-weight:500;line-height:1;letter-spacing:-.04em;text-transform:lowercase;margin-bottom:10px">génère ton<br><span style="color:var(--blue)">brevet.</span></h1>
+      <p style="font-size:13px;color:var(--muted);font-weight:300;line-height:1.6;max-width:340px;margin-top:10px">Choisis la durée, les notions et le mode de correction. On s'occupe du reste.</p>
+    </div>
+    <div>
+      <div class="gen-label">durée de l'épreuve</div>
+      <div class="duree-list">
+        <button class="duree-chip sel" onclick="selectDuree(this)" data-mins="120"><span>2h</span><span class="duree-sub">comme le vrai brevet</span></button>
+        <button class="duree-chip" onclick="selectDuree(this)" data-mins="90"><span>1h30</span><span class="duree-sub">entraînement intensif</span></button>
+        <button class="duree-chip" onclick="selectDuree(this)" data-mins="60"><span>1h</span><span class="duree-sub">session standard</span></button>
+        <button class="duree-chip" onclick="selectDuree(this)" data-mins="30"><span>30 min</span><span class="duree-sub">révision rapide</span></button>
+        <button class="duree-chip" onclick="selectDuree(this)" data-mins="10"><span>10 min</span><span class="duree-sub">échauffement</span></button>
+        <button class="duree-chip" onclick="selectDuree(this)" data-mins="5"><span>5 min</span><span class="duree-sub">exercice flash</span></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="gen-right">
+    <div>
+      <div class="gen-label">notions à travailler</div>
+      <div class="notions-grid">
+        <button class="notion-chip all-chip sel" data-notion="all" onclick="toggleNotion(this)"><span class="ncheck">✓</span>Toutes les notions</button>
+        <button class="notion-chip" data-notion="Statistiques" onclick="toggleNotion(this)"><span class="ncheck"></span>Statistiques</button>
+        <button class="notion-chip" data-notion="Arithmétique" onclick="toggleNotion(this)"><span class="ncheck"></span>Arithmétique</button>
+        <button class="notion-chip" data-notion="Algorithmique" onclick="toggleNotion(this)"><span class="ncheck"></span>Algorithmique</button>
+        <button class="notion-chip" data-notion="Probabilités" onclick="toggleNotion(this)"><span class="ncheck"></span>Probabilités</button>
+        <button class="notion-chip" data-notion="Géométrie" onclick="toggleNotion(this)"><span class="ncheck"></span>Géométrie</button>
+        <button class="notion-chip" data-notion="Volume et Grandeurs" onclick="toggleNotion(this)"><span class="ncheck"></span>Volume et Grandeurs</button>
+        <button class="notion-chip" data-notion="Proportionnalité" onclick="toggleNotion(this)"><span class="ncheck"></span>Proportionnalité</button>
+        <button class="notion-chip" data-notion="Algèbre et Fonctions" onclick="toggleNotion(this)"><span class="ncheck"></span>Algèbre et Fonctions</button>
+        <button class="notion-chip" data-notion="Puissances" onclick="toggleNotion(this)"><span class="ncheck"></span>Puissances</button>
+        <button class="notion-chip" data-notion="QCM et situations" onclick="toggleNotion(this)"><span class="ncheck"></span>QCM et situations</button>
+      </div>
+    </div>
+
+    <div>
+      <div class="gen-label">mode de correction</div>
+      <div class="corr-list">
+        <button class="corr-chip sel" onclick="selectCorr(this)" data-mode="question">
+          <div style="text-align:left"><div class="corr-title">correction question par question</div><div class="corr-sub">la correction s'affiche après chaque réponse</div></div>
+          <div class="ccheck" style="background:var(--blue);border-color:var(--blue);color:#fff">✓</div>
+        </button>
+        <button class="corr-chip" onclick="selectCorr(this)" data-mode="fin">
+          <div style="text-align:left"><div class="corr-title">correction à la fin de l'examen</div><div class="corr-sub">toutes les corrections révélées en une fois</div></div>
+          <div class="ccheck"></div>
+        </button>
+      </div>
+    </div>
+
+    <div class="gen-recap">
+      <div class="recap-title">ton brevet</div>
+      <div>
+        <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:2px">durée</div>
+        <div class="recap-big" id="recap-duree">2h</div>
+      </div>
+      <div>
+        <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">notions</div>
+        <div class="recap-tags" id="recap-notions"><span class="recap-tag all">Toutes les notions</span></div>
+      </div>
+      <div>
+        <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">correction</div>
+        <div id="recap-corr" style="font-family:var(--fd);font-size:14px;font-weight:500;color:var(--blue)">question par question</div>
+      </div>
+      <div class="gen-cta">
+        <button class="gen-btn gen-btn-blue" onclick="genererBrevet()">générer mon brevet →</button>
+        <button class="gen-btn gen-btn-ghost" onclick="showPage('accueil')">← retour</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ═══════ PAGE BREVET ═══════ -->
+<div class="page" id="page-brevet">
+<nav class="nav">
+  <div class="logo" onclick="showPage('accueil')"><span class="logo-top">prépa</span><span class="logo-bot">bre<span>.</span>vet</span></div>
+  <div class="nav-r">
+    <ul class="nav-links">
+      <li onclick="showPage('accueil')">accueil</li>
+      <li onclick="showPage('parcours')">mon parcours</li><li onclick="showPage('ressources')">ressources</li>
+      <li onclick="showPage('abonnement')" style="color:var(--orange);opacity:1;font-weight:600">s'inscrire ✦</li>
+    </ul>
+    <button class="cta" onclick="showPage('generer')">générer un brevet →</button>
+  </div>
+</nav>
+<div class="divider"></div>
+<div style="padding:36px 48px 28px;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px">
+  <div>
+    <p class="eyebrow" style="margin-bottom:10px">Brevet généré · Mathématiques</p>
+    <h1 style="font-family:var(--fd);font-size:clamp(32px,3.8vw,56px);font-weight:500;line-height:1;letter-spacing:-.04em;text-transform:lowercase;margin-bottom:8px">ton brevet<br><span style="color:var(--blue)">personnalisé.</span></h1>
+    <p style="font-size:13px;color:var(--muted);font-weight:300">Durée : <strong id="brevet-duree" style="color:var(--ink)">2h</strong> · <span id="brevet-notions"></span></p>
+  </div>
+  <div id="timer-box" style="display:none;background:var(--white);border-radius:18px;padding:20px 28px;text-align:center;min-width:180px">
+    <div style="font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">temps restant</div>
+    <div id="timer-display" style="font-family:var(--fd);font-size:42px;font-weight:700;letter-spacing:-.04em;line-height:1;color:var(--blue);font-variant-numeric:tabular-nums">00:00</div>
+    <div style="margin-top:12px;display:flex;gap:6px;justify-content:center">
+      <button id="timer-pause-btn" onclick="toggleTimer()" style="font-size:11px;font-weight:600;padding:5px 14px;border-radius:100px;border:1.5px solid rgba(0,0,0,.1);background:transparent;color:var(--ink);cursor:pointer">⏸ pause</button>
+    </div>
+  </div>
+</div>
+<div class="divider"></div>
+<div style="padding:36px 48px 72px;max-width:880px">
+  <div id="brevet-exercises"></div>
+</div>
+<div class="footer-email-wrap" style="border-top:1px solid rgba(0,0,0,.08)"><a class="footer-email"><span class="__cf_email__" data-cfemail="e784888993868493a79795829786859582918293c98195">[email&#160;protected]</span></a></div>
+<div class="footer-bar"><div class="footer-bar-links"><a>Instagram</a><a>Newsletter</a><a>LinkedIn</a></div><span class="footer-bar-copy">© 2026 Prépa Brevet</span></div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+function showPage(id) {
+  // Arrête le timer si on quitte la page brevet
+  if(id !== 'brevet' && _timerInterval) {
+    clearInterval(_timerInterval);
+    _timerInterval = null;
+  }
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active')});
+  var t = document.getElementById('page-'+id);
+  if(t) t.classList.add('active');
+  window.scrollTo(0,0);
+  if(id==='parcours') renderHistorique();
+}
+
+function togglePricing(type) {
+  var bm=document.getElementById('tog-month'),by=document.getElementById('tog-year');
+  var pm=document.getElementById('price-main'),pp=document.getElementById('price-period'),ps=document.getElementById('price-sub');
+  if(type==='month'){
+    bm.style.background='rgba(255,255,255,0.2)';bm.style.color='#fff';
+    by.style.background='transparent';by.style.color='rgba(255,255,255,0.5)';
+    pm.textContent='9€';pp.textContent='/mois';ps.textContent='7 jours essai gratuit sans CB';
+  } else {
+    by.style.background='rgba(255,255,255,0.2)';by.style.color='#fff';
+    bm.style.background='transparent';bm.style.color='rgba(255,255,255,0.5)';
+    pm.textContent='6€';pp.textContent='/mois';ps.textContent='72€/an · 2 mois offerts · sans engagement';
+  }
+}
+
+function selectDuree(el) {
+  document.querySelectorAll('.duree-chip').forEach(function(c){c.classList.remove('sel')});
+  el.classList.add('sel');
+  document.getElementById('recap-duree').textContent = el.querySelector('span').textContent;
+}
+
+function toggleNotion(el) {
+  var isAll = el.dataset.notion==='all';
+  if(isAll) {
+    document.querySelectorAll('.notion-chip').forEach(function(c){c.classList.remove('sel');c.querySelector('.ncheck').textContent=''});
+    el.classList.add('sel'); el.querySelector('.ncheck').textContent='✓';
+  } else {
+    var all=document.querySelector('.notion-chip[data-notion="all"]');
+    all.classList.remove('sel'); all.querySelector('.ncheck').textContent='';
+    el.classList.toggle('sel');
+    el.querySelector('.ncheck').textContent=el.classList.contains('sel')?'✓':'';
+    if(!document.querySelectorAll('.notion-chip.sel:not([data-notion="all"])').length){
+      all.classList.add('sel'); all.querySelector('.ncheck').textContent='✓';
+    }
+  }
+  updateRecapNotions();
+}
+
+function updateRecapNotions() {
+  var c=document.getElementById('recap-notions'); c.innerHTML='';
+  if(document.querySelector('.notion-chip.all-chip.sel')){
+    c.innerHTML='<span class="recap-tag all">Toutes les notions</span>';
+  } else {
+    document.querySelectorAll('.notion-chip.sel:not(.all-chip)').forEach(function(n){
+      var t=document.createElement('span'); t.className='recap-tag'; t.textContent=n.dataset.notion; c.appendChild(t);
+    });
+  }
+}
+
+function selectCorr(el) {
+  document.querySelectorAll('.corr-chip').forEach(function(c){
+    c.classList.remove('sel'); c.querySelector('.ccheck').textContent=''; c.querySelector('.ccheck').style.background=''; c.querySelector('.ccheck').style.borderColor=''; c.querySelector('.ccheck').style.color='';
+  });
+  el.classList.add('sel');
+  var ck=el.querySelector('.ccheck');
+  ck.textContent='✓'; ck.style.background='var(--blue)'; ck.style.borderColor='var(--blue)'; ck.style.color='#fff';
+  document.getElementById('recap-corr').textContent = el.dataset.mode==='question' ? 'question par question' : 'à la fin de l\'examen';
+}
+
+function genererBrevet() {
+  var dureeEl=document.querySelector('.duree-chip.sel');
+  var duree=dureeEl?dureeEl.querySelector('span').textContent:'2h';
+  var notions=[];
+  if(document.querySelector('.notion-chip.all-chip.sel')){
+    notions=['Statistiques','Arithmétique','Algorithmique','Probabilités','Géométrie','Volume et Grandeurs','Proportionnalité','Algèbre et Fonctions','Puissances','QCM et situations'];
+  } else {
+    document.querySelectorAll('.notion-chip.sel:not(.all-chip)').forEach(function(c){notions.push(c.dataset.notion)});
+  }
+  var modeCorr = (document.querySelector('.corr-chip.sel')||{dataset:{mode:'question'}}).dataset.mode;
+  window._brevetMode = modeCorr;
+  window._brevetData = null;
+  window._scores = {};
+
+  showPage('brevet');
+  document.getElementById('brevet-duree').textContent=duree;
+  document.getElementById('brevet-notions').textContent='Notions : '+notions.join(', ');
+
+  // Pioche dans la base de données
+  var candidats = EXERCICES_DB.filter(function(ex){
+    return notions.indexOf(ex.notion) !== -1;
+  });
+
+  // Mélange aléatoire
+  candidats = candidats.sort(function(){ return Math.random() - 0.5; });
+
+  if(candidats.length === 0) {
+    document.getElementById('brevet-exercises').innerHTML =
+      '<div style="padding:64px 0;text-align:center">'+
+      '<div style="font-size:48px;margin-bottom:20px">📚</div>'+
+      '<p style="font-family:var(--fd);font-size:20px;font-weight:500;letter-spacing:-.02em;text-transform:lowercase;margin-bottom:10px">aucun exercice disponible</p>'+
+      '<p style="font-size:14px;color:var(--muted);font-weight:300;margin-bottom:28px;max-width:360px;margin-left:auto;margin-right:auto">La base de données ne contient pas encore d\'exercices pour les notions sélectionnées.</p>'+
+      '<button class="btn btn-ghost" onclick="showPage(\'generer\')">← Changer les notions</button>'+
+      '</div>';
+    return;
+  }
+
+  // Nombre d'exercices selon la durée
+  var nbExercices;
+  var qcmOnly = false;
+  if(duree === '2h')     { nbExercices = 5; }
+  else if(duree === '1h30') { nbExercices = 4; }
+  else if(duree === '1h')   { nbExercices = 3; }
+  else if(duree === '30 min') { nbExercices = 1; }
+  else if(duree === '10 min') { nbExercices = 1; qcmOnly = true; }
+  else if(duree === '5 min')  { nbExercices = 1; qcmOnly = true; }
+  else { nbExercices = 3; }
+
+  // Filtre QCM si besoin
+  if(qcmOnly) {
+    var qcmCandidats = candidats.filter(function(ex){ return ex.notion === 'QCM et situations'; });
+    if(qcmCandidats.length > 0) candidats = qcmCandidats;
+  }
+
+  // Limite au nombre voulu
+  candidats = candidats.slice(0, nbExercices);
+
+  // Normalise au format attendu par renderExercices
+  var exercices = candidats.map(function(ex, i){
+    return {
+      numero: i + 1,
+      titre: ex.titre,
+      notion: ex.notion,
+      bareme: ex.bareme + ' points',
+      source: ex.source || '',
+      enonce: ex.enonce,
+      figure: ex.figure || null,
+      questions: ex.questions
+    };
+  });
+
+  window._brevetData = exercices;
+  renderExercices(exercices, modeCorr);
+  startTimer(duree);
+}
+
+// ── Génère un SVG de graphique de fonction affine ────────────
+// ── Helper graphique lignes (utilisé par fonctions_3graphes) ──
+// SVG pré-générés (remplace les builders dynamiques)
+var _SVG_CACHE = {
+  "homothetie_carres": "<svg width=\"220\" height=\"108\" viewBox=\"0 0 220 108\" xmlns=\"http://www.w3.org/2000/svg\" style=\"display:block;font-family:system-ui,sans-serif\"><rect width=\"220\" height=\"108\" fill=\"#ffffff\" rx=\"10\" stroke=\"#e2e5ef\" stroke-width=\"1\"/><g stroke=\"#eef0f6\" stroke-width=\"0.7\"><line x1=\"0\" y1=\"0\" x2=\"0\" y2=\"108\"/><line x1=\"16\" y1=\"0\" x2=\"16\" y2=\"108\"/><line x1=\"32\" y1=\"0\" x2=\"32\" y2=\"108\"/><line x1=\"48\" y1=\"0\" x2=\"48\" y2=\"108\"/><line x1=\"64\" y1=\"0\" x2=\"64\" y2=\"108\"/><line x1=\"80\" y1=\"0\" x2=\"80\" y2=\"108\"/><line x1=\"96\" y1=\"0\" x2=\"96\" y2=\"108\"/><line x1=\"112\" y1=\"0\" x2=\"112\" y2=\"108\"/><line x1=\"128\" y1=\"0\" x2=\"128\" y2=\"108\"/><line x1=\"144\" y1=\"0\" x2=\"144\" y2=\"108\"/><line x1=\"160\" y1=\"0\" x2=\"160\" y2=\"108\"/><line x1=\"176\" y1=\"0\" x2=\"176\" y2=\"108\"/><line x1=\"192\" y1=\"0\" x2=\"192\" y2=\"108\"/><line x1=\"208\" y1=\"0\" x2=\"208\" y2=\"108\"/><line x1=\"0\" y1=\"0\" x2=\"220\" y2=\"0\"/><line x1=\"0\" y1=\"16\" x2=\"220\" y2=\"16\"/><line x1=\"0\" y1=\"32\" x2=\"220\" y2=\"32\"/><line x1=\"0\" y1=\"48\" x2=\"220\" y2=\"48\"/><line x1=\"0\" y1=\"64\" x2=\"220\" y2=\"64\"/><line x1=\"0\" y1=\"80\" x2=\"220\" y2=\"80\"/><line x1=\"0\" y1=\"96\" x2=\"220\" y2=\"96\"/></g><line x1=\"20\" y1=\"68\" x2=\"90\" y2=\"48\" stroke=\"#aab0cc\" stroke-width=\"0.8\" stroke-dasharray=\"3,3\"/><line x1=\"20\" y1=\"68\" x2=\"110\" y2=\"68\" stroke=\"#aab0cc\" stroke-width=\"0.8\" stroke-dasharray=\"3,3\"/><line x1=\"20\" y1=\"68\" x2=\"90\" y2=\"88\" stroke=\"#aab0cc\" stroke-width=\"0.8\" stroke-dasharray=\"3,3\"/><line x1=\"20\" y1=\"68\" x2=\"70\" y2=\"68\" stroke=\"#aab0cc\" stroke-width=\"0.8\" stroke-dasharray=\"3,3\"/><line x1=\"20\" y1=\"68\" x2=\"160\" y2=\"28\" stroke=\"#aab0cc\" stroke-width=\"0.8\" stroke-dasharray=\"3,3\"/><line x1=\"20\" y1=\"68\" x2=\"200\" y2=\"68\" stroke=\"#aab0cc\" stroke-width=\"0.8\" stroke-dasharray=\"3,3\"/><line x1=\"20\" y1=\"68\" x2=\"160\" y2=\"108\" stroke=\"#aab0cc\" stroke-width=\"0.8\" stroke-dasharray=\"3,3\"/><line x1=\"20\" y1=\"68\" x2=\"120\" y2=\"68\" stroke=\"#aab0cc\" stroke-width=\"0.8\" stroke-dasharray=\"3,3\"/><polygon points=\"90,48 110,68 90,88 70,68\" fill=\"#EEF2FF\" stroke=\"#0021BC\" stroke-width=\"1.8\"/><text x=\"90\" y=\"73\" text-anchor=\"middle\" font-size=\"12\" font-weight=\"700\" fill=\"#0021BC\">A</text><polygon points=\"160,28 200,68 160,108 120,68\" fill=\"#FFF4EE\" stroke=\"#EE6E34\" stroke-width=\"1.8\"/><text x=\"160\" y=\"73\" text-anchor=\"middle\" font-size=\"12\" font-weight=\"700\" fill=\"#EE6E34\">B</text><circle cx=\"20\" cy=\"68\" r=\"3\" fill=\"#333\"/><line x1=\"13\" y1=\"68\" x2=\"27\" y2=\"68\" stroke=\"#333\" stroke-width=\"1.5\"/><line x1=\"20\" y1=\"61\" x2=\"20\" y2=\"75\" stroke=\"#333\" stroke-width=\"1.5\"/><text x=\"20\" y=\"86\" text-anchor=\"middle\" font-size=\"12\" font-style=\"italic\" font-weight=\"600\" fill=\"#333\">O</text></svg>",
+  "triangle_TER": "<svg width=\"212\" height=\"187\" viewBox=\"0 0 212 187\" xmlns=\"http://www.w3.org/2000/svg\" style=\"display:block;font-family:system-ui,sans-serif\"><rect width=\"212\" height=\"187\" fill=\"#f8f9fb\" rx=\"8\"/><polygon points=\"44,151 176,44 176,151\" fill=\"#EEF5FF\" stroke=\"#0021BC\" stroke-width=\"2\" stroke-linejoin=\"round\"/><polyline points=\"176,141 166,141 166,151\" fill=\"none\" stroke=\"#0021BC\" stroke-width=\"1.5\"/><path d=\"M 176,66 A 22,22 0 0,0 159,58\" fill=\"none\" stroke=\"#EE6E34\" stroke-width=\"1.6\"/><text x=\"152\" y=\"66\" font-size=\"11\" font-weight=\"600\" fill=\"#EE6E34\">39\u00b0</text><text transform=\"translate(120,110) rotate(-39.0)\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-size=\"11\" font-weight=\"600\" fill=\"#333\">7,4 cm</text><text x=\"24\" y=\"156\" font-size=\"14\" font-weight=\"700\" fill=\"#1a1a2e\">T</text><text x=\"182\"  y=\"49\" font-size=\"14\" font-weight=\"700\" fill=\"#1a1a2e\">E</text><text x=\"182\"  y=\"157\" font-size=\"14\" font-weight=\"700\" fill=\"#1a1a2e\">R</text></svg>",
+  "geo_GFCDE": "<svg width=\"313\" height=\"280\" viewBox=\"0 0 313 280\" xmlns=\"http://www.w3.org/2000/svg\" style=\"display:block;font-family:system-ui,sans-serif\"><rect width=\"313\" height=\"280\" fill=\"transparent\" rx=\"10\"/><line x1=\"40\" y1=\"40\" x2=\"40\" y2=\"133\" stroke=\"#1a1a2e\" stroke-width=\"1.8\"/><line x1=\"40\" y1=\"133\" x2=\"273\" y2=\"133\" stroke=\"#1a1a2e\" stroke-width=\"1.8\"/><line x1=\"273\" y1=\"133\" x2=\"273\" y2=\"250\" stroke=\"#1a1a2e\" stroke-width=\"1.8\"/><line x1=\"40\" y1=\"40\" x2=\"273\" y2=\"250\" stroke=\"#1a1a2e\" stroke-width=\"1.8\"/><polyline points=\"273,143 263,143 263,133\" fill=\"none\" stroke=\"#1a1a2e\" stroke-width=\"1.4\"/><text x=\"36\" y=\"30\" font-size=\"14\" font-weight=\"700\" fill=\"#1a1a2e\" text-anchor=\"middle\">G</text><text x=\"24\" y=\"138\" font-size=\"14\" font-weight=\"700\" fill=\"#1a1a2e\">F</text><text x=\"147\" y=\"123\" font-size=\"14\" font-weight=\"700\" fill=\"#1a1a2e\">C</text><text x=\"281\" y=\"138\" font-size=\"14\" font-weight=\"700\" fill=\"#1a1a2e\">D</text><text x=\"281\" y=\"255\" font-size=\"14\" font-weight=\"700\" fill=\"#1a1a2e\">E</text></svg>",
+  "geo_GFCDE_q4": "<svg width=\"313\" height=\"320\" viewBox=\"0 0 313 320\" xmlns=\"http://www.w3.org/2000/svg\" style=\"display:block;font-family:system-ui,sans-serif\"><rect width=\"313\" height=\"320\" fill=\"transparent\"/><polygon points=\"90,92 90,133 130,133\" fill=\"rgba(0,33,188,0.1)\" stroke=\"none\"/><line x1=\"40\" y1=\"40\" x2=\"40\" y2=\"133\" stroke=\"#1a1a2e\" stroke-width=\"1.8\"/><line x1=\"40\" y1=\"133\" x2=\"273\" y2=\"133\" stroke=\"#1a1a2e\" stroke-width=\"1.8\"/><line x1=\"273\" y1=\"133\" x2=\"273\" y2=\"280\" stroke=\"#1a1a2e\" stroke-width=\"1.8\"/><line x1=\"40\" y1=\"40\" x2=\"273\" y2=\"280\" stroke=\"#1a1a2e\" stroke-width=\"1.8\"/><polyline points=\"273,143 263,143 263,133\" fill=\"none\" stroke=\"#1a1a2e\" stroke-width=\"1.4\"/><line x1=\"90\" y1=\"50\" x2=\"90\" y2=\"153\" stroke=\"#0021BC\" stroke-width=\"1.4\" stroke-dasharray=\"5,3\"/><polyline points=\"90,123 100,123 100,133\" fill=\"none\" stroke=\"#0021BC\" stroke-width=\"1.3\"/><line x1=\"90\" y1=\"92\" x2=\"130\" y2=\"133\" stroke=\"#0021BC\" stroke-width=\"1.6\"/><text x=\"36\" y=\"30\" font-size=\"14\" font-weight=\"700\" fill=\"#1a1a2e\" text-anchor=\"middle\">G</text><text x=\"24\" y=\"138\" font-size=\"14\" font-weight=\"700\" fill=\"#1a1a2e\">F</text><text x=\"134\" y=\"123\" font-size=\"14\" font-weight=\"700\" fill=\"#1a1a2e\">C</text><text x=\"281\" y=\"138\" font-size=\"14\" font-weight=\"700\" fill=\"#1a1a2e\">D</text><text x=\"281\" y=\"285\" font-size=\"14\" font-weight=\"700\" fill=\"#1a1a2e\">E</text><text x=\"74\" y=\"97\" font-size=\"13\" font-weight=\"700\" fill=\"#0021BC\">A</text><text x=\"74\" y=\"138\" font-size=\"13\" font-weight=\"700\" fill=\"#0021BC\">B</text><text x=\"96\" y=\"60\" font-size=\"12\" font-style=\"italic\" fill=\"#0021BC\">d</text><text x=\"160\" y=\"102\" font-size=\"11\" fill=\"#0021BC\">Aire<tspan font-size=\"9\" baseline-shift=\"sub\">ABC</tspan> = 23,4 cm\u00b2</text></svg>",
+  "fonctions_3graphes": "<div style=\"display:inline-block;border:1px solid #bbb;font-family:system-ui,sans-serif;font-size:11px\"><div style=\"display:flex;border-bottom:1px solid #bbb\"><div style=\"width:170px;text-align:center;font-weight:600;padding:5px 2px;border-right:1px solid #bbb\"><span>Repr\u00e9sentation graphique 1</span></div><div style=\"width:170px;text-align:center;font-weight:600;padding:5px 2px;border-right:1px solid #bbb\"><span>Repr\u00e9sentation graphique 2</span></div><div style=\"width:170px;text-align:center;font-weight:600;padding:5px 2px;\"><span>Repr\u00e9sentation graphique 3</span></div></div><div style=\"display:flex\"><div style=\"width:170px;display:flex;justify-content:center;align-items:center;padding:4px;border-right:1px solid #bbb\"><svg width=\"160\" height=\"155\" viewBox=\"0 0 160 155\" xmlns=\"http://www.w3.org/2000/svg\" style=\"display:inline-block;vertical-align:top;font-family:system-ui,sans-serif\"><rect width=\"160\" height=\"155\" fill=\"#fff\" stroke=\"#bbb\" stroke-width=\"1\"/><g stroke=\"#dde\" stroke-width=\"0.5\"><line x1=\"26\" y1=\"8\" x2=\"26\" y2=\"129\"/><line x1=\"49\" y1=\"8\" x2=\"49\" y2=\"129\"/><line x1=\"73\" y1=\"8\" x2=\"73\" y2=\"129\"/><line x1=\"96\" y1=\"8\" x2=\"96\" y2=\"129\"/><line x1=\"119\" y1=\"8\" x2=\"119\" y2=\"129\"/><line x1=\"143\" y1=\"8\" x2=\"143\" y2=\"129\"/><line x1=\"26\" y1=\"129\" x2=\"152\" y2=\"129\"/><line x1=\"26\" y1=\"116\" x2=\"152\" y2=\"116\"/><line x1=\"26\" y1=\"102\" x2=\"152\" y2=\"102\"/><line x1=\"26\" y1=\"89\" x2=\"152\" y2=\"89\"/><line x1=\"26\" y1=\"75\" x2=\"152\" y2=\"75\"/><line x1=\"26\" y1=\"62\" x2=\"152\" y2=\"62\"/><line x1=\"26\" y1=\"48\" x2=\"152\" y2=\"48\"/><line x1=\"26\" y1=\"35\" x2=\"152\" y2=\"35\"/><line x1=\"26\" y1=\"21\" x2=\"152\" y2=\"21\"/><line x1=\"26\" y1=\"8\" x2=\"152\" y2=\"8\"/></g><line x1=\"142.66666666666666\" y1=\"8\" x2=\"142.66666666666666\" y2=\"129\" stroke=\"#777\" stroke-width=\"1.2\"/><line x1=\"26\" y1=\"129\" x2=\"152\" y2=\"129\" stroke=\"#777\" stroke-width=\"1.2\"/><g font-size=\"8\" fill=\"#444\" text-anchor=\"middle\"><text x=\"49.33333333333333\" y=\"139\">-2</text><text x=\"95.99999999999999\" y=\"139\">-1</text></g><g font-size=\"8\" fill=\"#444\" text-anchor=\"end\"><text x=\"23\" y=\"118.55555555555556\">2</text><text x=\"23\" y=\"105.11111111111111\">4</text><text x=\"23\" y=\"91.66666666666667\">6</text><text x=\"23\" y=\"78.22222222222223\">8</text><text x=\"23\" y=\"64.77777777777777\">10</text><text x=\"23\" y=\"51.33333333333334\">12</text><text x=\"23\" y=\"37.888888888888886\">14</text><text x=\"23\" y=\"24.444444444444457\">16</text><text x=\"23\" y=\"11\">18</text></g><line x1=\"49.33333333333333\" y1=\"129\" x2=\"152\" y2=\"10.688888888888883\" stroke=\"#111\" stroke-width=\"2.2\" stroke-linecap=\"round\"/><line x1=\"26\" y1=\"8\" x2=\"131\" y2=\"129\" stroke=\"#111\" stroke-width=\"2.2\" stroke-linecap=\"round\"/></svg></div><div style=\"width:170px;display:flex;justify-content:center;align-items:center;padding:4px;border-right:1px solid #bbb\"><svg width=\"160\" height=\"155\" viewBox=\"0 0 160 155\" xmlns=\"http://www.w3.org/2000/svg\" style=\"display:inline-block;vertical-align:top;font-family:system-ui,sans-serif\"><rect width=\"160\" height=\"155\" fill=\"#fff\" stroke=\"#bbb\" stroke-width=\"1\"/><g stroke=\"#dde\" stroke-width=\"0.5\"><line x1=\"26\" y1=\"8\" x2=\"26\" y2=\"129\"/><line x1=\"49\" y1=\"8\" x2=\"49\" y2=\"129\"/><line x1=\"73\" y1=\"8\" x2=\"73\" y2=\"129\"/><line x1=\"96\" y1=\"8\" x2=\"96\" y2=\"129\"/><line x1=\"119\" y1=\"8\" x2=\"119\" y2=\"129\"/><line x1=\"143\" y1=\"8\" x2=\"143\" y2=\"129\"/><line x1=\"26\" y1=\"129\" x2=\"152\" y2=\"129\"/><line x1=\"26\" y1=\"116\" x2=\"152\" y2=\"116\"/><line x1=\"26\" y1=\"102\" x2=\"152\" y2=\"102\"/><line x1=\"26\" y1=\"89\" x2=\"152\" y2=\"89\"/><line x1=\"26\" y1=\"75\" x2=\"152\" y2=\"75\"/><line x1=\"26\" y1=\"62\" x2=\"152\" y2=\"62\"/><line x1=\"26\" y1=\"48\" x2=\"152\" y2=\"48\"/><line x1=\"26\" y1=\"35\" x2=\"152\" y2=\"35\"/><line x1=\"26\" y1=\"21\" x2=\"152\" y2=\"21\"/><line x1=\"26\" y1=\"8\" x2=\"152\" y2=\"8\"/></g><line x1=\"95.99999999999999\" y1=\"8\" x2=\"95.99999999999999\" y2=\"129\" stroke=\"#777\" stroke-width=\"1.2\"/><line x1=\"26\" y1=\"129\" x2=\"152\" y2=\"129\" stroke=\"#777\" stroke-width=\"1.2\"/><g font-size=\"8\" fill=\"#444\" text-anchor=\"middle\"><text x=\"49.33333333333333\" y=\"139\">-1</text><text x=\"142.66666666666666\" y=\"139\">1</text></g><g font-size=\"8\" fill=\"#444\" text-anchor=\"end\"><text x=\"23\" y=\"118.55555555555556\">2</text><text x=\"23\" y=\"105.11111111111111\">4</text><text x=\"23\" y=\"91.66666666666667\">6</text><text x=\"23\" y=\"78.22222222222223\">8</text><text x=\"23\" y=\"64.77777777777777\">10</text><text x=\"23\" y=\"51.33333333333334\">12</text><text x=\"23\" y=\"37.888888888888886\">14</text><text x=\"23\" y=\"24.444444444444457\">16</text><text x=\"23\" y=\"11\">18</text></g><line x1=\"26\" y1=\"102.11111111111111\" x2=\"95.99999999999999\" y2=\"21.444444444444457\" stroke=\"#111\" stroke-width=\"2.2\" stroke-linecap=\"round\"/><line x1=\"95.99999999999999\" y1=\"21.444444444444457\" x2=\"152\" y2=\"85.97777777777777\" stroke=\"#111\" stroke-width=\"2.2\" stroke-linecap=\"round\"/></svg></div><div style=\"width:170px;display:flex;justify-content:center;align-items:center;padding:4px;\"><svg width=\"160\" height=\"155\" viewBox=\"0 0 160 155\" xmlns=\"http://www.w3.org/2000/svg\" style=\"display:inline-block;vertical-align:top;font-family:system-ui,sans-serif\"><rect width=\"160\" height=\"155\" fill=\"#fff\" stroke=\"#bbb\" stroke-width=\"1\"/><g stroke=\"#dde\" stroke-width=\"0.5\"><line x1=\"26\" y1=\"8\" x2=\"26\" y2=\"129\"/><line x1=\"47\" y1=\"8\" x2=\"47\" y2=\"129\"/><line x1=\"68\" y1=\"8\" x2=\"68\" y2=\"129\"/><line x1=\"89\" y1=\"8\" x2=\"89\" y2=\"129\"/><line x1=\"110\" y1=\"8\" x2=\"110\" y2=\"129\"/><line x1=\"131\" y1=\"8\" x2=\"131\" y2=\"129\"/><line x1=\"152\" y1=\"8\" x2=\"152\" y2=\"129\"/><line x1=\"26\" y1=\"129\" x2=\"152\" y2=\"129\"/><line x1=\"26\" y1=\"116\" x2=\"152\" y2=\"116\"/><line x1=\"26\" y1=\"102\" x2=\"152\" y2=\"102\"/><line x1=\"26\" y1=\"89\" x2=\"152\" y2=\"89\"/><line x1=\"26\" y1=\"75\" x2=\"152\" y2=\"75\"/><line x1=\"26\" y1=\"62\" x2=\"152\" y2=\"62\"/><line x1=\"26\" y1=\"48\" x2=\"152\" y2=\"48\"/><line x1=\"26\" y1=\"35\" x2=\"152\" y2=\"35\"/><line x1=\"26\" y1=\"21\" x2=\"152\" y2=\"21\"/><line x1=\"26\" y1=\"8\" x2=\"152\" y2=\"8\"/></g><line x1=\"47\" y1=\"8\" x2=\"47\" y2=\"129\" stroke=\"#777\" stroke-width=\"1.2\"/><line x1=\"26\" y1=\"129\" x2=\"152\" y2=\"129\" stroke=\"#777\" stroke-width=\"1.2\"/><g font-size=\"8\" fill=\"#444\" text-anchor=\"middle\"><text x=\"89\" y=\"139\">1</text><text x=\"131\" y=\"139\">2</text></g><g font-size=\"8\" fill=\"#444\" text-anchor=\"end\"><text x=\"23\" y=\"118.55555555555556\">2</text><text x=\"23\" y=\"105.11111111111111\">4</text><text x=\"23\" y=\"91.66666666666667\">6</text><text x=\"23\" y=\"78.22222222222223\">8</text><text x=\"23\" y=\"64.77777777777777\">10</text><text x=\"23\" y=\"51.33333333333334\">12</text><text x=\"23\" y=\"37.888888888888886\">14</text><text x=\"23\" y=\"24.444444444444457\">16</text><text x=\"23\" y=\"11\">18</text></g><line x1=\"36.5\" y1=\"8\" x2=\"131\" y2=\"129\" stroke=\"#111\" stroke-width=\"2.2\" stroke-linecap=\"round\"/></svg></div></div></div>",
+  "polygones_agrandissement": "<svg width=\"300\" height=\"180\" viewBox=\"0 0 300 180\" xmlns=\"http://www.w3.org/2000/svg\" style=\"display:block;font-family:system-ui,sans-serif\"><rect width=\"300\" height=\"180\" fill=\"transparent\"/><polygon points=\"45,148 135,148 135,86 90,50 45,86\" fill=\"none\" stroke=\"#1a1a2e\" stroke-width=\"2\" stroke-linejoin=\"round\"/><text x=\"90\" y=\"168\" text-anchor=\"middle\" font-size=\"12\" fill=\"#1a1a2e\" font-weight=\"600\">Polygone 2</text><polygon points=\"202,130 238,130 238,105 220,91 202,105\" fill=\"none\" stroke=\"#1a1a2e\" stroke-width=\"1.6\" stroke-linejoin=\"round\"/><text x=\"220\" y=\"145\" text-anchor=\"middle\" font-size=\"12\" fill=\"#1a1a2e\" font-weight=\"600\">Polygone 1</text></svg>",
+  "tableau_tailles": "<div style=\"display:inline-block\"><svg width=\"440\" height=\"60\" viewBox=\"0 0 440 60\" xmlns=\"http://www.w3.org/2000/svg\" style=\"display:block;font-family:system-ui,sans-serif;font-size:12px\"><rect x=\"0\" y=\"0\"        width=\"88\" height=\"30\" fill=\"#e8eaf6\"/><rect x=\"0\" y=\"30\" width=\"88\" height=\"30\" fill=\"#e8eaf6\"/><rect x=\"0\" y=\"0\" width=\"440\" height=\"60\" fill=\"none\" stroke=\"#1a1a2e\" stroke-width=\"1.5\"/><line x1=\"0\" y1=\"30\" x2=\"440\" y2=\"30\" stroke=\"#1a1a2e\" stroke-width=\"1.2\"/><line x1=\"88\" y1=\"0\" x2=\"88\" y2=\"60\" stroke=\"#1a1a2e\" stroke-width=\"1.5\"/><line x1=\"132\" y1=\"0\" x2=\"132\" y2=\"60\" stroke=\"#1a1a2e\" stroke-width=\"0.8\"/><line x1=\"176\" y1=\"0\" x2=\"176\" y2=\"60\" stroke=\"#1a1a2e\" stroke-width=\"0.8\"/><line x1=\"220\" y1=\"0\" x2=\"220\" y2=\"60\" stroke=\"#1a1a2e\" stroke-width=\"0.8\"/><line x1=\"264\" y1=\"0\" x2=\"264\" y2=\"60\" stroke=\"#1a1a2e\" stroke-width=\"0.8\"/><line x1=\"308\" y1=\"0\" x2=\"308\" y2=\"60\" stroke=\"#1a1a2e\" stroke-width=\"0.8\"/><line x1=\"352\" y1=\"0\" x2=\"352\" y2=\"60\" stroke=\"#1a1a2e\" stroke-width=\"0.8\"/><line x1=\"396\" y1=\"0\" x2=\"396\" y2=\"60\" stroke=\"#1a1a2e\" stroke-width=\"0.8\"/><text x=\"44\" y=\"19\" text-anchor=\"middle\" font-weight=\"700\" fill=\"#1a1a2e\">Taille (cm)</text><text x=\"44\" y=\"49\" text-anchor=\"middle\" font-weight=\"700\" fill=\"#1a1a2e\">Effectif</text><text x=\"110\" y=\"19\" text-anchor=\"middle\" fill=\"#1a1a2e\">152</text><text x=\"110\" y=\"49\" text-anchor=\"middle\" fill=\"#1a1a2e\">2</text><text x=\"154\" y=\"19\" text-anchor=\"middle\" fill=\"#1a1a2e\">157</text><text x=\"154\" y=\"49\" text-anchor=\"middle\" fill=\"#1a1a2e\">4</text><text x=\"198\" y=\"19\" text-anchor=\"middle\" fill=\"#1a1a2e\">160</text><text x=\"198\" y=\"49\" text-anchor=\"middle\" fill=\"#1a1a2e\">2</text><text x=\"242\" y=\"19\" text-anchor=\"middle\" fill=\"#1a1a2e\">162</text><text x=\"242\" y=\"49\" text-anchor=\"middle\" fill=\"#1a1a2e\">5</text><text x=\"286\" y=\"19\" text-anchor=\"middle\" fill=\"#1a1a2e\">165</text><text x=\"286\" y=\"49\" text-anchor=\"middle\" fill=\"#1a1a2e\">2</text><text x=\"330\" y=\"19\" text-anchor=\"middle\" fill=\"#1a1a2e\">170</text><text x=\"330\" y=\"49\" text-anchor=\"middle\" fill=\"#1a1a2e\">4</text><text x=\"374\" y=\"19\" text-anchor=\"middle\" fill=\"#1a1a2e\">174</text><text x=\"374\" y=\"49\" text-anchor=\"middle\" fill=\"#1a1a2e\">6</text><text x=\"418\" y=\"19\" text-anchor=\"middle\" fill=\"#1a1a2e\">180</text><text x=\"418\" y=\"49\" text-anchor=\"middle\" fill=\"#1a1a2e\">5</text></svg><div style=\"margin-top:14px;font-size:13px;color:var(--ink);line-height:2\"><b>1.</b> Quelle est la moyenne des tailles des \u00e9l\u00e8ves de cette classe ?<br><b>2.</b> Quelle est la m\u00e9diane des tailles des \u00e9l\u00e8ves de cette classe ?</div></div>",
+  "tableau_tailles_sans_questions": "<svg width=\"440\" height=\"60\" viewBox=\"0 0 440 60\" xmlns=\"http://www.w3.org/2000/svg\" style=\"display:block;font-family:system-ui,sans-serif;font-size:12px\"><rect x=\"0\" y=\"0\"        width=\"88\" height=\"30\" fill=\"#e8eaf6\"/><rect x=\"0\" y=\"30\" width=\"88\" height=\"30\" fill=\"#e8eaf6\"/><rect x=\"0\" y=\"0\" width=\"440\" height=\"60\" fill=\"none\" stroke=\"#1a1a2e\" stroke-width=\"1.5\"/><line x1=\"0\" y1=\"30\" x2=\"440\" y2=\"30\" stroke=\"#1a1a2e\" stroke-width=\"1.2\"/><line x1=\"88\" y1=\"0\" x2=\"88\" y2=\"60\" stroke=\"#1a1a2e\" stroke-width=\"1.5\"/><line x1=\"132\" y1=\"0\" x2=\"132\" y2=\"60\" stroke=\"#1a1a2e\" stroke-width=\"0.8\"/><line x1=\"176\" y1=\"0\" x2=\"176\" y2=\"60\" stroke=\"#1a1a2e\" stroke-width=\"0.8\"/><line x1=\"220\" y1=\"0\" x2=\"220\" y2=\"60\" stroke=\"#1a1a2e\" stroke-width=\"0.8\"/><line x1=\"264\" y1=\"0\" x2=\"264\" y2=\"60\" stroke=\"#1a1a2e\" stroke-width=\"0.8\"/><line x1=\"308\" y1=\"0\" x2=\"308\" y2=\"60\" stroke=\"#1a1a2e\" stroke-width=\"0.8\"/><line x1=\"352\" y1=\"0\" x2=\"352\" y2=\"60\" stroke=\"#1a1a2e\" stroke-width=\"0.8\"/><line x1=\"396\" y1=\"0\" x2=\"396\" y2=\"60\" stroke=\"#1a1a2e\" stroke-width=\"0.8\"/><text x=\"44\" y=\"19\" text-anchor=\"middle\" font-weight=\"700\" fill=\"#1a1a2e\">Taille (cm)</text><text x=\"44\" y=\"49\" text-anchor=\"middle\" font-weight=\"700\" fill=\"#1a1a2e\">Effectif</text><text x=\"110\" y=\"19\" text-anchor=\"middle\" fill=\"#1a1a2e\">152</text><text x=\"110\" y=\"49\" text-anchor=\"middle\" fill=\"#1a1a2e\">2</text><text x=\"154\" y=\"19\" text-anchor=\"middle\" fill=\"#1a1a2e\">157</text><text x=\"154\" y=\"49\" text-anchor=\"middle\" fill=\"#1a1a2e\">4</text><text x=\"198\" y=\"19\" text-anchor=\"middle\" fill=\"#1a1a2e\">160</text><text x=\"198\" y=\"49\" text-anchor=\"middle\" fill=\"#1a1a2e\">2</text><text x=\"242\" y=\"19\" text-anchor=\"middle\" fill=\"#1a1a2e\">162</text><text x=\"242\" y=\"49\" text-anchor=\"middle\" fill=\"#1a1a2e\">5</text><text x=\"286\" y=\"19\" text-anchor=\"middle\" fill=\"#1a1a2e\">165</text><text x=\"286\" y=\"49\" text-anchor=\"middle\" fill=\"#1a1a2e\">2</text><text x=\"330\" y=\"19\" text-anchor=\"middle\" fill=\"#1a1a2e\">170</text><text x=\"330\" y=\"49\" text-anchor=\"middle\" fill=\"#1a1a2e\">4</text><text x=\"374\" y=\"19\" text-anchor=\"middle\" fill=\"#1a1a2e\">174</text><text x=\"374\" y=\"49\" text-anchor=\"middle\" fill=\"#1a1a2e\">6</text><text x=\"418\" y=\"19\" text-anchor=\"middle\" fill=\"#1a1a2e\">180</text><text x=\"418\" y=\"49\" text-anchor=\"middle\" fill=\"#1a1a2e\">5</text></svg>",
+  "geo_ABCDEM": "<svg width=\"360\" height=\"295\" viewBox=\"0 0 360 295\" xmlns=\"http://www.w3.org/2000/svg\" style=\"display:block;font-family:system-ui,sans-serif;font-size:12px\"><line x1=\"45\" y1=\"39\" x2=\"45\" y2=\"184\" stroke=\"#1a1a2e\" stroke-width=\"1.6\"/><line x1=\"45\" y1=\"184\" x2=\"214\" y2=\"184\" stroke=\"#1a1a2e\" stroke-width=\"1.6\"/><line x1=\"214\" y1=\"184\" x2=\"296\" y2=\"184\" stroke=\"#1a1a2e\" stroke-width=\"1.6\"/><line x1=\"296\" y1=\"184\" x2=\"296\" y2=\"251\" stroke=\"#1a1a2e\" stroke-width=\"1.6\"/><line x1=\"45\" y1=\"39\" x2=\"296\" y2=\"251\" stroke=\"#1a1a2e\" stroke-width=\"1.6\"/><line x1=\"45\" y1=\"39\" x2=\"119\" y2=\"184\" stroke=\"#1a1a2e\" stroke-width=\"1.6\"/><rect x=\"45\" y=\"177\" width=\"7\" height=\"7\" fill=\"none\" stroke=\"#1a1a2e\" stroke-width=\"1.1\"/><rect x=\"289\" y=\"184\" width=\"7\" height=\"7\" fill=\"none\" stroke=\"#1a1a2e\" stroke-width=\"1.1\"/><path d=\"M 102.0 184.0 A 17 17 0 0 0 111.3 168.9\" fill=\"none\" stroke=\"#1a1a2e\" stroke-width=\"1.1\"/><text x=\"96.0\" y=\"173.9\" text-anchor=\"middle\" font-size=\"10\" fill=\"#1a1a2e\">60\u00b0</text><text x=\"137.5\" y=\"105.5\" text-anchor=\"start\" font-size=\"11\" fill=\"#1a1a2e\">70 m</text><text x=\"265.1\" y=\"209.1\" text-anchor=\"middle\" font-size=\"11\" fill=\"#1a1a2e\">50 m</text><text x=\"301\" y=\"221.5\" text-anchor=\"start\" font-size=\"11\" fill=\"#1a1a2e\">30 m</text><text x=\"45\" y=\"32\" text-anchor=\"middle\" font-weight=\"700\" font-size=\"12\" fill=\"#1a1a2e\">D</text><text x=\"35\" y=\"188\" text-anchor=\"middle\" font-weight=\"700\" font-size=\"12\" fill=\"#1a1a2e\">E</text><text x=\"117\" y=\"198\" text-anchor=\"middle\" font-weight=\"700\" font-size=\"12\" fill=\"#1a1a2e\">M</text><text x=\"216\" y=\"198\" text-anchor=\"middle\" font-weight=\"700\" font-size=\"12\" fill=\"#1a1a2e\">A</text><text x=\"306\" y=\"188\" text-anchor=\"middle\" font-weight=\"700\" font-size=\"12\" fill=\"#1a1a2e\">B</text><text x=\"306\" y=\"255\" text-anchor=\"middle\" font-weight=\"700\" font-size=\"12\" fill=\"#1a1a2e\">C</text></svg>",
+  "programmes_AB_algo": "<svg width=\"620\" height=\"280\" viewBox=\"0 0 620 280\" xmlns=\"http://www.w3.org/2000/svg\" style=\"display:block;font-family:system-ui,sans-serif;font-size:12px\"><line x1=\"280\" y1=\"0\" x2=\"280\" y2=\"280\" stroke=\"#ccc\" stroke-width=\"1\" stroke-dasharray=\"4,3\"/><text x=\"140\" y=\"20\" text-anchor=\"middle\" font-weight=\"700\" font-size=\"13\" fill=\"#1a1a2e\">Programme A</text><circle cx=\"22\" cy=\"45\" r=\"3\" fill=\"#1a1a2e\"/><text x=\"34\" y=\"48\" font-size=\"12\" fill=\"#1a1a2e\">Choisir un nombre</text><circle cx=\"22\" cy=\"79\" r=\"3\" fill=\"#1a1a2e\"/><text x=\"34\" y=\"82\" font-size=\"12\" fill=\"#1a1a2e\">Multiplier par 3</text><circle cx=\"22\" cy=\"113\" r=\"3\" fill=\"#1a1a2e\"/><text x=\"34\" y=\"116\" font-size=\"12\" fill=\"#1a1a2e\">Ajouter 15</text><circle cx=\"22\" cy=\"147\" r=\"3\" fill=\"#1a1a2e\"/><text x=\"34\" y=\"150\" font-size=\"12\" fill=\"#1a1a2e\">Diviser par 3</text><circle cx=\"22\" cy=\"181\" r=\"3\" fill=\"#1a1a2e\"/><text x=\"34\" y=\"184\" font-size=\"12\" fill=\"#1a1a2e\">Soustraire le nombre de d\u00e9part</text><text x=\"457\" y=\"20\" text-anchor=\"middle\" font-weight=\"700\" font-size=\"13\" fill=\"#1a1a2e\">Programme B</text><defs><marker id=\"arrowAB\" markerWidth=\"7\" markerHeight=\"7\" refX=\"6\" refY=\"3.5\" orient=\"auto\"><polygon points=\"0,0 7,3.5 0,7\" fill=\"#1a1a2e\"/></marker></defs><rect x=\"381\" y=\"31\" width=\"152\" height=\"26\" rx=\"3\" fill=\"#fff\" stroke=\"#1a1a2e\" stroke-width=\"1.3\"/><text x=\"457\" y=\"48\" text-anchor=\"middle\" font-size=\"11.5\" fill=\"#1a1a2e\">Choisir un nombre</text><rect x=\"314\" y=\"103\" width=\"106\" height=\"26\" rx=\"3\" fill=\"#fff\" stroke=\"#1a1a2e\" stroke-width=\"1.3\"/><text x=\"367\" y=\"120\" text-anchor=\"middle\" font-size=\"11.5\" fill=\"#1a1a2e\">Soustraire 1</text><rect x=\"494\" y=\"103\" width=\"106\" height=\"26\" rx=\"3\" fill=\"#fff\" stroke=\"#1a1a2e\" stroke-width=\"1.3\"/><text x=\"547\" y=\"120\" text-anchor=\"middle\" font-size=\"11.5\" fill=\"#1a1a2e\">Soustraire 6</text><rect x=\"361\" y=\"170\" width=\"192\" height=\"36\" rx=\"3\" fill=\"#fff\" stroke=\"#1a1a2e\" stroke-width=\"1.3\"/><text x=\"457\" y=\"184\" text-anchor=\"middle\" font-size=\"11.5\" fill=\"#1a1a2e\">Multiplier les deux</text><text x=\"457\" y=\"200\" text-anchor=\"middle\" font-size=\"11.5\" fill=\"#1a1a2e\">r\u00e9sultats obtenus</text><rect x=\"414\" y=\"235\" width=\"86\" height=\"26\" rx=\"3\" fill=\"#fff\" stroke=\"#1a1a2e\" stroke-width=\"1.3\"/><text x=\"457\" y=\"252\" text-anchor=\"middle\" font-size=\"11.5\" fill=\"#1a1a2e\">Ajouter 5</text><line x1=\"427\" y1=\"57\" x2=\"372.6\" y2=\"98.7\" stroke=\"#1a1a2e\" stroke-width=\"1.3\" marker-end=\"url(#arrowAB)\"/><line x1=\"487\" y1=\"57\" x2=\"541.4\" y2=\"98.7\" stroke=\"#1a1a2e\" stroke-width=\"1.3\" marker-end=\"url(#arrowAB)\"/><line x1=\"377\" y1=\"129\" x2=\"393.9\" y2=\"163.7\" stroke=\"#1a1a2e\" stroke-width=\"1.3\" marker-end=\"url(#arrowAB)\"/><line x1=\"537\" y1=\"129\" x2=\"520.1\" y2=\"163.7\" stroke=\"#1a1a2e\" stroke-width=\"1.3\" marker-end=\"url(#arrowAB)\"/><line x1=\"457\" y1=\"206\" x2=\"457.0\" y2=\"228.0\" stroke=\"#1a1a2e\" stroke-width=\"1.3\" marker-end=\"url(#arrowAB)\"/></svg>",
+  "programme_B_algo": "<svg width=\"420\" height=\"268\" viewBox=\"0 0 420 268\" xmlns=\"http://www.w3.org/2000/svg\" style=\"display:block;font-family:system-ui,sans-serif;font-size:12px\"><defs><marker id=\"arrowB\" markerWidth=\"7\" markerHeight=\"7\" refX=\"6\" refY=\"3.5\" orient=\"auto\"><polygon points=\"0,0 7,3.5 0,7\" fill=\"#1a1a2e\"/></marker></defs><rect x=\"130\" y=\"14\" width=\"160\" height=\"28\" rx=\"4\" fill=\"#fff\" stroke=\"#1a1a2e\" stroke-width=\"1.4\"/><text x=\"210\" y=\"32.5\" text-anchor=\"middle\" font-size=\"12\" fill=\"#1a1a2e\">Choisir un nombre</text><rect x=\"34\" y=\"94\" width=\"112\" height=\"28\" rx=\"4\" fill=\"#fff\" stroke=\"#1a1a2e\" stroke-width=\"1.4\"/><text x=\"90\" y=\"112.5\" text-anchor=\"middle\" font-size=\"12\" fill=\"#1a1a2e\">Soustraire 1</text><rect x=\"274\" y=\"94\" width=\"112\" height=\"28\" rx=\"4\" fill=\"#fff\" stroke=\"#1a1a2e\" stroke-width=\"1.4\"/><text x=\"330\" y=\"112.5\" text-anchor=\"middle\" font-size=\"12\" fill=\"#1a1a2e\">Soustraire 6</text><rect x=\"90\" y=\"162\" width=\"240\" height=\"36\" rx=\"4\" fill=\"#fff\" stroke=\"#1a1a2e\" stroke-width=\"1.4\"/><text x=\"210\" y=\"177\" text-anchor=\"middle\" font-size=\"12\" fill=\"#1a1a2e\">Multiplier les deux</text><text x=\"210\" y=\"192\" text-anchor=\"middle\" font-size=\"12\" fill=\"#1a1a2e\">r\u00e9sultats obtenus</text><rect x=\"165\" y=\"228\" width=\"90\" height=\"28\" rx=\"4\" fill=\"#fff\" stroke=\"#1a1a2e\" stroke-width=\"1.4\"/><text x=\"210\" y=\"246.5\" text-anchor=\"middle\" font-size=\"12\" fill=\"#1a1a2e\">Ajouter 5</text><line x1=\"165\" y1=\"42\" x2=\"95.75258271979926\" y2=\"90.01154264760585\" stroke=\"#1a1a2e\" stroke-width=\"1.3\" marker-end=\"url(#arrowB)\"/><line x1=\"255\" y1=\"42\" x2=\"324.24741728020075\" y2=\"90.01154264760585\" stroke=\"#1a1a2e\" stroke-width=\"1.3\" marker-end=\"url(#arrowB)\"/><line x1=\"90\" y1=\"122\" x2=\"125.05025253169417\" y2=\"157.05025253169416\" stroke=\"#1a1a2e\" stroke-width=\"1.3\" marker-end=\"url(#arrowB)\"/><line x1=\"330\" y1=\"122\" x2=\"294.9497474683058\" y2=\"157.05025253169416\" stroke=\"#1a1a2e\" stroke-width=\"1.3\" marker-end=\"url(#arrowB)\"/><line x1=\"210\" y1=\"198\" x2=\"210\" y2=\"221\" stroke=\"#1a1a2e\" stroke-width=\"1.3\" marker-end=\"url(#arrowB)\"/></svg>",
+  "geo_ACDEB": "<svg width=\"460\" height=\"260\" viewBox=\"0 0 460 260\" xmlns=\"http://www.w3.org/2000/svg\" style=\"display:block;font-family:system-ui,sans-serif;font-size:12px\"><defs><marker id=\"arrG\" markerWidth=\"6\" markerHeight=\"6\" refX=\"5\" refY=\"3\" orient=\"auto\"><polygon points=\"0,0 6,3 0,6\" fill=\"#1a1a2e\"/></marker><marker id=\"arrGL\" markerWidth=\"6\" markerHeight=\"6\" refX=\"1\" refY=\"3\" orient=\"auto\"><polygon points=\"6,0 0,3 6,6\" fill=\"#1a1a2e\"/></marker></defs><line x1=\"155\" y1=\"105\" x2=\"365\" y2=\"105\" stroke=\"#1a1a2e\" stroke-width=\"1.6\"/><line x1=\"365\" y1=\"105\" x2=\"423\" y2=\"105\" stroke=\"#1a1a2e\" stroke-width=\"1.6\"/><line x1=\"155\" y1=\"105\" x2=\"155\" y2=\"197\" stroke=\"#1a1a2e\" stroke-width=\"1.6\"/><line x1=\"155\" y1=\"197\" x2=\"155\" y2=\"221\" stroke=\"#1a1a2e\" stroke-width=\"1.6\"/><line x1=\"365\" y1=\"105\" x2=\"155\" y2=\"197\" stroke=\"#1a1a2e\" stroke-width=\"1.6\"/><line x1=\"423\" y1=\"105\" x2=\"155\" y2=\"221\" stroke=\"#1a1a2e\" stroke-width=\"1.6\"/><rect x=\"155\" y=\"105\" width=\"8\" height=\"8\" fill=\"none\" stroke=\"#e44\" stroke-width=\"1.3\"/><line x1=\"155\" y1=\"87\" x2=\"359\" y2=\"87\" stroke=\"#1a1a2e\" stroke-width=\"1\" marker-end=\"url(#arrG)\" marker-start=\"url(#arrGL)\"/><text x=\"260\" y=\"83\" text-anchor=\"middle\" font-size=\"11\" fill=\"#1a1a2e\">480 m</text><line x1=\"369\" y1=\"87\" x2=\"417\" y2=\"87\" stroke=\"#1a1a2e\" stroke-width=\"1\" marker-end=\"url(#arrG)\" marker-start=\"url(#arrGL)\"/><text x=\"394\" y=\"83\" text-anchor=\"middle\" font-size=\"11\" fill=\"#1a1a2e\">120 m</text><line x1=\"125\" y1=\"105\" x2=\"125\" y2=\"215\" stroke=\"#1a1a2e\" stroke-width=\"1\" marker-end=\"url(#arrG)\" marker-start=\"url(#arrGL)\"/><text x=\"121\" y=\"167\" text-anchor=\"end\" font-size=\"11\" fill=\"#1a1a2e\">250 m</text><line x1=\"141\" y1=\"197\" x2=\"141\" y2=\"216\" stroke=\"#1a1a2e\" stroke-width=\"1\" marker-end=\"url(#arrG)\" marker-start=\"url(#arrGL)\"/><text x=\"137\" y=\"213\" text-anchor=\"end\" font-size=\"11\" fill=\"#1a1a2e\">50 m</text><text x=\"145\" y=\"110\" text-anchor=\"end\" font-weight=\"700\" font-size=\"13\" fill=\"#1a1a2e\">A</text><text x=\"365\" y=\"121\" text-anchor=\"middle\" font-weight=\"700\" font-size=\"13\" fill=\"#1a1a2e\">C</text><text x=\"433\" y=\"110\" text-anchor=\"start\" font-weight=\"700\" font-size=\"13\" fill=\"#1a1a2e\">B</text><text x=\"163\" y=\"202\" text-anchor=\"start\" font-weight=\"700\" font-size=\"13\" fill=\"#1a1a2e\">D</text><text x=\"163\" y=\"226\" text-anchor=\"start\" font-weight=\"700\" font-size=\"13\" fill=\"#1a1a2e\">E</text></svg>",
+  "affine_-2x+4": "<svg width=\"220\" height=\"200\" viewBox=\"0 0 220 200\" xmlns=\"http://www.w3.org/2000/svg\" style=\"display:block\"><g stroke=\"#e2e5ef\" stroke-width=\"0.8\"><line x1=\"32\" y1=\"16\" x2=\"32\" y2=\"172\"/><line x1=\"70.22222222222223\" y1=\"16\" x2=\"70.22222222222223\" y2=\"172\"/><line x1=\"108.44444444444444\" y1=\"16\" x2=\"108.44444444444444\" y2=\"172\"/><line x1=\"146.66666666666666\" y1=\"16\" x2=\"146.66666666666666\" y2=\"172\"/><line x1=\"184.88888888888889\" y1=\"16\" x2=\"184.88888888888889\" y2=\"172\"/><line x1=\"32\" y1=\"172\" x2=\"204\" y2=\"172\"/><line x1=\"32\" y1=\"148\" x2=\"204\" y2=\"148\"/><line x1=\"32\" y1=\"124\" x2=\"204\" y2=\"124\"/><line x1=\"32\" y1=\"100\" x2=\"204\" y2=\"100\"/><line x1=\"32\" y1=\"76\" x2=\"204\" y2=\"76\"/><line x1=\"32\" y1=\"52\" x2=\"204\" y2=\"52\"/><line x1=\"32\" y1=\"28\" x2=\"204\" y2=\"28\"/></g><defs><marker id=\"arr\" markerWidth=\"6\" markerHeight=\"6\" refX=\"5\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L6,3 L0,6 Z\" fill=\"#222\"/></marker><marker id=\"arr2\" markerWidth=\"6\" markerHeight=\"6\" refX=\"3\" refY=\"0\" orient=\"auto\"><path d=\"M0,6 L3,0 L6,6 Z\" fill=\"#222\"/></marker></defs><line x1=\"32\" y1=\"148\" x2=\"210\" y2=\"148\" stroke=\"#222\" stroke-width=\"1.5\" marker-end=\"url(#arr)\"/><line x1=\"70.22222222222223\" y1=\"178\" x2=\"70.22222222222223\" y2=\"10\" stroke=\"#222\" stroke-width=\"1.5\" marker-end=\"url(#arr2)\"/><g font-family=\"system-ui,sans-serif\" font-size=\"10\" fill=\"#555\" text-anchor=\"middle\"><text x=\"32\" y=\"162\">-1</text><text x=\"108.44444444444444\" y=\"162\">1</text><text x=\"146.66666666666666\" y=\"162\">2</text><text x=\"184.88888888888889\" y=\"162\">3</text></g><g font-family=\"system-ui,sans-serif\" font-size=\"10\" fill=\"#555\" text-anchor=\"end\"><text x=\"66.22222222222223\" y=\"175.5\">-1</text><text x=\"66.22222222222223\" y=\"127.5\">1</text><text x=\"66.22222222222223\" y=\"103.5\">2</text><text x=\"66.22222222222223\" y=\"79.5\">3</text><text x=\"66.22222222222223\" y=\"55.5\">4</text><text x=\"66.22222222222223\" y=\"31.5\">5</text></g><text font-family=\"system-ui,sans-serif\" font-size=\"10\" fill=\"#555\" x=\"65.22222222222223\" y=\"162\" text-anchor=\"middle\">O</text><line x1=\"41.55555555555556\" y1=\"16\" x2=\"165.77777777777777\" y2=\"172\" stroke=\"#0021BC\" stroke-width=\"2.2\" stroke-linecap=\"round\"/><circle cx=\"70.22222222222223\" cy=\"52\" r=\"3.5\" fill=\"#0021BC\"/><circle cx=\"146.66666666666666\" cy=\"148\" r=\"3.5\" fill=\"#0021BC\"/><text x=\"192.53333333333333\" y=\"195.60000000000002\" font-family=\"serif\" font-style=\"italic\" font-size=\"13\" fill=\"#0021BC\" text-anchor=\"middle\">C\u2091</text></svg>",
+};
+
+function buildGraphique(key) { return _SVG_CACHE[key] || ''; }
+const EXERCICES_DB = [
+
+  // ─────────────────────────────────────────────
+  // PROBABILITÉS
+  // ─────────────────────────────────────────────
+  {
+    id: "proba-2025-metro-1",
+    notion: "Probabilités",
+    titre: "Urnes et boules numérotées",
+    source: "Brevet Métropole — Juin 2025",
+    difficulte: 2,
+    bareme: 20,
+    enonce: "On dispose d'une urne A contenant 6 boules numérotées : 7 ; 10 ; 12 ; 15 ; 24 ; 30\net d'une urne B contenant 9 boules numérotées : 2 ; 5 ; 6 ; 8 ; 17 ; 18 ; 21 ; 22 ; 25.\nLes boules sont indiscernables au toucher.",
+    questions: [
+      { id:"1", texte:"On tire une boule dans l'urne A, quelle est la probabilité d'obtenir un nombre pair ?", points:4, reponse:"Les nombres pairs de l'urne A sont : 10, 12, 24, 30 → 4 boules sur 6. P = 4/6 = 2/3." },
+      { id:"2", texte:"On tire une boule dans l'urne B, justifier que la probabilité d'obtenir un nombre premier est de 1/3.", points:4, reponse:"Les nombres premiers de l'urne B sont : 2, 5, 17 → 3 boules sur 9. P = 3/9 = 1/3." },
+      { id:"3", texte:"Quelle urne contient le plus grand nombre de boules dont le numéro est un multiple de 6 ?", points:4, reponse:"Urne A : multiples de 6 → 12, 30 → 2 boules. Urne B : multiples de 6 → 6, 18 → 2 boules. Les deux urnes en contiennent autant (2 chacune)." },
+      { id:"4", texte:"On tire une boule au hasard dans l'une des urnes. Démontrer que la probabilité d'obtenir un nombre supérieur ou égal à 20 est la même quelle que soit l'urne choisie.", points:4, reponse:"Urne A : nombres ≥ 20 → 24, 30 → P = 2/6 = 1/3. Urne B : nombres ≥ 20 → 21, 22, 25 → P = 3/9 = 1/3. Les probabilités sont égales (1/3)." },
+      { id:"5", texte:"En repartant avec la composition initiale des urnes A et B on décide d'ajouter une boule numérotée 50 dans chacune d'entre elles. Dans ces conditions, la probabilité d'obtenir un résultat supérieur ou égal à 20 est-elle toujours égale quelle que soit l'urne choisie ?", points:4, reponse:"Urne A : 7 boules, nombres ≥ 20 → 24, 30, 50 → P = 3/7. Urne B : 10 boules, nombres ≥ 20 → 21, 22, 25, 50 → P = 4/10 = 2/5. Or 3/7 ≠ 2/5, donc les probabilités ne sont plus égales." }
+    ]
+  },
+
+  // ─────────────────────────────────────────────
+  // QCM ET SITUATIONS
+  // ─────────────────────────────────────────────
+  {
+    id: "qcm-2025-asie-1",
+    notion: "QCM et situations",
+    titre: "QCM — Probabilités, statistiques et fonctions",
+    source: "Brevet Asie — Juin 2025",
+    difficulte: 1,
+    bareme: 16,
+    enonce: "Cet exercice est un questionnaire à choix multiple (QCM). Aucune justification n'est demandée. Pour chaque question, quatre propositions (A, B, C et D) sont données.\nUne seule est exacte. Recopier sur la copie le numéro de la question, ainsi que la lettre de la réponse.",
+    questions: [
+      { id:"1", texte:"Dans une urne, on dispose de 4 boules bleues, 6 boules violettes, 7 boules rouges, 3 boules jaunes, toutes indiscernables au toucher. On tire une boule au hasard. Quelle est la probabilité d'obtenir une boule violette ?", options:["6/14","1/4","3/10","14/20"], points:4, reponse:"Réponse C. Total : 4+6+7+3 = 20 boules. Boules violettes : 6. P = 6/20 = 3/10." },
+      { id:"2", texte:"Calculer 70 % d'une quantité revient à multiplier cette quantité par :", options:["0,30","0,70","1,70","1,30"], points:4, reponse:"Réponse B. 70 % = 70/100 = 0,70. Multiplier par 0,70 donne bien 70 % de la quantité." },
+      { id:"3", texte:"On considère la série suivante composée des 5 valeurs : 7 ; 18 ; 12 ; 13 ; 15.", options:["L'étendue de cette série est 8","La médiane de cette série est 12","La moyenne de cette série est 53","La moyenne de cette série est 13"], points:4, reponse:"Réponse D. Série ordonnée : 7, 12, 13, 15, 18. Moyenne = (7+12+13+15+18)/5 = 65/5 = 13. Étendue = 18−7 = 11 (pas 8). Médiane = 13 (pas 12)." },
+      { id:"4", texte:"Une fonction affine f a pour représentation graphique la courbe C<sub>f</sub> ci-contre. L'expression de la fonction f est :", graphique:"affine_-2x+4", options:["f(x) = 2x + 4","f(x) = 4x − 2","f(x) = −2x + 4","f(x) = −4x + 2"], points:4, reponse:"Réponse C. Ordonnée à l'origine = 4. Pente = (0−4)/(2−0) = −2. Donc f(x) = −2x + 4." }
+    ]
+  },
+
+  {
+    id: "qcm-2025-centres-etrangers-1",
+    notion: "QCM et situations",
+    titre: "QCM — Arithmétique, algorithmique, géométrie et algèbre",
+    source: "Brevet Centres Étrangers — 2025",
+    difficulte: 2,
+    bareme: 20,
+    enonce: "Cet exercice est un questionnaire à choix multiple (QCM). Pour chaque question, quatre réponses sont proposées. Une seule réponse est exacte. Recopier sur la copie le numéro de la question et la réponse choisie. Aucune justification n'est demandée.",
+    questions: [
+      { id:"1", texte:"La décomposition en produit de facteurs premiers de 120 est :", options:["2 × 3 × 4 × 5","15 × 2 × 2 × 2","2³ × 3 × 5","53 + 67"], points:4, reponse:"Réponse C. 120 = 8 × 15 = 2³ × 3 × 5. Tous les facteurs sont premiers." },
+      { id:"2", texte:"Dans la cellule A2, la formule « = − 4 * A1 - 12 » a été saisie. On l'étire jusqu'à la cellule B2 (A1 = 2, B1 = 5). La valeur obtenue dans la cellule B2 est :", options:["−32","−20","8","68"], points:4, reponse:"Réponse A. En étirant vers B2, A1 devient B1 = 5. Calcul : −4 × 5 − 12 = −20 − 12 = −32." },
+      { id:"3", texte:"Sur la figure ci-contre, le rapport de l'homothétie de centre O qui transforme le carré A en le carré B est :", graphique:"homothetie_carres", options:["−2","−0,5","0,5","2"], points:4, reponse:"Réponse D. Le carré B est deux fois plus grand que le carré A, et du même côté de O. Le rapport est 2." },
+      { id:"4", texte:"Une écriture factorisée de 4x² − 1 est :", options:["(2x − 1)(2x + 1)","(4x − 1)(4x + 1)","4(x − 1)(x + 1)","(2x − 1)²"], points:4, reponse:"Réponse A. 4x² − 1 = (2x)² − 1² = (2x − 1)(2x + 1) par identité remarquable a² − b²." },
+      { id:"5", texte:"Dans le triangle TER ci-contre, rectangle en R, TE = 7,4 cm et l'angle en E est 39°. La mesure de RE arrondie au centième de cm est :", graphique:"triangle_TER", options:["4,66 cm","5,75 cm","9,52 cm","11,76 cm"], points:4, reponse:"Réponse B. Dans le triangle TER rectangle en R : cos(E) = RE/TE. RE = TE × cos(39°) = 7,4 × cos(39°) ≈ 7,4 × 0,7771 ≈ 5,75 cm." }
+    ]
+  },
+
+  // ─────────────────────────────────────────────
+  // GÉOMÉTRIE
+  // ─────────────────────────────────────────────
+  {
+    id: "geo-2025-asie-2",
+    notion: "Géométrie",
+    titre: "Triangles, parallèles et théorème de Pythagore",
+    source: "Brevet Asie — Juin 2025",
+    difficulte: 3,
+    bareme: 24,
+    enonce: "Dans la figure ci-contre (non représentée en vraie grandeur) :\n• Les points G, C et E sont alignés ;\n• Les points F, C et D sont alignés ;\n• Les droites (GF) et (DE) sont parallèles ;\n• Le triangle CDE est rectangle en D ;\n• CD = 21,6 cm, CE = 29,1 cm, FC = 17,2 cm.",
+    figure: "geo_GFCDE",
+    questions: [
+      { id:"1", texte:"Montrer que la longueur DE est égale à 19,5 cm.", points:4, reponse:"Le triangle CDE est rectangle en D, donc par le théorème de Pythagore : CE² = CD² + DE². Soit DE² = CE² − CD² = 29,1² − 21,6² = 846,81 − 466,56 = 380,25. Donc DE = √380,25 = 19,5 cm." },
+      { id:"2", texte:"Calculer l'aire du triangle CDE.", points:4, reponse:"Le triangle CDE est rectangle en D, donc l'aire = (CD × DE) / 2 = (21,6 × 19,5) / 2 = 421,2 / 2 = 210,6 cm²." },
+      { id:"3", texte:"Calculer la longueur GF arrondie au millimètre près.", points:6, reponse:"Les droites (GF) et (DE) sont parallèles, et G, C, E sont alignés ainsi que F, C, D. Par le théorème de Thalès dans le triangle avec centre C : GF/DE = FC/CD. Donc GF = DE × FC/CD = 19,5 × 17,2/21,6 ≈ 15,5 cm." },
+      { id:"4a", texte:"On trace une droite (d) perpendiculaire à (FC) coupant [GC] en A et [FC] en B. L'aire du triangle ABC affichée par le logiciel est 23,4 cm².\nMontrer que l'aire du triangle ABC est égale à 1/9 de l'aire du triangle CDE.", graphique:"geo_GFCDE_q4", points:5, reponse:"Aire CDE = 210,6 cm². 210,6 / 9 = 23,4 cm². Or l'aire du triangle ABC est 23,4 cm² d'après le logiciel. Donc aire ABC = (1/9) × aire CDE." },
+      { id:"4b", texte:"On admet que les triangles ABC et EDC sont semblables. Déterminer la longueur AB.", points:5, reponse:"Les triangles ABC et EDC sont semblables, donc leurs aires sont dans le rapport k² où k est le rapport de similitude. Aire ABC / Aire EDC = 1/9, donc k² = 1/9, soit k = 1/3. Ainsi AB/ED = 1/3, donc AB = ED/3 = 19,5/3 = 6,5 cm." }
+    ]
+  },
+
+  // ─────────────────────────────────────────────
+  // ALGÈBRE ET FONCTIONS
+  // ─────────────────────────────────────────────
+  {
+    id: "alg-2025-centres-etrangers-3",
+    notion: "Algèbre et Fonctions",
+    titre: "Programme de calcul et fonction affine",
+    source: "Brevet Centres Étrangers — 2025",
+    difficulte: 2,
+    bareme: 21,
+    enonce: "On considère le programme de calcul suivant :\n• Choisir un nombre\n• Multiplier le nombre choisi par −2\n• Ajouter 4 au résultat\n• Multiplier le résultat obtenu par 4",
+    questions: [
+      { id:"1", texte:"Montrer que si l'on choisit 1 comme nombre de départ dans le programme, le résultat obtenu est 8.", points:3, reponse:"1 × (−2) = −2 ; −2 + 4 = 2 ; 2 × 4 = 8. Le résultat est bien 8." },
+      { id:"2", texte:"Quel est le résultat si le nombre de départ est −2 ?", points:3, reponse:"−2 × (−2) = 4 ; 4 + 4 = 8 ; 8 × 4 = 32. Le résultat est 32." },
+      { id:"3", texte:"Si l'on note x le nombre de départ, montrer que le résultat peut s'écrire −8x + 16.", points:4, reponse:"x × (−2) = −2x ; −2x + 4 ; (−2x + 4) × 4 = −8x + 16. Le résultat est bien −8x + 16." },
+      { id:"4a", texte:"Résoudre l'équation −8x + 16 = 4.", points:3, reponse:"−8x + 16 = 4 ⟺ −8x = 4 − 16 ⟺ −8x = −12 ⟺ x = −12/(−8) = 3/2 = 1,5." },
+      { id:"4b", texte:"En déduire le nombre de départ qu'il faut choisir pour obtenir 4 comme résultat.", points:3, reponse:"D'après la question 4a, −8x + 16 = 4 donne x = 1,5. Il faut donc choisir 1,5 comme nombre de départ." },
+      { id:"5", texte:"Parmi les trois représentations graphiques ci-dessous, quelle est celle qui représente la fonction f définie par f(x) = −8x + 16 ? Expliquer la démarche.", graphique:"fonctions_3graphes", points:5, reponse:"La fonction f(x) = −8x + 16 a une pente négative (−8) et une ordonnée à l'origine de 16. La représentation 3 convient : elle montre une droite décroissante qui coupe l'axe des ordonnées en 16 et l'axe des abscisses en x = 2 (car −8×2+16=0)." }
+    ]
+  }
+
+  ,{
+    id: "qcm-2025-amerique-nord-1",
+    notion: "QCM et situations",
+    titre: "Cinq situations indépendantes",
+    source: "Brevet Amérique du Nord — 2025",
+    difficulte: 2,
+    bareme: 20,
+    enonce: "Dans cet exercice, les cinq situations sont indépendantes. Il est rappelé que chaque réponse doit être justifiée sauf indication contraire.",
+    questions: [
+      {
+        id: "Situation 1",
+        texte: "Dans une urne de 40 boules indiscernables au toucher, 5 sont rouges, 20 sont vertes et 15 sont blanches. L'expérience consiste à tirer au hasard une boule de l'urne et à noter sa couleur.\nCalculer la probabilité d'obtenir une boule verte.",
+        points: 4,
+        reponse: "Il y a 20 boules vertes sur 40 boules au total. P(verte) = 20/40 = 1/2."
+      },
+      {
+        id: "Situation 2",
+        texte: "Décomposer en produit de facteurs premiers le nombre 1 050.\n(Aucune justification n'est attendue.)",
+        points: 4,
+        reponse: "1 050 = 2 × 525 = 2 × 3 × 175 = 2 × 3 × 5 × 35 = 2 × 3 × 5 × 5 × 7 = 2 × 3 × 5² × 7."
+      },
+      {
+        id: "Situation 3",
+        texte: "Un article coûte 25 €. Calculer son prix après une augmentation de 14 %.",
+        points: 4,
+        reponse: "Augmentation de 14 % : on multiplie par 1,14. Nouveau prix = 25 × 1,14 = 28,50 €."
+      },
+      {
+        id: "Situation 4",
+        texte: "Le polygone 2 est un agrandissement du polygone 1. Le coefficient de cet agrandissement est 2,5. L'aire du polygone 1 est égale à 7,5 cm².\nCalculer l'aire du polygone 2.",
+        graphique: "polygones_agrandissement",
+        points: 4,
+        reponse: "Quand on agrandit une figure par un coefficient k, l'aire est multipliée par k². Aire polygone 2 = 7,5 × 2,5² = 7,5 × 6,25 = 46,875 cm²."
+      },
+      {
+        id: "Situation 5",
+        texte: "Dans une classe de 3ᵉ on note la répartition des tailles des élèves dans le tableau suivant.\n\nQuelle est la moyenne des tailles des élèves de cette classe ?",
+        graphique: "tableau_tailles_sans_questions",
+        points: 2,
+        reponse: "Effectif total = 2+4+2+5+2+4+6+5 = 30 élèves.\nMoyenne = (152×2 + 157×4 + 160×2 + 162×5 + 165×2 + 170×4 + 174×6 + 180×5) / 30 = 5016 / 30 = 167,2 cm."
+      },
+      {
+        id: "Situation 5 — Question 2",
+        texte: "Quelle est la médiane des tailles des élèves de cette classe ?",
+        points: 2,
+        reponse: "30 élèves → médiane entre le 15ᵉ et 16ᵉ. Effectifs cumulés : 2, 6, 8, 13, 15, 19… Le 15ᵉ est en 165 et le 16ᵉ en 170. Médiane = (165+170)/2 = 167,5 cm."
+      }
+    ]
+  }
+
+  ,{
+    id: "geo-2025-amerique-nord-2",
+    notion: "Géométrie",
+    titre: "Triangles rectangles, parallèles et trigonométrie",
+    source: "Brevet Amérique du Nord — 2025",
+    difficulte: 3,
+    bareme: 20,
+    enonce: "On a les données suivantes :\n• Les points A, B, E et M sont alignés\n• Les points A, C et D sont alignés\n• ADE est un triangle rectangle en E\n• ABC est un triangle rectangle en B\n• AD = 70 m  •  BC = 30 m  •  AC = 50 m\n• angle DME = 60°",
+    figure: "geo_ABCDEM",
+    questions: [
+      {
+        id: "1",
+        texte: "Calculer la longueur AB.",
+        points: 4,
+        reponse: "Le triangle ABC est rectangle en B, donc par le théorème de Pythagore : AC² = AB² + BC². Soit AB² = AC² − BC² = 50² − 30² = 2 500 − 900 = 1 600. Donc AB = √1 600 = 40 m."
+      },
+      {
+        id: "2",
+        texte: "Montrer que les droites (DE) et (BC) sont parallèles.",
+        points: 4,
+        reponse: "Le triangle ADE est rectangle en E, donc l'angle AED = 90°. Le triangle ABC est rectangle en B, donc l'angle ABC = 90°. Les droites (DE) et (BC) forment toutes les deux un angle droit avec la droite (EMAB). Deux droites perpendiculaires à une même droite sont parallèles entre elles. Donc (DE) ∥ (BC)."
+      },
+      {
+        id: "3",
+        texte: "Montrer que la longueur DE est égale à 42 m.",
+        points: 4,
+        reponse: "Les droites (DE) et (BC) sont parallèles (question 2), et les points A, C, D sont alignés ainsi que E, M, A, B. Par le théorème de Thalès dans le triangle DAB (ou par rapport de similitude) : DE/BC = DA/BA (les triangles ADE et ABC sont semblables). On a DA = 70, BC = 30, AB = 40. Les triangles ADE et ABC sont semblables : DE/BC = AD/AC = 70/50 = 7/5. Donc DE = BC × 7/5 = 30 × 7/5 = 42 m."
+      },
+      {
+        id: "4",
+        texte: "Montrer que la longueur EM est environ égale à 24,2 m.",
+        points: 4,
+        reponse: "Dans le triangle rectangle ADE, rectangle en E, on cherche AE. Par Pythagore : AD² = AE² + DE² → AE² = 70² − 42² = 4 900 − 1 764 = 3 136 → AE = 56 m. Dans le triangle DME, l'angle en M (DME) = 60°. On utilise la trigonométrie : tan(60°) = DE/EM → EM = DE/tan(60°) = 42/√3 ≈ 42/1,732 ≈ 24,2 m."
+      },
+      {
+        id: "5",
+        texte: "En déduire l'aire du triangle AMD.",
+        points: 4,
+        reponse: "Le triangle AMD a pour base AM et pour hauteur DE (car DE ⊥ AM). AM = AE − EM = 56 − 24,2 = 31,8 m. Aire = (AM × DE) / 2 = (31,8 × 42) / 2 = 1 335,6 / 2 ≈ 667,8 m²."
+      }
+    ]
+  }
+
+  ,{
+    id: "geo-2025-metropole-2",
+    notion: "Géométrie",
+    titre: "Aquathlon — Course à pied et natation",
+    source: "Brevet Métropole — Juin 2025",
+    difficulte: 3,
+    bareme: 23,
+    enonce: "Cette année, les professeurs d'EPS proposent aux élèves un aquathlon (course à pied et natation).\n\n── Partie A — La course à pied ──\nLe parcours ACDEB a pour départ A et arrivée B.\n• Les points A, C, B sont alignés\n• Les points A, D, E sont alignés\n• ADC est un triangle rectangle en A\n• AC = 480 m  •  CB = 120 m\n• AE = 250 m  •  DE = 50 m",
+    figure: "geo_ACDEB",
+    questions: [
+      {
+        id: "1",
+        texte: "Justifier que AD = 200 m.",
+        points: 3,
+        reponse: "Les points A, D, E sont alignés et AE = 250 m, DE = 50 m. Donc AD = AE − DE = 250 − 50 = 200 m."
+      },
+      {
+        id: "2",
+        texte: "Calculer la longueur CD.",
+        points: 4,
+        reponse: "Le triangle ADC est rectangle en A, donc par le théorème de Pythagore : CD² = AC² + AD² = 480² + 200² = 230 400 + 40 000 = 270 400. Donc CD = √270 400 = 520 m."
+      },
+      {
+        id: "3a",
+        texte: "Pour que le parcours soit validé, il est nécessaire que les droites (CD) et (BE) soient parallèles et que la mesure de l'angle ACD soit supérieure à 20°.\n\na. Les droites (CD) et (BE) sont-elles parallèles ?",
+        points: 5,
+        reponse: "Les points A, C, B sont alignés et A, D, E sont alignés. AC/AB = 480/600 = 4/5. AD/AE = 200/250 = 4/5. Les rapports sont égaux donc par la réciproque du théorème de Thalès, (CD) ∥ (BE)."
+      },
+      {
+        id: "3b",
+        texte: "b. La mesure de l'angle ACD est-elle supérieure à 20° ?",
+        points: 5,
+        reponse: "Dans le triangle ADC rectangle en A : tan(ACD) = AD/AC = 200/480 ≈ 0,417. Donc angle ACD ≈ 22,6°. Comme 22,6° > 20°, oui."
+      },
+      {
+        id: "3c",
+        texte: "c. Le parcours est-il validé ?",
+        points: 2,
+        reponse: "Oui, les deux conditions sont remplies : (CD) ∥ (BE) et angle ACD ≈ 22,6° > 20°."
+      },
+      {
+        id: "── Partie B — La natation ──",
+        num: "4",
+        texte: "Concernant l'épreuve de natation, il s'agit de nager une distance de 200 m.\nVoici les temps de 9 élèves :\n5 min 30 s ; 5 min 45 s ; 5 min 49 s ; 5 min 50 s ; 6 min ; 6 min 11 s ; 6 min 12 s ; 6 min 20 s ; 6 min 40 s.\n\nQuel est le temps médian de cette série ?",
+        points: 2,
+        reponse: "La série comporte 9 valeurs (déjà ordonnée). La médiane est la 5ᵉ valeur : 6 min."
+      },
+      {
+        id: "5",
+        texte: "Un poisson rouge nage à la vitesse de 5 km/h. Nage-t-il plus vite que l'élève le plus rapide ?",
+        points: 2,
+        reponse: "L'élève le plus rapide nage 200 m en 5 min 30 s = 330 s. Vitesse = 200/330 m/s ≈ 0,606 m/s ≈ 2,18 km/h. Comme 5 km/h > 2,18 km/h, le poisson rouge nage plus vite."
+      }
+    ]
+  }
+  ,{
+    id: "algo-2025-amerique-nord-3",
+    notion: "Algorithmique",
+    titre: "Programmes de calcul A et B",
+    source: "Brevet Amérique du Nord — 2025",
+    difficulte: 2,
+    bareme: 20,
+    enonce: "On considère les deux programmes de calcul suivants :",
+    figure: "programmes_AB_algo",
+    questions: [
+      {
+        id: "1",
+        texte: "Montrer que, lorsque le nombre choisi est 4, le résultat obtenu avec le programme A est 5.",
+        points: 3,
+        reponse: "4 × 3 = 12 ; 12 + 15 = 27 ; 27 ÷ 3 = 9 ; 9 − 4 = 5. Le résultat est bien 5."
+      },
+      {
+        id: "2",
+        texte: "Montrer que, lorsque le nombre choisi est −2, le résultat obtenu avec le programme A est 5.",
+        points: 3,
+        reponse: "−2 × 3 = −6 ; −6 + 15 = 9 ; 9 ÷ 3 = 3 ; 3 − (−2) = 3 + 2 = 5. Le résultat est bien 5."
+      },
+      {
+        id: "3",
+        texte: "Justifier que l'affirmation suivante est vraie : « Le programme A donne toujours le même résultat. »",
+        points: 5,
+        reponse: "Soit x le nombre de départ. Programme A : x × 3 = 3x ; 3x + 15 ; (3x + 15) ÷ 3 = x + 5 ; x + 5 − x = 5. Quel que soit x, le résultat est toujours 5."
+      },
+      {
+        id: "4",
+        texte: "Lorsque le nombre choisi est 10, quel résultat obtient-on avec le programme B ?",
+        points: 4,
+        reponse: "Programme B avec x = 10 : branche gauche → 10 − 1 = 9 ; branche droite → 10 − 6 = 4 ; multiplication → 9 × 4 = 36 ; ajout → 36 + 5 = 41. Le résultat est 41."
+      },
+      {
+        id: "5",
+        texte: "Il existe exactement deux nombres pour lesquels les programmes A et B fournissent à chaque fois des résultats identiques. Quels sont ces deux nombres ?",
+        points: 5,
+        reponse: "Programme A donne toujours 5. Programme B avec x donne : (x−1)(x−6)+5. On résout (x−1)(x−6)+5 = 5, soit (x−1)(x−6) = 0. Donc x−1 = 0 ou x−6 = 0, soit x = 1 ou x = 6. Les deux nombres sont 1 et 6."
+      }
+    ]
+  }
+
+];
+
+// ── Helpers ────────────────────────────────────────────────
+function getExercicesByNotion(notion) {
+  return EXERCICES_DB.filter(function(ex) { return ex.notion === notion; });
+}
+function getExercicesBySource(source) {
+  return EXERCICES_DB.filter(function(ex) { return ex.source.includes(source); });
+}
+function getExerciceById(id) {
+  return EXERCICES_DB.find(function(ex) { return ex.id === id; });
+}
+function getAllNotions() {
+  return [...new Set(EXERCICES_DB.map(function(ex) { return ex.notion; }))];
+}
+function getAllSources() {
+  return [...new Set(EXERCICES_DB.map(function(ex) { return ex.source; }))];
+}
+// ── Variables globales timer ────────────────────────────────────
+var _timerInterval = null;
+var _timerSeconds = 0;
+var _timerPaused = false;
+var _timerTotal = 0;
+
+// ── renderExercices ─────────────────────────────────────────────
+function renderExercices(exercices, modeCorr) {
+  var html = '';
+  exercices.forEach(function(ex, ei) {
+    var totalEx = ex.questions.reduce(function(s,q){ return s + q.points; }, 0);
+    html += '<div class="brevet-ex" id="ex-' + ei + '">';
+    html += '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:14px">';
+    html += '<div><span class="brevet-ex-num">Exercice ' + ex.numero + '</span>';
+    html += '<span class="brevet-ex-titre">' + ex.titre + '</span>';
+    if(ex.source) html += '<span style="font-size:11px;font-weight:400;color:var(--muted);display:block;margin-top:4px;letter-spacing:0;text-transform:none">' + ex.source + '</span>';
+    html += '</div>';
+    html += '<div style="display:flex;gap:6px;align-items:center">';
+    html += '<span class="ctag b">' + ex.notion + '</span>';
+    html += '<span class="ctag" id="ex-score-tag-' + ei + '">' + totalEx + ' pts</span>';
+    html += '</div></div>';
+
+    html += '<div class="brevet-enonce">';
+    html += '<div style="display:flex;gap:24px;align-items:flex-start;flex-wrap:nowrap">';
+    html += '<div style="flex:1;min-width:200px">' + ex.enonce.replace(/\n/g,'<br>').replace(/──\s*(Partie [AB][^─]*?)──/g,'<br><span style="display:inline-block;margin:8px 0 4px;padding:6px 12px;background:rgba(0,33,188,.06);border-radius:6px;border-left:3px solid var(--blue);font-weight:700;font-size:13px;color:var(--blue);letter-spacing:.03em;text-transform:uppercase">$1</span><br>') + '</div>';
+    if(ex.figure) {
+      html += '<div style="flex-shrink:0">';
+      html += buildGraphique(ex.figure);
+      html += '</div>';
+    }
+    html += '</div>';
+    html += '</div>';
+
+    ex.questions.forEach(function(q, qi) {
+      var isQcm = q.options && q.options.length >= 2;
+      var letters = ['A','B','C','D'];
+      html += '<div class="brevet-q" id="q-' + ei + '-' + qi + '">';
+      if(q.id.indexOf('Partie') !== -1) {
+        var partLabel = q.id.replace(/──/g,'').trim();
+        html += '<div style="margin:18px 0 10px;padding:8px 14px;background:rgba(0,33,188,.06);border-radius:8px;border-left:3px solid var(--blue)">';
+        html += '<span style="font-weight:700;font-size:13px;color:var(--blue);letter-spacing:.03em;text-transform:uppercase">' + partLabel + '</span>';
+        html += '</div>';
+        html += '<div class="brevet-q-row">';
+        if(q.num) {
+          var parts = q.texte.split('\n\n');
+          var contexte = parts.slice(0, parts.length-1).join('\n\n');
+          var question = parts[parts.length-1];
+          if(contexte) html += '<span class="brevet-q-text" style="width:100%;margin-bottom:10px">' + contexte.replace(/\n/g,'<br>') + '</span></div><div class="brevet-q-row"><span class="brevet-q-id">' + q.num + '.</span><span class="brevet-q-text">' + question + '</span>';
+          else html += '<span class="brevet-q-id">' + q.num + '.</span><span class="brevet-q-text">' + q.texte.replace(/\n/g,'<br>') + '</span>';
+        } else {
+          html += '<span class="brevet-q-text">' + q.texte.replace(/\n/g,'<br>') + '</span>';
+        }
+        html += '<span class="brevet-q-pts" id="pts-badge-' + ei + '-' + qi + '">' + q.points + ' pt' + (q.points > 1 ? 's' : '') + '</span>';
+        html += '</div>';
+      } else {
+        html += '<div class="brevet-q-row">';
+        html += '<span class="brevet-q-id">' + q.id + '.</span>';
+        html += '<span class="brevet-q-text">' + q.texte + '</span>';
+        html += '<span class="brevet-q-pts" id="pts-badge-' + ei + '-' + qi + '">' + q.points + ' pt' + (q.points > 1 ? 's' : '') + '</span>';
+        html += '</div>';
+      }
+      if(q.graphique) {
+        html += '<div style="margin:14px 0 4px;display:flex;justify-content:flex-start">';
+        html += buildGraphique(q.graphique);
+        html += '</div>';
+      }
+      if(isQcm) {
+        html += '<div class="qcm-options" id="qcm-' + ei + '-' + qi + '">';
+        q.options.forEach(function(opt, oi) {
+          var letter = letters[oi] || oi;
+          html += '<button class="qcm-btn" id="qcm-opt-' + ei + '-' + qi + '-' + letter + '" onclick="selectQcm(' + ei + ',' + qi + ',\'' + letter + '\')">';
+          html += '<span class="qcm-btn-letter">' + letter + '</span>';
+          html += '<span class="qcm-btn-label">' + opt + '</span>';
+          html += '<span class="qcm-btn-icon"></span>';
+          html += '</button>';
+        });
+        html += '</div>';
+        html += '<input type="hidden" id="ans-' + ei + '-' + qi + '" value="">';
+        if(modeCorr === 'question') {
+          html += '<button class="corr-btn" id="corr-btn-' + ei + '-' + qi + '" onclick="corrigerQuestion(' + ei + ',' + qi + ')" disabled style="opacity:.35;margin-top:12px">Corriger \u2192</button>';
+        }
+      } else {
+        html += '<textarea class="brevet-answer" id="ans-' + ei + '-' + qi + '" placeholder="Ta r\u00e9ponse\u2026" rows="3"></textarea>';
+        if(modeCorr === 'question') {
+          html += '<button class="corr-btn" onclick="corrigerQuestion(' + ei + ',' + qi + ')">Corriger cette question \u2192</button>';
+        }
+      }
+      html += '<div class="q-feedback" id="fb-' + ei + '-' + qi + '"></div>';
+      html += '</div>';
+    });
+
+    html += '<div class="ex-score-bar" id="ex-bar-' + ei + '" style="display:none">';
+    html += '<div class="ex-score-row"><span class="ex-score-label">Score exercice ' + ex.numero + '</span><span class="ex-score-val" id="ex-score-val-' + ei + '">0 / ' + totalEx + ' pts</span></div>';
+    html += '<div class="ex-bar"><div class="ex-bar-fill" id="ex-bar-fill-' + ei + '" style="width:0%"></div></div>';
+    html += '</div>';
+    html += '</div>';
+  });
+
+  html += '<div style="margin-top:24px;display:flex;gap:12px;align-items:center" id="submit-row">';
+  if(modeCorr === 'fin') {
+    html += '<button class="btn btn-blue" onclick="corrigerTout()" style="font-size:14px;padding:14px 32px">Corriger mon brevet \u2192</button>';
+  } else {
+    html += '<button class="btn btn-orange" onclick="rendreNote()" style="font-size:14px;padding:14px 32px">Voir ma note finale \u2192</button>';
+  }
+  html += '<button class="btn btn-ghost" onclick="showPage(\'generer\')" style="font-size:13px;padding:12px 24px">\u2190 Nouveau brevet</button>';
+  html += '</div>';
+  html += '<div class="score-panel" id="score-panel"></div>';
+  document.getElementById('brevet-exercises').innerHTML = html;
+}
+
+function selectQcm(ei, qi, letter) {
+  var fb = document.getElementById('fb-'+ei+'-'+qi);
+  if(fb && fb.style.display !== 'none' && fb.style.display !== '') return;
+  ['A','B','C','D'].forEach(function(l){
+    var opt = document.getElementById('qcm-opt-'+ei+'-'+qi+'-'+l);
+    if(opt) opt.classList.remove('selected');
+  });
+  var chosen = document.getElementById('qcm-opt-'+ei+'-'+qi+'-'+letter);
+  if(chosen) chosen.classList.add('selected');
+  var input = document.getElementById('ans-'+ei+'-'+qi);
+  if(input) input.value = letter;
+  var corrBtn = document.getElementById('corr-btn-'+ei+'-'+qi);
+  if(corrBtn) { corrBtn.disabled = false; corrBtn.style.opacity = '1'; }
+}
+
+function corrigerQcmInstant(ei, qi) {
+  var ex = window._brevetData[ei];
+  var q = ex.questions[qi];
+  var choix = document.getElementById('ans-'+ei+'-'+qi).value.trim();
+  var m = q.reponse ? q.reponse.match(/R\u00e9ponse\s+([A-D])/i) : null;
+  var bonne = m ? m[1] : null;
+  ['A','B','C','D'].forEach(function(l){
+    var opt = document.getElementById('qcm-opt-'+ei+'-'+qi+'-'+l);
+    if(!opt) return;
+    opt.disabled = true;
+    var ic = opt.querySelector('.qcm-btn-icon');
+    if(l === choix && l === bonne)  { opt.classList.add('correct'); if(ic) ic.textContent='\u2713'; }
+    else if(l === choix)            { opt.classList.add('wrong');   if(ic) ic.textContent='\u2717'; }
+    else if(l === bonne)            { opt.classList.add('missed');  if(ic) ic.textContent='\u2713'; }
+  });
+  var correct = bonne && choix === bonne;
+  var corrBtn = document.getElementById('corr-btn-'+ei+'-'+qi);
+  if(corrBtn) corrBtn.style.display = 'none';
+  showFeedback(ei, qi, {pts: correct ? q.points : 0, max: q.points, verdict: correct ? 'ok' : 'ko', correction: q.reponse || ('Bonne r\u00e9ponse : ' + (bonne||'?'))}, q.points);
+  updateExScore(ei);
+}
+
+async function corrigerQuestion(ei, qi) {
+  var ex = window._brevetData[ei];
+  var q = ex.questions[qi];
+  var reponse = document.getElementById('ans-'+ei+'-'+qi).value.trim();
+  var fb = document.getElementById('fb-'+ei+'-'+qi);
+  if(/^[A-D]$/.test(reponse)) { corrigerQcmInstant(ei, qi); return; }
+  var btn = document.querySelector('#q-'+ei+'-'+qi+' .corr-btn');
+  if(!reponse){ fb.className='q-feedback ko'; fb.style.display='block'; fb.innerHTML='<span class="q-pts-earned">0/'+q.points+' pt'+(q.points>1?'s':'')+'</span>\u00c9cris une r\u00e9ponse avant de corriger.'; return; }
+  btn.disabled=true; btn.textContent='Correction en cours\u2026';
+  document.getElementById('ans-'+ei+'-'+qi).disabled=true;
+  var prompt='Tu es un professeur de math\u00e9matiques qui corrige un brevet de coll\u00e8ge. Exercice : "'+ex.titre+'". \u00c9nonc\u00e9 : "'+ex.enonce+'". Question '+q.id+' ('+q.points+' point'+(q.points>1?'s':'')+') : "'+q.texte+'". R\u00e9ponse de l\'élève : "'+reponse+'". \u00c9value et r\u00e9ponds UNIQUEMENT en JSON : {"pts":X,"max":'+q.points+',"verdict":"ok"|"bof"|"ko","correction":"explication courte en 1-2 phrases"}. pts entre 0 et '+q.points+'.';
+  try {
+    var r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:300,messages:[{role:'user',content:prompt}]})});
+    var data=await r.json();
+    var text=data.content[0].text.trim().replace(/^```json\s*/,'').replace(/^```\s*/,'').replace(/\s*```$/,'');
+    var res=JSON.parse(text);
+    showFeedback(ei, qi, res, q.points);
+    updateExScore(ei);
+  } catch(e){
+    fb.className='q-feedback bof'; fb.style.display='block'; fb.innerHTML='Erreur lors de la correction. R\u00e9essaie.';
+    btn.disabled=false; btn.textContent='Corriger cette question \u2192';
+    document.getElementById('ans-'+ei+'-'+qi).disabled=false;
+  }
+}
+
+function showFeedback(ei, qi, res, maxPts){
+  var fb=document.getElementById('fb-'+ei+'-'+qi);
+  var earned=Math.min(res.pts, maxPts);
+  fb.className='q-feedback '+res.verdict;
+  fb.style.display='block';
+  var icon=res.verdict==='ok'?'\u2713':res.verdict==='bof'?'~':'\u2717';
+  fb.innerHTML='<span class="q-pts-earned">'+icon+' '+earned+'/'+maxPts+' pt'+(maxPts>1?'s':'')+'</span>'+res.correction;
+  var badge=document.getElementById('pts-badge-'+ei+'-'+qi);
+  badge.style.background=res.verdict==='ok'?'#EDFBF0':res.verdict==='bof'?'#FFFBEB':'#FEF2F2';
+  badge.style.color=res.verdict==='ok'?'#166534':res.verdict==='bof'?'#92400E':'#991B1B';
+  badge.textContent=earned+'/'+maxPts+' pt'+(maxPts>1?'s':'');
+  if(!window._scores) window._scores={};
+  if(!window._scores[ei]) window._scores[ei]={};
+  window._scores[ei][qi]=earned;
+}
+
+function updateExScore(ei){
+  var ex=window._brevetData[ei];
+  var total=ex.questions.reduce(function(s,q){return s+q.points},0);
+  var earned=0;
+  var scores=window._scores&&window._scores[ei]?window._scores[ei]:{};
+  ex.questions.forEach(function(q,qi){ earned+=(scores[qi]||0); });
+  var pct=Math.round(earned/total*100);
+  document.getElementById('ex-bar-'+ei).style.display='block';
+  document.getElementById('ex-score-val-'+ei).textContent=earned+' / '+total+' pts';
+  document.getElementById('ex-bar-fill-'+ei).style.width=pct+'%';
+  var color=pct>=80?'#22C55E':pct>=50?'var(--orange)':'#EF4444';
+  document.getElementById('ex-bar-fill-'+ei).style.background=color;
+  document.getElementById('ex-score-tag-'+ei).textContent=earned+'/'+total+' pts';
+}
+
+async function corrigerTout(){
+  var exercices=window._brevetData;
+  var btn=document.querySelector('#submit-row .btn-blue');
+  btn.textContent='Correction en cours\u2026'; btn.disabled=true;
+  document.querySelectorAll('.brevet-answer').forEach(function(t){t.disabled=true});
+  for(var ei=0;ei<exercices.length;ei++){
+    var ex=exercices[ei];
+    for(var qi=0;qi<ex.questions.length;qi++){
+      await corrigerQuestionSilent(ei,qi);
+    }
+    updateExScore(ei);
+  }
+  afficherScoreFinal();
+}
+
+async function corrigerQuestionSilent(ei,qi){
+  var ex=window._brevetData[ei];
+  var q=ex.questions[qi];
+  var reponse=document.getElementById('ans-'+ei+'-'+qi).value.trim();
+  if(/^[A-D]$/.test(reponse)){ corrigerQcmInstant(ei,qi); return; }
+  if(!reponse){
+    if(!window._scores) window._scores={};
+    if(!window._scores[ei]) window._scores[ei]={};
+    window._scores[ei][qi]=0;
+    showFeedback(ei,qi,{pts:0,verdict:'ko',correction:'Pas de r\u00e9ponse fournie.'},q.points);
+    return;
+  }
+  var prompt='Tu es un professeur de math\u00e9matiques. Exercice : "'+ex.titre+'". Question '+q.id+' ('+q.points+' pt'+(q.points>1?'s':'')+') : "'+q.texte+'". R\u00e9ponse : "'+reponse+'". R\u00e9ponds UNIQUEMENT en JSON : {"pts":X,"max":'+q.points+',"verdict":"ok"|"bof"|"ko","correction":"1-2 phrases"}';
+  try{
+    var r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:300,messages:[{role:'user',content:prompt}]})});
+    var data=await r.json();
+    var text=data.content[0].text.trim().replace(/^```json\s*/,'').replace(/^```\s*/,'').replace(/\s*```$/,'');
+    var res=JSON.parse(text);
+    showFeedback(ei,qi,res,q.points);
+  }catch(e){
+    if(!window._scores) window._scores={};
+    if(!window._scores[ei]) window._scores[ei]={};
+    window._scores[ei][qi]=0;
+  }
+}
+
+function rendreNote(){ afficherScoreFinal(); }
+
+function afficherScoreFinal(){
+  var exercices=window._brevetData;
+  var totalMax=0, totalGagne=0, scoresParEx=[];
+  exercices.forEach(function(ex,ei){
+    var max=ex.questions.reduce(function(s,q){return s+q.points},0);
+    var earned=0;
+    var scores=window._scores&&window._scores[ei]?window._scores[ei]:{};
+    ex.questions.forEach(function(q,qi){earned+=(scores[qi]||0);});
+    totalMax+=max; totalGagne+=earned;
+    scoresParEx.push({nom:ex.titre,earned:earned,max:max});
+    updateExScore(ei);
+  });
+  var note20=totalMax>0?Math.round(totalGagne/totalMax*20*10)/10:0;
+  var mention, mentionColor, mentionBg;
+  if(note20>=18){mention='F\u00e9licitations';mentionColor='#8B5A7A';mentionBg='var(--rose)'}
+  else if(note20>=16){mention='Tr\u00e8s bien';mentionColor='#fff';mentionBg='var(--orange)'}
+  else if(note20>=14){mention='Bien';mentionColor='#fff';mentionBg='#3B82F6'}
+  else if(note20>=12){mention='Assez bien';mentionColor='#fff';mentionBg='var(--blue-lt)'}
+  else if(note20>=10){mention='Admis';mentionColor='#fff';mentionBg='#8A8DAA'}
+  else{mention='\u00c0 retravailler';mentionColor='#fff';mentionBg='#EF4444'}
+  var barsHtml=scoresParEx.map(function(s){
+    var pct=s.max>0?Math.round(s.earned/s.max*100):0;
+    return '<div class="score-ex-row"><span class="score-ex-name">'+s.nom.substring(0,14)+'</span><div class="score-ex-bar"><div class="score-ex-fill" style="width:'+pct+'%"></div></div><span class="score-ex-pts">'+s.earned+'/'+s.max+'</span></div>';
+  }).join('');
+  var panel=document.getElementById('score-panel');
+  panel.style.display='block';
+  panel.innerHTML='<div class="score-panel-inner">'
+    +'<div><div class="score-note">Ta note finale</div>'
+    +'<div class="score-big">'+note20.toString().replace('.',',')+' <span style="font-size:28px;font-weight:400;opacity:.5">/20</span></div>'
+    +'<div><span class="score-mention" style="background:'+mentionBg+';color:'+mentionColor+'">'+mention+'</span></div>'
+    +'<div style="margin-top:16px;font-size:13px;color:rgba(255,255,255,.5)">'+totalGagne+' pts sur '+totalMax+' au total</div>'
+    +'</div>'
+    +'<div><div style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:16px">d\u00e9tail par exercice</div>'
+    +'<div class="score-bars">'+barsHtml+'</div>'
+    +'<button onclick="sauvegarderEtVoirParcours()" style="margin-top:24px;width:100%;font-size:13px;font-weight:600;padding:13px;border-radius:100px;border:none;cursor:pointer;background:rgba(255,255,255,.15);color:#fff" onmouseover="this.style.background=\'rgba(255,255,255,.25)\'" onmouseout="this.style.background=\'rgba(255,255,255,.15)\'">Ajouter au tableau de bord \u2192</button>'
+    +'</div></div>';
+  panel.scrollIntoView({behavior:'smooth',block:'center'});
+  genererConseils(note20, mention, scoresParEx);
+}
+
+async function genererConseils(note20, mention, scoresParEx) {
+  var faibles=scoresParEx.filter(function(s){return s.max>0&&s.earned/s.max<0.6;}).map(function(s){return s.nom;});
+  var bons=scoresParEx.filter(function(s){return s.max>0&&s.earned/s.max>=0.8;}).map(function(s){return s.nom;});
+  var prompt='Un \u00e9l\u00e8ve de 3e vient de faire un brevet blanc de maths. Note : '+note20+'/20 (mention '+mention+'). '
+    +(faibles.length?'Points faibles : '+faibles.join(', ')+'. ':'')
+    +(bons.length?'Points forts : '+bons.join(', ')+'. ':'')
+    +'Donne 3 conseils courts et bienveillants. R\u00e9ponds UNIQUEMENT en JSON : {"conseils":["conseil1","conseil2","conseil3"]}';
+  try {
+    var r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:400,messages:[{role:'user',content:prompt}]})});
+    var data=await r.json();
+    var text=data.content[0].text.trim().replace(/^```json\s*/,'').replace(/^```\s*/,'').replace(/\s*```$/,'');
+    var res=JSON.parse(text);
+    window._dernierConseils=res.conseils;
+  } catch(e) {
+    window._dernierConseils=['Revois les notions o\u00f9 tu as perdu des points.','Refais des exercices similaires.','Continue, la r\u00e9gularit\u00e9 paie !'];
+  }
+  sauvegarderSession(note20, mention, scoresParEx);
+}
+
+function sauvegarderSession(note20, mention, scoresParEx) {
+  var sessions=JSON.parse(localStorage.getItem('brevet_sessions')||'[]');
+  var now=new Date();
+  var dateStr=now.toLocaleDateString('fr-FR',{day:'numeric',month:'short',year:'numeric'});
+  var notions=window._brevetData.map(function(ex){return ex.notion;});
+  var unique=notions.filter(function(v,i,a){return a.indexOf(v)===i;});
+  sessions.unshift({date:dateStr,note:note20,mention:mention,notions:unique.join(', '),scoresParEx:scoresParEx,conseils:window._dernierConseils||[]});
+  if(sessions.length>20) sessions=sessions.slice(0,20);
+  localStorage.setItem('brevet_sessions',JSON.stringify(sessions));
+  window._sessionsData=sessions;
+}
+
+function sauvegarderEtVoirParcours() {
+  showPage('parcours');
+  setTimeout(renderHistorique, 100);
+}
+
+function renderHistorique() {
+  var sessions=JSON.parse(localStorage.getItem('brevet_sessions')||'[]');
+  var container=document.getElementById('histo-dynamique');
+  if(!container) return;
+  if(!sessions.length){
+    container.innerHTML='<p style="color:var(--muted);font-size:14px;padding:20px 0">Aucun brevet r\u00e9alis\u00e9 pour l\'instant. <span style="color:var(--blue);cursor:pointer" onclick="showPage(\'generer\')">G\u00e9n\u00e8re ton premier brevet \u2192</span></p>';
+    return;
+  }
+  var html='';
+  sessions.forEach(function(s,i){
+    var ms=getMentionStyle(s.mention);
+    var barsHtml='';
+    if(s.scoresParEx){
+      s.scoresParEx.forEach(function(ex){
+        var pct=ex.max>0?Math.round(ex.earned/ex.max*100):0;
+        var barColor=pct>=80?'#22C55E':pct>=50?'var(--orange)':'#EF4444';
+        barsHtml+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">'
+          +'<span style="font-size:11px;color:var(--muted);width:80px;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+ex.nom.substring(0,12)+'</span>'
+          +'<div style="flex:1;height:5px;background:rgba(0,0,0,.06);border-radius:100px;overflow:hidden"><div style="height:100%;width:'+pct+'%;background:'+barColor+';border-radius:100px"></div></div>'
+          +'<span style="font-size:11px;font-weight:600;color:var(--muted);width:36px;text-align:right">'+ex.earned+'/'+ex.max+'</span>'
+          +'</div>';
+      });
+    }
+    var conseilsHtml='';
+    if(s.conseils&&s.conseils.length){
+      conseilsHtml='<div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(0,0,0,.06)">'
+        +'<div style="font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">conseils personnalis\u00e9s</div>'
+        +'<ul style="list-style:none;display:flex;flex-direction:column;gap:6px">';
+      s.conseils.forEach(function(c){
+        conseilsHtml+='<li style="font-size:13px;color:var(--ink);line-height:1.5;display:flex;gap:8px"><span style="color:var(--blue);flex-shrink:0">\u2192</span>'+c+'</li>';
+      });
+      conseilsHtml+='</ul></div>';
+    }
+    html+='<div style="background:var(--white);border-radius:16px;padding:28px;margin-bottom:10px">'
+      +'<div style="display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:start">'
+      +'<div style="text-align:center"><div style="font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">brevet</div><div style="font-size:28px;font-weight:700;color:var(--blue);letter-spacing:-.03em;line-height:1">'+(String(sessions.length-i).padStart(2,'0'))+'</div><div style="font-size:11px;color:var(--muted);margin-top:4px;white-space:nowrap">'+s.date+'</div></div>'
+      +'<div><div style="font-size:12px;color:var(--muted);font-weight:300;margin-bottom:10px">'+s.notions+'</div>'+barsHtml+conseilsHtml+'</div>'
+      +'<div style="text-align:right"><div style="font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">note</div>'
+      +'<div style="font-size:36px;font-weight:700;color:var(--blue);letter-spacing:-.04em;line-height:1">'+s.note.toString().replace('.',',')+' <span style="font-size:14px;font-weight:400;color:var(--muted)">/20</span></div>'
+      +'<span style="display:inline-block;margin-top:8px;font-size:11px;font-weight:600;padding:4px 14px;border-radius:100px;background:'+ms.bg+';color:'+ms.color+'">'+s.mention+'</span>'
+      +'</div></div></div>';
+  });
+  container.innerHTML=html;
+  var moy=sessions.reduce(function(s,r){return s+r.note},0)/sessions.length;
+  moy=Math.round(moy*10)/10;
+  var el=document.getElementById('stat-moy'); if(el) el.textContent=moy.toString().replace('.',',');
+  var elM=document.getElementById('mention-actuelle-label'); if(elM) elM.textContent=getMentionLabel(moy);
+  var elN=document.getElementById('mention-actuelle-note'); if(elN) elN.textContent=moy.toString().replace('.',',')+' / 20';
+  var elNb=document.getElementById('stat-nb'); if(elNb) elNb.textContent=sessions.length;
+}
+
+function getMentionStyle(mention) {
+  if(mention==='F\u00e9licitations') return {bg:'#F9F0F7',color:'#8B5A7A'};
+  if(mention==='Tr\u00e8s bien')     return {bg:'#FFF0E8',color:'var(--orange)'};
+  if(mention==='Bien')          return {bg:'#EEF2FF',color:'var(--blue)'};
+  if(mention==='Assez bien')    return {bg:'rgba(189,212,231,.3)',color:'#5a7a9a'};
+  if(mention==='Admis')         return {bg:'rgba(0,0,0,.06)',color:'var(--muted)'};
+  return {bg:'#FEF2F2',color:'#991B1B'};
+}
+
+function getMentionLabel(note) {
+  if(note>=18) return 'F\u00e9licitations';
+  if(note>=16) return 'Tr\u00e8s bien';
+  if(note>=14) return 'Bien';
+  if(note>=12) return 'Assez bien';
+  if(note>=10) return 'Admis';
+  return '\u00c0 retravailler';
+}
+
+function dureeToSeconds(duree) {
+  if(duree==='2h')    return 120*60;
+  if(duree==='1h30')  return 90*60;
+  if(duree==='1h')    return 60*60;
+  if(duree==='30 min')return 30*60;
+  if(duree==='10 min')return 10*60;
+  if(duree==='5 min') return 5*60;
+  return 120*60;
+}
+
+function startTimer(duree) {
+  if(_timerInterval) clearInterval(_timerInterval);
+  _timerSeconds=dureeToSeconds(duree);
+  _timerTotal=_timerSeconds;
+  _timerPaused=false;
+  document.getElementById('timer-box').style.display='block';
+  document.getElementById('timer-pause-btn').textContent='\u23f8 pause';
+  updateTimerDisplay();
+  _timerInterval=setInterval(function(){
+    if(_timerPaused) return;
+    _timerSeconds--;
+    updateTimerDisplay();
+    if(_timerSeconds<=0){ clearInterval(_timerInterval); timerFini(); }
+  }, 1000);
+}
+
+function updateTimerDisplay() {
+  var s=Math.max(0,_timerSeconds);
+  var h=Math.floor(s/3600), m=Math.floor((s%3600)/60), sec=s%60;
+  var display=h>0?h+':'+(m<10?'0':'')+m+':'+(sec<10?'0':'')+sec:(m<10?'0':'')+m+':'+(sec<10?'0':'')+sec;
+  var el=document.getElementById('timer-display');
+  el.textContent=display;
+  var pct=_timerTotal>0?_timerSeconds/_timerTotal:1;
+  if(pct<=0.1||_timerSeconds<=300){ el.style.color='#EF4444'; document.getElementById('timer-box').style.background='#FEF2F2'; }
+  else if(pct<=0.25){ el.style.color='var(--orange)'; document.getElementById('timer-box').style.background='#FFF0E8'; }
+  else { el.style.color='var(--blue)'; document.getElementById('timer-box').style.background='var(--white)'; }
+}
+
+function toggleTimer() {
+  _timerPaused=!_timerPaused;
+  document.getElementById('timer-pause-btn').textContent=_timerPaused?'\u25b6 reprendre':'\u23f8 pause';
+}
+
+function resetTimer() {
+  _timerSeconds=_timerTotal; _timerPaused=false;
+  document.getElementById('timer-pause-btn').textContent='\u23f8 pause';
+  updateTimerDisplay();
+}
+
+function timerFini() {
+  var el=document.getElementById('timer-display');
+  el.textContent='Temps \u00e9coul\u00e9 !'; el.style.color='#EF4444';
+  document.getElementById('timer-box').style.background='#FEF2F2';
+  document.querySelectorAll('.brevet-answer').forEach(function(t){t.disabled=true});
+  document.querySelectorAll('.corr-btn').forEach(function(b){b.disabled=true});
+}
+
+</script>
+</body>
+</html>
