@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mentions légales — Prépa Brevet</title>
+<style>
+:root {
+  --blue:#0021BC;--blue-lt:#BDD4E7;--orange:#EE6E34;--rose:#D0A6C6;
+  --bg:#EDEEF0;--white:#FFFFFF;--ink:rgb(25,8,6);--muted:#8A8DAA;
+  --fd:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  --fb:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--fb);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+/* NAV */
+.nav{display:flex;justify-content:space-between;align-items:flex-start;padding:28px 48px 0;z-index:10;position:relative}
+.logo{cursor:pointer;text-decoration:none}
+.logo-top{font-size:13px;color:var(--ink);display:block}
+.logo-bot{font-family:var(--fd);font-size:36px;font-weight:800;letter-spacing:-.04em;line-height:.9;text-transform:uppercase;display:block;color:var(--ink)}
+.logo-bot span{color:var(--blue)}
+.nav-r{display:flex;align-items:center;gap:32px}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links li{font-size:14px;opacity:.6;cursor:pointer;transition:opacity .15s}
+.nav-links li:hover{opacity:1}
+.nav-links li.on{opacity:1;font-weight:500}
+.cta{font-family:var(--fd);font-size:13px;font-weight:600;background:var(--blue);color:#fff;padding:11px 24px;border-radius:100px;border:none;cursor:pointer;transition:opacity .15s;text-decoration:none;display:inline-block}
+.cta:hover{opacity:.85}
+
+/* UTILS */
+.divider{height:1px;background:rgba(0,0,0,.1);margin:0 48px}
+.eyebrow{font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--orange);display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:'';width:20px;height:2px;background:var(--orange);border-radius:2px;display:inline-block}
+.ctag{font-size:10px;font-weight:500;padding:4px 12px;border-radius:100px;border:1.5px solid rgba(0,0,0,.1);color:var(--muted);background:transparent}
+.ctag.b{background:#EEF2FF;border-color:var(--blue);color:var(--blue)}
+.ctag.o{background:#FFF0E8;border-color:var(--orange);color:var(--orange)}
+.ctag.r{background:#F9F0F7;border-color:var(--rose);color:#8B5A7A}
+.last-updated{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:500;padding:5px 14px;border-radius:100px;background:rgba(0,0,0,.05);color:var(--muted)}
+.last-updated::before{content:'';width:6px;height:6px;border-radius:50%;background:#22C55E;display:inline-block}
+
+/* STATS STRIP */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);padding:0 48px}
+.stat{padding:40px 32px;border-right:1px solid rgba(0,0,0,.08)}
+.stat:last-child{border-right:none}
+.stat-n{font-family:var(--fd);font-size:64px;font-weight:500;letter-spacing:-.04em;line-height:1;text-transform:lowercase;margin-bottom:8px}
+.stat-l{font-size:13px;color:var(--muted);font-weight:300;line-height:1.5;max-width:180px}
+
+/* SECTION */
+.sec{padding:56px 48px;border-top:1px solid rgba(0,0,0,.08)}
+.sec-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:36px}
+.sec-title{font-family:var(--fd);font-size:clamp(28px,3.5vw,48px);font-weight:500;text-transform:lowercase;letter-spacing:-.03em;line-height:1}
+
+/* CARDS GRID 3 COL */
+.card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.card{background:var(--white);padding:32px;position:relative;overflow:hidden;transition:background .15s}
+.card:hover{background:#F4F5F8}
+.card:nth-child(1){border-radius:16px 0 0 16px}
+.card:nth-child(3){border-radius:0 16px 16px 0}
+.card-ghost-num{font-family:var(--fd);font-size:88px;font-weight:800;letter-spacing:-.06em;line-height:1;color:rgba(0,0,0,.04);position:absolute;right:-4px;top:4px;pointer-events:none;user-select:none}
+.card-eyebrow{font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.card-title{font-family:var(--fd);font-size:17px;font-weight:500;text-transform:lowercase;letter-spacing:-.02em;margin-bottom:10px;line-height:1.2}
+.card-body{font-size:13px;color:var(--muted);font-weight:300;line-height:1.75}
+.card-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:18px}
+
+/* INFO ROWS (2 col layout) */
+.info-layout{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.info-block{background:var(--white);padding:36px 40px}
+.info-block:first-child{border-radius:16px 0 0 16px}
+.info-block:last-child{border-radius:0 16px 16px 0}
+.info-label{font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.info-val{font-family:var(--fd);font-size:22px;font-weight:500;letter-spacing:-.03em;line-height:1.15;margin-bottom:6px}
+.info-sub{font-size:13px;color:var(--muted);font-weight:300;line-height:1.7}
+.info-link{font-size:13px;color:var(--blue);font-weight:500;display:inline-flex;align-items:center;gap:6px;margin-top:10px;transition:opacity .15s}
+.info-link:hover{opacity:.7}
+
+/* HIGHLIGHT */
+.highlight{border-left:3px solid var(--blue-lt);padding:14px 20px;border-radius:0 10px 10px 0;background:rgba(0,33,188,.03);font-size:14px;line-height:1.75;color:#3A3D6B}
+.highlight.orange{border-left-color:var(--orange);background:#FFF8F4;color:#7A3A1A}
+
+/* ACCORDION */
+.acc-item{border-bottom:1px solid rgba(0,0,0,.07)}
+.acc-item:first-child{border-top:1px solid rgba(0,0,0,.07)}
+.acc-btn{width:100%;display:flex;justify-content:space-between;align-items:center;padding:22px 0;cursor:pointer;background:none;border:none;font-family:var(--fd);font-size:16px;font-weight:500;text-transform:lowercase;letter-spacing:-.01em;color:var(--ink);text-align:left;gap:16px;transition:color .15s}
+.acc-btn:hover{color:var(--blue)}
+.acc-btn.open{color:var(--blue)}
+.acc-arrow{width:28px;height:28px;border-radius:50%;background:rgba(0,0,0,.06);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;transition:transform .2s,background .15s}
+.acc-btn.open .acc-arrow{transform:rotate(180deg);background:var(--blue);color:#fff}
+.acc-body{display:none;padding-bottom:22px;font-size:13px;color:var(--muted);font-weight:300;line-height:1.8;max-width:640px}
+.acc-body.open{display:block}
+
+/* BIG QUOTE */
+.big-quote{font-family:var(--fd);font-size:clamp(32px,4vw,56px);font-weight:500;letter-spacing:-.03em;line-height:1.1;text-transform:lowercase}
+
+/* TABLE RESPONSABLES */
+.resp-table{width:100%;border-collapse:collapse}
+.resp-table th{font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);text-align:left;padding:12px 20px;border-bottom:1px solid rgba(0,0,0,.08);background:rgba(0,0,0,.02)}
+.resp-table td{padding:20px;font-size:13px;font-weight:300;color:var(--ink);border-bottom:1px solid rgba(0,0,0,.04);vertical-align:top;line-height:1.6}
+.resp-table tr:last-child td{border-bottom:none}
+.resp-table tr:hover td{background:rgba(0,33,188,.02)}
+.resp-table td strong{font-weight:500;display:block;font-family:var(--fd);font-size:15px;letter-spacing:-.01em;margin-bottom:2px}
+.resp-table .td-link{color:var(--blue);font-weight:500;font-size:12px}
+
+/* CONTACT BANNER */
+.contact-banner{background:var(--blue);border-radius:20px;padding:48px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:40px;margin:0 48px 56px}
+.contact-banner-title{font-family:var(--fd);font-size:clamp(28px,3vw,44px);font-weight:500;letter-spacing:-.04em;text-transform:lowercase;color:#fff;line-height:1;margin-bottom:12px}
+.contact-banner-sub{font-size:14px;color:rgba(255,255,255,.55);font-weight:300;line-height:1.65;max-width:440px;border-left:3px solid rgba(255,255,255,.2);padding-left:16px}
+.contact-btn{font-family:var(--fd);font-size:13px;font-weight:600;background:var(--orange);color:#fff;padding:14px 32px;border-radius:100px;border:none;cursor:pointer;white-space:nowrap;text-transform:lowercase;transition:opacity .15s;display:inline-block}
+.contact-btn:hover{opacity:.85}
+
+/* SOMMAIRE STICKY */
+.sommaire{background:var(--white);border-radius:14px;padding:24px 28px;margin:0 48px 0}
+.sommaire-title{font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.sommaire-links{display:flex;flex-wrap:wrap;gap:8px}
+.sommaire-link{font-size:13px;font-weight:400;color:var(--ink);padding:6px 16px;border-radius:100px;border:1.5px solid rgba(0,0,0,.1);transition:all .15s;cursor:pointer}
+.sommaire-link:hover{background:var(--blue);border-color:var(--blue);color:#fff}
+
+/* FOOTER */
+.footer-top{padding:48px 48px 36px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:40px;border-top:1px solid rgba(0,0,0,.08)}
+.footer-logo-bot{font-family:var(--fd);font-size:26px;font-weight:800;letter-spacing:-.04em;text-transform:uppercase;line-height:.95;margin-bottom:12px;color:var(--ink)}
+.footer-logo-bot span{color:var(--blue)}
+.footer-desc{font-size:12px;color:var(--muted);font-weight:300;line-height:1.65}
+.footer-col-title{font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-links li{font-size:13px;color:rgba(0,0,0,.45);cursor:pointer;font-weight:300;transition:color .15s}
+.footer-links li:hover{color:var(--ink)}
+.footer-links li.on{color:var(--blue);font-weight:500}
+.footer-email-wrap{padding:0 48px;border-top:1px solid rgba(0,0,0,.08);display:flex;align-items:center;gap:16px}
+.footer-email{font-family:var(--fd);font-size:clamp(24px,4vw,56px);font-weight:500;color:var(--ink);letter-spacing:-.04em;text-transform:lowercase;padding:28px 0;text-decoration:none;transition:color .15s}
+.footer-email:hover{color:var(--blue)}
+.footer-bar{background:var(--blue);padding:16px 48px;display:flex;justify-content:space-between;align-items:center}
+.footer-bar-links{display:flex;gap:40px}
+.footer-bar-links a{font-size:13px;font-weight:500;color:rgba(255,255,255,.7);text-decoration:none;cursor:pointer;transition:color .15s}
+.footer-bar-links a:hover{color:#fff}
+.footer-bar-copy{font-size:12px;color:rgba(255,255,255,.35)}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="logo" href="#">
+    <span class="logo-top">prépa</span>
+    <span class="logo-bot">bre<span>.</span>vet</span>
+  </a>
+  <div class="nav-r">
+    <ul class="nav-links">
+      <li>accueil</li>
+      <li>mon parcours</li>
+      <li>ressources</li>
+      <li style="color:var(--orange);opacity:1;font-weight:600">s'inscrire ✦</li>
+    </ul>
+    <a class="cta" href="#">générer un brevet →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div style="display:grid;grid-template-columns:1fr 1fr;padding:48px 48px 0;gap:48px;align-items:end;min-height:52vh">
+  <div style="padding-bottom:48px">
+    <p class="eyebrow" style="margin-bottom:24px">Informations légales</p>
+    <h1 style="font-family:var(--fd);font-size:clamp(52px,7vw,96px);font-weight:500;line-height:1;letter-spacing:-.03em;text-transform:lowercase;margin-bottom:32px">tout ce qu'on<br>te doit par<br><span style="color:var(--blue)">la loi.</span></h1>
+    <p style="font-size:15px;font-weight:300;line-height:1.75;color:var(--muted);max-width:420px;border-left:3px solid var(--blue-lt);padding-left:18px;margin-bottom:28px">Conformément à la loi n°2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique (LCEN), voici toutes les informations légales relatives à ce site.</p>
+    <span class="last-updated">mise à jour le 14 mars 2026</span>
+  </div>
+  <div style="padding-bottom:48px;display:flex;flex-direction:column;gap:16px;justify-content:flex-end">
+    <!-- Carte éditeur -->
+    <div style="background:var(--white);border-radius:20px;padding:32px">
+      <div style="font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:16px">éditeur du site</div>
+      <div style="font-family:var(--fd);font-size:24px;font-weight:500;letter-spacing:-.03em;margin-bottom:4px">Prépa Brevet SAS</div>
+      <div style="font-size:13px;color:var(--muted);font-weight:300;line-height:1.7;margin-bottom:20px">Capital social : 10 000 € · RCS Paris 123 456 789<br>12 rue de la Réussite, 75001 Paris</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <span class="ctag b">SARL immatriculée</span>
+        <span class="ctag">TVA : FR12 123456789</span>
+      </div>
+    </div>
+    <!-- Tags légaux -->
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <span style="font-size:11px;font-weight:600;padding:6px 16px;border-radius:100px;background:#EDFBF0;border:1.5px solid #22C55E;color:#166534">LCEN conforme ✓</span>
+      <span style="font-size:11px;font-weight:600;padding:6px 16px;border-radius:100px;background:#EEF2FF;border:1.5px solid var(--blue);color:var(--blue)">Hébergement UE</span>
+      <span style="font-size:11px;font-weight:600;padding:6px 16px;border-radius:100px;background:#FFF0E8;border:1.5px solid var(--orange);color:var(--orange)">CNIL n°456789</span>
+    </div>
+  </div>
+</div>
+
+<div class="divider" style="margin-top:0"></div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="stat-n" style="color:var(--blue)">2021</div><div class="stat-l">année de création de la société</div></div>
+  <div class="stat"><div class="stat-n" style="color:var(--orange)">10k€</div><div class="stat-l">capital social enregistré</div></div>
+  <div class="stat"><div class="stat-n">LCEN</div><div class="stat-l">loi du 21 juin 2004 respectée</div></div>
+  <div class="stat"><div class="stat-n" style="color:var(--rose)">UE</div><div class="stat-l">hébergement exclusivement européen</div></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SOMMAIRE -->
+<div style="padding:36px 0 0">
+  <div class="sommaire">
+    <div class="sommaire-title">sommaire</div>
+    <div class="sommaire-links">
+      <a class="sommaire-link" href="#editeur">éditeur du site</a>
+      <a class="sommaire-link" href="#hebergeur">hébergeur</a>
+      <a class="sommaire-link" href="#directeur">directeur de publication</a>
+      <a class="sommaire-link" href="#propriete">propriété intellectuelle</a>
+      <a class="sommaire-link" href="#responsabilite">responsabilité</a>
+      <a class="sommaire-link" href="#liens">liens hypertextes</a>
+      <a class="sommaire-link" href="#droit">droit applicable</a>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION ÉDITEUR & HÉBERGEUR -->
+<div class="sec" id="editeur">
+  <div class="sec-head"><h2 class="sec-title">éditeur du site & hébergeur</h2></div>
+  <div class="info-layout" id="hebergeur">
+    <!-- Éditeur -->
+    <div class="info-block" style="border-radius:16px 0 0 16px">
+      <div class="info-label">éditeur — art. 6 LCEN</div>
+      <div class="info-val">Prépa Brevet SAS</div>
+      <div class="info-sub">
+        Société par actions simplifiée au capital de 10 000 €<br>
+        Immatriculée au RCS de Paris sous le n° 123 456 789<br>
+        Siège social : 12 rue de la Réussite, 75001 Paris<br>
+        TVA intracommunautaire : FR12 123456789
+      </div>
+      <a class="info-link" href="mailto:contact@prepabrevet.fr">→ contact@prepabrevet.fr</a>
+    </div>
+    <!-- Hébergeur -->
+    <div class="info-block" style="border-radius:0 16px 16px 0" id="directeur">
+      <div class="info-label">hébergeur</div>
+      <div class="info-val">OVHcloud SAS</div>
+      <div class="info-sub">
+        2 rue Kellermann, 59100 Roubaix — France<br>
+        RCS Lille Métropole 424 761 419<br>
+        Téléphone : +33 9 72 10 10 07<br>
+        Hébergement sur serveurs situés en France (UE)
+      </div>
+      <a class="info-link" href="https://www.ovhcloud.com" target="_blank">→ ovhcloud.com</a>
+    </div>
+  </div>
+
+  <!-- Directeur de publication -->
+  <div style="margin-top:2px">
+    <div class="info-layout">
+      <div class="info-block" style="border-radius:16px 0 0 16px">
+        <div class="info-label">directeur de publication</div>
+        <div class="info-val">Camille Martin</div>
+        <div class="info-sub">Présidente de Prépa Brevet SAS<br>Responsable de la publication du site et du contenu éditorial.</div>
+        <a class="info-link" href="mailto:direction@prepabrevet.fr">→ direction@prepabrevet.fr</a>
+      </div>
+      <div class="info-block" style="border-radius:0 16px 16px 0">
+        <div class="info-label">délégué à la protection des données (DPO)</div>
+        <div class="info-val">Me. Sophie Durand</div>
+        <div class="info-sub">Avocate spécialisée RGPD<br>Désignée auprès de la CNIL sous le n° DPO-456789.<br>Point de contact pour tout exercice de droits.</div>
+        <a class="info-link" href="mailto:rgpd@prepabrevet.fr">→ rgpd@prepabrevet.fr</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SECTION PROPRIÉTÉ INTELLECTUELLE -->
+<div class="sec" id="propriete">
+  <div class="sec-head"><h2 class="sec-title">propriété intellectuelle</h2></div>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-ghost-num">©</div>
+      <div class="card-eyebrow">Contenus du site</div>
+      <div class="card-title">textes, graphismes & interface</div>
+      <div class="card-body">L'ensemble des contenus publiés sur ce site — textes, exercices, corrections, design, illustrations et interface — sont protégés par le droit d'auteur. Toute reproduction sans autorisation écrite est interdite.</div>
+      <div class="card-tags"><span class="ctag b">Code de la PI</span><span class="ctag">art. L111-1</span></div>
+    </div>
+    <div class="card">
+      <div class="card-ghost-num">™</div>
+      <div class="card-eyebrow">Marques & logos</div>
+      <div class="card-title">marques déposées</div>
+      <div class="card-body">La marque «&nbsp;Prépa Brevet&nbsp;» et le logo associé sont des marques déposées à l'INPI. Toute utilisation sans autorisation explicite constitue une contrefaçon sanctionnée par la loi.</div>
+      <div class="card-tags"><span class="ctag o">INPI enregistré</span></div>
+    </div>
+    <div class="card">
+      <div class="card-ghost-num">✎</div>
+      <div class="card-eyebrow">Contenu pédagogique</div>
+      <div class="card-title">exercices & corrections IA</div>
+      <div class="card-body">Les exercices générés par IA et leurs corrections sont produits à partir de données pédagogiques officielles (sujets de l'Éducation Nationale). Ils sont mis à disposition à titre d'entraînement uniquement.</div>
+      <div class="card-tags"><span class="ctag">Usage personnel</span><span class="ctag r">Non commercial</span></div>
+    </div>
+  </div>
+  <div style="margin-top:16px" class="highlight">
+    Pour toute demande de reproduction ou d'utilisation des contenus, écrire à <strong style="font-weight:500">contact@prepabrevet.fr</strong> en précisant la nature et la finalité de l'utilisation envisagée.
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SECTION RESPONSABILITÉ -->
+<div class="sec" id="responsabilite">
+  <div class="sec-head"><h2 class="sec-title">responsabilité & limitations</h2></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px">
+    <div style="background:var(--white);padding:36px;border-radius:16px 0 0 16px">
+      <div style="font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:14px">exactitude des contenus</div>
+      <p style="font-size:13px;font-weight:300;color:var(--muted);line-height:1.8;margin-bottom:16px">Prépa Brevet s'efforce de maintenir des informations exactes et à jour. Toutefois, nous ne pouvons garantir l'exhaustivité ou l'absence d'erreurs dans les contenus générés automatiquement.</p>
+      <p style="font-size:13px;font-weight:300;color:var(--muted);line-height:1.8">Les exercices et corrections produits par l'IA sont fournis à titre d'entraînement. Ils ne constituent pas une garantie de résultats scolaires.</p>
+    </div>
+    <div style="background:var(--white);padding:36px;border-radius:0 16px 16px 0;border-left:2px solid var(--bg)">
+      <div style="font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:14px">disponibilité du service</div>
+      <p style="font-size:13px;font-weight:300;color:var(--muted);line-height:1.8;margin-bottom:16px">Nous nous engageons à maintenir une disponibilité du service de 99,5% par an hors maintenance planifiée. Des interruptions techniques peuvent toutefois survenir sans préavis.</p>
+      <p style="font-size:13px;font-weight:300;color:var(--muted);line-height:1.8">En cas d'interruption prolongée, les utilisateurs Premium seront remboursés au prorata de la période d'indisponibilité.</p>
+    </div>
+  </div>
+  <div style="margin-top:16px" class="highlight orange">
+    Prépa Brevet décline toute responsabilité pour les dommages directs ou indirects résultant d'une utilisation des contenus en dehors du cadre d'entraînement scolaire prévu.
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SECTION LIENS & DROIT -->
+<div class="sec" id="liens">
+  <div class="sec-head"><h2 class="sec-title">liens hypertextes & droit applicable</h2></div>
+
+  <!-- Accordion -->
+  <div style="max-width:720px" id="droit">
+    <div class="acc-item">
+      <button class="acc-btn" onclick="toggleAcc(this)">
+        <span>liens hypertextes vers ce site</span>
+        <span class="acc-arrow">↓</span>
+      </button>
+      <div class="acc-body">La mise en place de liens hypertextes vers les pages de ce site est autorisée sans demande préalable, à condition que le lien ne soit pas utilisé à des fins commerciales ou publicitaires et que la source soit clairement indiquée.</div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-btn" onclick="toggleAcc(this)">
+        <span>liens vers des sites tiers</span>
+        <span class="acc-arrow">↓</span>
+      </button>
+      <div class="acc-body">Ce site peut contenir des liens vers des sites tiers. Ces liens sont fournis à titre informatif uniquement. Prépa Brevet n'exerce aucun contrôle sur ces sites et décline toute responsabilité quant à leur contenu ou leur politique de confidentialité.</div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-btn" onclick="toggleAcc(this)">
+        <span>droit applicable et juridiction compétente</span>
+        <span class="acc-arrow">↓</span>
+      </button>
+      <div class="acc-body">Les présentes mentions légales sont soumises au droit français. En cas de litige concernant l'interprétation ou l'exécution des présentes, les tribunaux de Paris seront seuls compétents, sauf disposition légale contraire.</div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-btn" onclick="toggleAcc(this)">
+        <span>médiation de la consommation</span>
+        <span class="acc-arrow">↓</span>
+      </button>
+      <div class="acc-body">Conformément aux articles L.611-1 et suivants du Code de la consommation, vous pouvez recourir gratuitement au service de médiation MEDICYS en cas de litige non résolu : 73 boulevard de Clichy, 75009 Paris — www.medicys.fr</div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-btn" onclick="toggleAcc(this)">
+        <span>accessibilité numérique</span>
+        <span class="acc-arrow">↓</span>
+      </button>
+      <div class="acc-body">Prépa Brevet s'engage à rendre son service accessible conformément aux recommandations WCAG 2.1 niveau AA. Un audit d'accessibilité est conduit annuellement. Pour signaler un problème d'accessibilité, contactez-nous à accessibility@prepabrevet.fr</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SECTION CONTACT -->
+<div class="sec" style="padding-bottom:56px">
+  <div class="sec-head"><h2 class="sec-title">une question juridique ?</h2></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px">
+    <!-- Contact général -->
+    <div style="background:var(--white);border-radius:16px 0 0 16px;padding:36px;display:flex;flex-direction:column;justify-content:space-between">
+      <div>
+        <div style="font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:14px">contact général</div>
+        <div style="font-family:var(--fd);font-size:20px;font-weight:500;letter-spacing:-.02em;margin-bottom:8px">contact@prepabrevet.fr</div>
+        <div style="font-size:13px;color:var(--muted);font-weight:300;line-height:1.7">Pour toute question relative aux mentions légales, aux conditions d'utilisation ou à la propriété intellectuelle.</div>
+      </div>
+      <a href="mailto:contact@prepabrevet.fr" style="margin-top:24px;display:inline-flex;align-items:center;gap:8px;font-family:var(--fd);font-size:13px;font-weight:600;background:var(--blue);color:#fff;padding:12px 24px;border-radius:100px;text-transform:lowercase;transition:opacity .15s;width:fit-content">écrire →</a>
+    </div>
+    <!-- Signalement -->
+    <div style="background:var(--white);border-radius:0 16px 16px 0;padding:36px;border-left:2px solid var(--bg);display:flex;flex-direction:column;justify-content:space-between">
+      <div>
+        <div style="font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:14px">signalement de contenu illicite</div>
+        <div style="font-family:var(--fd);font-size:20px;font-weight:500;letter-spacing:-.02em;margin-bottom:8px">legal@prepabrevet.fr</div>
+        <div style="font-size:13px;color:var(--muted);font-weight:300;line-height:1.7">Pour tout signalement de contenu illicite au sens de l'article 6 de la LCEN. Nous traitons chaque signalement sous 24h ouvrées.</div>
+      </div>
+      <a href="mailto:legal@prepabrevet.fr" style="margin-top:24px;display:inline-flex;align-items:center;gap:8px;font-family:var(--fd);font-size:13px;font-weight:600;background:transparent;color:var(--ink);padding:11px 24px;border-radius:100px;border:1.5px solid rgba(0,0,0,.15);text-transform:lowercase;transition:opacity .15s;width:fit-content">signaler →</a>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT BANNER -->
+<div class="contact-banner">
+  <div>
+    <h2 class="contact-banner-title">besoin d'une<br>réponse rapide ?</h2>
+    <p class="contact-banner-sub">Notre équipe juridique répond à chaque demande sous 48 heures ouvrées. Pour les urgences légales, un numéro dédié est disponible en semaine.</p>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-end">
+    <a class="contact-btn" href="mailto:contact@prepabrevet.fr">nous contacter →</a>
+    <a href="#" style="font-size:13px;color:rgba(255,255,255,.45);font-weight:300">voir la politique RGPD</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer-top">
+  <div>
+    <div class="footer-logo-bot">bre<span>.</span>vet</div>
+    <p class="footer-desc">La plateforme d'entraînement au brevet des collèges. Exercices progressifs, corrections détaillées, suivi personnalisé.</p>
+  </div>
+  <div>
+    <div class="footer-col-title">Notions</div>
+    <ul class="footer-links"><li>mathématiques</li><li>français</li><li>histoire-géo</li><li>sciences</li></ul>
+  </div>
+  <div>
+    <div class="footer-col-title">Navigation</div>
+    <ul class="footer-links"><li>accueil</li><li>mon parcours</li><li>ressources</li><li>s'inscrire</li></ul>
+  </div>
+  <div>
+    <div class="footer-col-title">Légal</div>
+    <ul class="footer-links">
+      <li class="on">mentions légales</li>
+      <li>RGPD</li>
+      <li>CGU</li>
+      <li>gérer mes cookies</li>
+    </ul>
+  </div>
+</div>
+<div class="footer-email-wrap">
+  <a class="footer-email" href="mailto:contact@prepabrevet.fr">contact@prepabrevet.fr</a>
+  <div style="flex-shrink:0;width:48px;height:48px;display:flex;align-items:center;justify-content:center">
+    <svg width="36" height="36" viewBox="0 0 42 42" fill="none"><path d="M8 8h26v26M8 34L34 8" stroke="rgb(25,8,6)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+</div>
+<div class="footer-bar">
+  <div class="footer-bar-links"><a>Instagram</a><a>Newsletter</a><a>LinkedIn</a></div>
+  <span class="footer-bar-copy">© 2026 Prépa Brevet — tous droits réservés</span>
+</div>
+
+<script>
+function toggleAcc(btn) {
+  var body = btn.nextElementSibling;
+  var isOpen = btn.classList.contains('open');
+  document.querySelectorAll('.acc-btn.open').forEach(function(b) {
+    b.classList.remove('open');
+    b.nextElementSibling.classList.remove('open');
+  });
+  if (!isOpen) { btn.classList.add('open'); body.classList.add('open'); }
+}
+</script>
+</body>
+</html>
