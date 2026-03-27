@@ -27,10 +27,44 @@ body{background:var(--bg);color:var(--ink);font-family:var(--fd);-webkit-font-sm
 /* PAGES */
 .page{display:none !important}
 .page.active{display:block !important}
+#page-accueil.active{display:block !important}
 #page-parcours.active{display:flex !important;flex-direction:column;height:calc(100vh - 93px);overflow:hidden}
 #page-abonnement.active{display:flex !important;flex-direction:column}
 #page-planning.active{display:flex !important;flex-direction:column;height:calc(100vh - 93px);overflow:hidden}
 #page-generer.active{display:flex !important;flex-direction:column;height:calc(100vh - 93px);overflow:hidden}
+
+/* SPLASH ACCUEIL */
+.splash{width:100%;height:calc(100vw * 0.5625);min-height:480px;position:relative;overflow:hidden;display:flex;flex-direction:column;background:var(--bg);}
+.splash::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(0,33,188,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,33,188,.04) 1px,transparent 1px);background-size:72px 72px;pointer-events:none;z-index:0;}
+.splash-body{flex:1;display:grid;grid-template-columns:1fr 1fr;padding:36px 48px 48px;gap:48px;align-items:stretch;position:relative;z-index:2;}
+.splash-left{display:flex;flex-direction:column;justify-content:space-between;padding-right:48px;}
+.splash-eyebrow{font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--orange);display:flex;align-items:center;gap:10px;}
+.splash-eyebrow::before{content:'';width:20px;height:2px;background:var(--orange);border-radius:2px;display:inline-block}
+.splash-title{font-family:var(--fd);font-size:clamp(40px,5.5vw,88px);font-weight:500;line-height:.95;letter-spacing:-.04em;text-transform:lowercase;}
+.splash-title .accent{color:var(--blue)}
+.splash-ctas{display:flex;gap:12px;}
+.splash-right{display:flex;flex-direction:column;justify-content:space-between;gap:24px;}
+.countdown-label{font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.countdown-digits{display:flex;gap:12px;align-items:flex-end;}
+.cd-unit{display:flex;flex-direction:column;align-items:center;gap:4px;}
+.cd-num{font-family:var(--fd);font-size:clamp(28px,3.8vw,60px);font-weight:500;letter-spacing:-.04em;line-height:1;color:var(--blue);background:var(--white);border-radius:10px;padding:10px 16px;min-width:64px;text-align:center;}
+.cd-sep{font-family:var(--fd);font-size:clamp(22px,2.8vw,44px);font-weight:300;color:var(--muted);margin-bottom:10px;line-height:1;}
+.cd-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;}
+.exam-card{background:var(--white);border-radius:16px;padding:20px 24px;display:flex;flex-direction:column;gap:14px;}
+.exam-card-top{display:flex;justify-content:space-between;align-items:center;}
+.exam-card-title{font-family:var(--fd);font-size:15px;font-weight:500;letter-spacing:-.02em;text-transform:lowercase;}
+.exam-badge{font-size:10px;font-weight:600;padding:4px 12px;border-radius:100px;background:#FFF0E8;border:1.5px solid var(--orange);color:var(--orange);}
+.exam-progress-label{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:6px;}
+.exam-bar{height:6px;background:rgba(0,0,0,.07);border-radius:100px;overflow:hidden;}
+.exam-bar-fill{height:100%;background:var(--orange);border-radius:100px;width:52%;}
+.exam-parts{display:flex;gap:8px;}
+.exam-part{flex:1;background:#F4F5F8;border-radius:8px;padding:8px 10px;font-size:11px;color:var(--muted);}
+.exam-part strong{display:block;font-family:var(--fd);font-size:14px;font-weight:500;color:var(--ink);letter-spacing:-.02em;margin-bottom:2px;}
+.scroll-hint{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;z-index:10;cursor:pointer;opacity:.45;transition:opacity .2s;}
+.scroll-hint:hover{opacity:.9}
+.scroll-hint span{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);}
+.scroll-arrow{width:28px;height:28px;border-radius:50%;border:1.5px solid rgba(0,0,0,.15);display:flex;align-items:center;justify-content:center;animation:bounce 2s infinite;}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
 
 /* PLANNING */
 .planning-hero{padding:16px 48px 10px;display:flex;align-items:center;gap:24px;flex-shrink:0}
@@ -381,56 +415,102 @@ body{background:var(--bg);color:var(--ink);font-family:var(--fd);-webkit-font-sm
 
 <!-- PAGE ACCUEIL -->
 <div class="page active" id="page-accueil">
-  <div style="display:grid;grid-template-columns:1fr 1fr;min-height:78vh;padding:48px 48px 0;gap:48px;align-items:end">
-    <div style="padding-bottom:48px">
-      <p class="eyebrow" style="margin-bottom:24px">Brevet 2026 · Mathématiques</p>
-      <h1 style="font-size:clamp(56px,7.5vw,104px);font-weight:500;line-height:1;letter-spacing:-.03em;text-transform:lowercase;margin-bottom:36px">prépare,<br>entraîne-toi,<br>réussis.</h1>
-      <p style="font-size:15px;font-weight:300;line-height:1.75;color:var(--muted);max-width:400px;border-left:3px solid var(--blue-lt);padding-left:18px;margin-bottom:32px">Entraîne-toi sur les vrais sujets du brevet — en conditions réelles, avec le chrono. Toutes les annales officielles depuis 2018, corrigées.</p>
-      <div style="display:flex;gap:12px">
-        <button class="btn btn-blue" onclick="goTo('generer')">générer un brevet →</button>
-        <button class="btn btn-ghost" onclick="goTo('parcours')">mon parcours</button>
+  <section class="splash">
+    <nav class="nav" style="position:relative;z-index:10">
+      <div class="logo" onclick="goTo('accueil')">
+        <span class="logo-top">prépa</span>
+        <span class="logo-bot">bre<span>.</span>vet</span>
+      </div>
+      <div class="nav-r">
+        <ul class="nav-links">
+          <li data-page="accueil" onclick="goTo('accueil')" class="on">accueil</li>
+          <li data-page="parcours" onclick="goTo('parcours')">mon parcours</li>
+          <li data-page="planning" onclick="goTo('planning')">planning</li>
+          <li data-page="ressources">ressources</li>
+          <li data-page="abonnement" class="on-orange" onclick="goTo('abonnement')">s'inscrire ✦</li>
+        </ul>
+        <button class="cta" onclick="goTo('generer')">générer un brevet →</button>
+      </div>
+    </nav>
+    <div class="splash-body">
+      <div class="splash-left">
+        <div class="splash-eyebrow">Brevet 2026 · Mathématiques</div>
+        <h1 class="splash-title">
+          ton brevet<br>
+          dans <span class="accent" id="days-num">—</span> jours.<br>
+          t'es prêt·e ?
+        </h1>
+        <div class="splash-ctas">
+          <button class="btn btn-blue" onclick="goTo('generer')">générer un brevet →</button>
+          <button class="btn btn-ghost" onclick="goTo('parcours')">mon parcours</button>
+        </div>
+      </div>
+      <div class="splash-right">
+        <div>
+          <div class="countdown-label">temps restant avant l'examen</div>
+          <div class="countdown-digits">
+            <div class="cd-unit"><div class="cd-num" id="cd-j">—</div><div class="cd-lbl">jours</div></div>
+            <div class="cd-sep">:</div>
+            <div class="cd-unit"><div class="cd-num" id="cd-h">—</div><div class="cd-lbl">heures</div></div>
+            <div class="cd-sep">:</div>
+            <div class="cd-unit"><div class="cd-num" id="cd-m">—</div><div class="cd-lbl">min</div></div>
+            <div class="cd-sep">:</div>
+            <div class="cd-unit"><div class="cd-num" id="cd-s">—</div><div class="cd-lbl">sec</div></div>
+          </div>
+        </div>
+        <div class="exam-card">
+          <div class="exam-card-top">
+            <div class="exam-card-title">brevet 2022 — en cours</div>
+            <span class="exam-badge">en cours</span>
+          </div>
+          <div>
+            <div class="exam-progress-label"><span>progression</span><span>52%</span></div>
+            <div class="exam-bar"><div class="exam-bar-fill"></div></div>
+          </div>
+          <div class="exam-parts">
+            <div class="exam-part"><strong>Partie 1</strong>QCM · 13 pts</div>
+            <div class="exam-part"><strong>Partie 2</strong>Exercices · 32 pts</div>
+            <div class="exam-part" style="background:#EEF2FF"><strong style="color:var(--blue)">Score</strong><span style="color:var(--blue);font-size:13px;font-weight:600">—/45</span></div>
+          </div>
+        </div>
       </div>
     </div>
-    <div style="padding-bottom:48px;display:flex;flex-direction:column;justify-content:flex-end;gap:20px">
-      <div style="font-size:12px;color:var(--muted);display:flex;gap:24px">
-        <span style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:3px;background:var(--blue);display:inline-block"></span>7 sessions</span>
-        <span style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:3px;background:var(--rose);display:inline-block"></span>session normale</span>
-        <span style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:3px;background:var(--orange);display:inline-block"></span>remplacement</span>
-      </div>
-      <div style="display:flex;gap:8px;height:120px">
-        <div style="background:var(--blue);border-radius:14px;flex:4;display:flex;align-items:flex-end;padding:12px 16px;font-size:18px;font-weight:600;color:rgba(255,255,255,.85)">2018—2021</div>
-        <div style="background:var(--rose);border-radius:14px;flex:1.5;display:flex;align-items:flex-end;padding:12px 16px;font-size:18px;font-weight:600;color:rgba(255,255,255,.85)">2022—23</div>
-        <div style="background:var(--orange);border-radius:14px;flex:1;display:flex;align-items:flex-end;padding:12px 16px;font-size:16px;font-weight:600;color:rgba(255,255,255,.85)">2024</div>
+    <div class="scroll-hint" onclick="document.getElementById('acc-main').scrollIntoView({behavior:'smooth'})">
+      <span>explorer</span>
+      <div class="scroll-arrow">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 2v8M2 7l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
     </div>
-  </div>
-  <div class="divider"></div>
-  <div class="stats-strip">
-    <div class="stat"><div class="stat-n" style="color:var(--blue)">16</div><div class="stat-l">sujets officiels du brevet de maths</div></div>
-    <div class="stat"><div class="stat-n">2018</div><div class="stat-l">première annale disponible — 6 ans de sujets</div></div>
-    <div class="stat"><div class="stat-n" style="color:var(--orange)">100%</div><div class="stat-l">corrigées question par question, avec la méthode</div></div>
-    <div class="stat"><div class="stat-n">2h⏱</div><div class="stat-l">durée max par sujet — comme le vrai brevet</div></div>
-  </div>
-  <div class="divider"></div>
-  <div class="sec">
-    <div class="sec-head"><h2 class="sec-title">les annales disponibles</h2><a class="see-all" href="#">voir les annales →</a></div>
-    <div class="chap-grid">
-      <div class="chap-card"><div class="chap-num">2024</div><div class="chap-title">brevet 2024</div><div class="chap-meta">Session normale · juin 2024 · 2h</div><div class="chap-tags"><span class="acc-ctag b">officiel</span><span class="acc-ctag">corrigé</span><span class="acc-ctag r">chronométré</span></div><div class="bar-wrap"><div class="bar"><div class="bar-fill" style="width:0%;background:var(--blue)"></div></div><span class="bar-pct" style="color:var(--muted)">—</span></div></div>
-      <div class="chap-card"><div class="chap-num">2023</div><div class="chap-title">brevet 2023</div><div class="chap-meta">Session normale · juin 2023 · 2h</div><div class="chap-tags"><span class="acc-ctag b">officiel</span><span class="acc-ctag">corrigé</span></div><div class="bar-wrap"><div class="bar"><div class="bar-fill" style="width:87%;background:var(--blue)"></div></div><span class="bar-pct" style="color:var(--blue)">87%</span></div></div>
-      <div class="chap-card"><div class="chap-num">2022</div><div class="chap-title">brevet 2022</div><div class="chap-meta">Session normale · juin 2022 · 2h</div><div class="chap-tags"><span class="acc-ctag b">officiel</span><span class="acc-ctag o">en cours</span></div><div class="bar-wrap"><div class="bar"><div class="bar-fill" style="width:52%;background:var(--orange)"></div></div><span class="bar-pct" style="color:var(--orange)">52%</span></div></div>
-      <div class="chap-card"><div class="chap-num">2021</div><div class="chap-title">brevet 2021</div><div class="chap-meta">Session normale · juin 2021 · 2h</div><div class="chap-tags"><span class="acc-ctag b">officiel</span><span class="acc-ctag">corrigé</span></div><div class="bar-wrap"><div class="bar"><div class="bar-fill" style="width:0%"></div></div><span class="bar-pct" style="color:var(--muted)">—</span></div></div>
-      <div class="chap-card"><div class="chap-num">2020</div><div class="chap-title">brevet 2020</div><div class="chap-meta">Session de remplacement · 2h</div><div class="chap-tags"><span class="acc-ctag b">officiel</span><span class="acc-ctag">corrigé</span></div><div class="bar-wrap"><div class="bar"><div class="bar-fill" style="width:0%"></div></div><span class="bar-pct" style="color:var(--muted)">—</span></div></div>
-      <div class="chap-card"><div class="chap-num">2018</div><div class="chap-title">brevet 2018 → 2019</div><div class="chap-meta">2 sujets officiels · corrigés</div><div class="chap-tags"><span class="acc-ctag b">officiel</span><span class="acc-ctag r">réussi ✓</span></div><div class="bar-wrap"><div class="bar"><div class="bar-fill" style="width:100%;background:var(--rose)"></div></div><span class="bar-pct" style="color:#8B5A7A">100%</span></div></div>
+  </section>
+
+  <div id="acc-main">
+    <div class="stats-strip">
+      <div class="stat"><div class="stat-n" style="color:var(--blue)">16</div><div class="stat-l">sujets officiels du brevet de maths</div></div>
+      <div class="stat"><div class="stat-n">2018</div><div class="stat-l">première annale disponible — 6 ans de sujets</div></div>
+      <div class="stat"><div class="stat-n" style="color:var(--orange)">100%</div><div class="stat-l">corrigées question par question, avec la méthode</div></div>
+      <div class="stat"><div class="stat-n">2h⏱</div><div class="stat-l">durée max par sujet — comme le vrai brevet</div></div>
     </div>
+    <div class="divider"></div>
+    <div class="sec">
+      <div class="sec-head"><h2 class="sec-title">les annales disponibles</h2><a class="see-all" href="#">voir les annales →</a></div>
+      <div class="chap-grid">
+        <div class="chap-card"><div class="chap-num">2024</div><div class="chap-title">brevet 2024</div><div class="chap-meta">Session normale · juin 2024 · 2h</div><div class="chap-tags"><span class="acc-ctag b">officiel</span><span class="acc-ctag">corrigé</span><span class="acc-ctag r">chronométré</span></div><div class="bar-wrap"><div class="bar"><div class="bar-fill" style="width:0%;background:var(--blue)"></div></div><span class="bar-pct" style="color:var(--muted)">—</span></div></div>
+        <div class="chap-card"><div class="chap-num">2023</div><div class="chap-title">brevet 2023</div><div class="chap-meta">Session normale · juin 2023 · 2h</div><div class="chap-tags"><span class="acc-ctag b">officiel</span><span class="acc-ctag">corrigé</span></div><div class="bar-wrap"><div class="bar"><div class="bar-fill" style="width:87%;background:var(--blue)"></div></div><span class="bar-pct" style="color:var(--blue)">87%</span></div></div>
+        <div class="chap-card"><div class="chap-num">2022</div><div class="chap-title">brevet 2022</div><div class="chap-meta">Session normale · juin 2022 · 2h</div><div class="chap-tags"><span class="acc-ctag b">officiel</span><span class="acc-ctag o">en cours</span></div><div class="bar-wrap"><div class="bar"><div class="bar-fill" style="width:52%;background:var(--orange)"></div></div><span class="bar-pct" style="color:var(--orange)">52%</span></div></div>
+        <div class="chap-card"><div class="chap-num">2021</div><div class="chap-title">brevet 2021</div><div class="chap-meta">Session normale · juin 2021 · 2h</div><div class="chap-tags"><span class="acc-ctag b">officiel</span><span class="acc-ctag">corrigé</span></div><div class="bar-wrap"><div class="bar"><div class="bar-fill" style="width:0%"></div></div><span class="bar-pct" style="color:var(--muted)">—</span></div></div>
+        <div class="chap-card"><div class="chap-num">2020</div><div class="chap-title">brevet 2020</div><div class="chap-meta">Session de remplacement · 2h</div><div class="chap-tags"><span class="acc-ctag b">officiel</span><span class="acc-ctag">corrigé</span></div><div class="bar-wrap"><div class="bar"><div class="bar-fill" style="width:0%"></div></div><span class="bar-pct" style="color:var(--muted)">—</span></div></div>
+        <div class="chap-card"><div class="chap-num">2018</div><div class="chap-title">brevet 2018 → 2019</div><div class="chap-meta">2 sujets officiels · corrigés</div><div class="chap-tags"><span class="acc-ctag b">officiel</span><span class="acc-ctag r">réussi ✓</span></div><div class="bar-wrap"><div class="bar"><div class="bar-fill" style="width:100%;background:var(--rose)"></div></div><span class="bar-pct" style="color:#8B5A7A">100%</span></div></div>
+      </div>
+    </div>
+    <div class="footer-top">
+      <div><div class="footer-logo-bot">bre<span>.</span>vet</div><p class="footer-desc">La plateforme d'entraînement au brevet des collèges. Exercices progressifs, corrections détaillées, suivi personnalisé.</p></div>
+      <div><div class="footer-col-title">Notions</div><ul class="footer-links"><li>Nombres et calculs</li><li>Probabilités et Statistiques</li><li>Grandeurs et mesures</li><li>Espace et géométrie</li></ul></div>
+      <div><div class="footer-col-title">Navigation</div><ul class="footer-links"><li onclick="goTo('accueil')">Accueil</li><li onclick="goTo('generer')">Générer mon brevet</li><li onclick="goTo('parcours')">Mon parcours</li><li>Mes Ressources</li><li onclick="goTo('abonnement')">S'inscrire ou s'identifier</li></ul></div>
+      <div><div class="footer-col-title">Contact</div><ul class="footer-links"><li>nous écrire</li><li>instagram</li><li>newsletter</li></ul><div class="footer-col-title" style="margin-top:24px">Légales</div><ul class="footer-links"><li>Mentions légales</li><li>RGPD</li><li>CGU</li></ul></div>
+    </div>
+    <div class="footer-email-wrap"><a class="footer-email" href="mailto:hello@prepabrevet.fr">hello@prepabrevet.fr</a></div>
+    <div class="footer-bar"><div class="footer-bar-links"><a>Instagram</a><a>Newsletter</a><a>LinkedIn</a></div><span class="footer-bar-copy">© 2026 Prépa Brevet — tous droits réservés</span></div>
   </div>
-  <div class="footer-top">
-    <div><div class="footer-logo-bot">bre<span>.</span>vet</div><p class="footer-desc">La plateforme d'entraînement au brevet des collèges. Exercices progressifs, corrections détaillées, suivi personnalisé.</p></div>
-    <div><div class="footer-col-title">Notions</div><ul class="footer-links"><li>Nombres et calculs</li><li>Probabilités et Statistiques</li><li>Grandeurs et mesures</li><li>Espace et géométrie</li></ul></div>
-    <div><div class="footer-col-title">Navigation</div><ul class="footer-links"><li onclick="goTo('accueil')">Accueil</li><li onclick="goTo('parcours');setTimeout(()=>openModal(),50)">Générer mon brevet</li><li onclick="goTo('parcours')">Mon parcours</li><li>Mes Ressources</li><li onclick="goTo('abonnement')">S'inscrire ou s'identifier</li></ul></div>
-    <div><div class="footer-col-title">Contact</div><ul class="footer-links"><li>nous écrire</li><li>instagram</li><li>newsletter</li></ul><div class="footer-col-title" style="margin-top:24px">Légales</div><ul class="footer-links"><li>Mentions légales</li><li>RGPD</li><li>CGU</li></ul></div>
-  </div>
-  <div class="footer-email-wrap"><a class="footer-email" href="/cdn-cgi/l/email-protection#a4ccc1c8c8cbe4d4d6c1d4c5c6d6c1d2c1d08ac2d6"><span class="__cf_email__" data-cfemail="6b030e0707042b1b190e1b0a09190e1d0e1f450d19">[email&#160;protected]</span></a></div>
-  <div class="footer-bar"><div class="footer-bar-links"><a>Instagram</a><a>Newsletter</a><a>LinkedIn</a></div><span class="footer-bar-copy">© 2026 Prépa Brevet — tous droits réservés</span></div>
 </div>
 
 <!-- PAGE ABONNEMENT -->
@@ -769,6 +849,9 @@ function goTo(page){
   document.querySelectorAll('.page').forEach(p=>{p.style.display='none';p.classList.remove('active');});
   var target=document.getElementById('page-'+page);
   target.classList.add('active');
+  // Masquer la nav globale sur l'accueil (qui a sa propre nav dans le splash)
+  var globalNav=document.querySelector('body > nav.nav');
+  if(globalNav) globalNav.style.display = page==='accueil' ? 'none' : 'flex';
   if(page==='parcours'){target.style.display='flex';target.style.flexDirection='column';target.style.height='calc(100vh - 93px)';target.style.overflow='hidden';}
   else if(page==='abonnement'){target.style.display='flex';target.style.flexDirection='column';}
   else if(page==='planning'){target.style.display='flex';target.style.flexDirection='column';target.style.height='calc(100vh - 93px)';target.style.overflow='hidden';setTimeout(()=>renderPlanning(),50);}
@@ -994,6 +1077,25 @@ function loadDemo(){
   ];
   save();
 }
+
+// ── COUNTDOWN ACCUEIL ──
+const examDate=new Date('2026-06-27T08:00:00');
+function padCD(n){return String(n).padStart(2,'0');}
+function tickCD(){
+  const diff=examDate-new Date();
+  if(diff<=0){document.getElementById('days-num').textContent='0';['cd-j','cd-h','cd-m','cd-s'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent='00';});return;}
+  const totalSec=Math.floor(diff/1000),j=Math.floor(totalSec/86400),h=Math.floor((totalSec%86400)/3600),m=Math.floor((totalSec%3600)/60),s=totalSec%60;
+  const dn=document.getElementById('days-num');if(dn)dn.textContent=j;
+  const cj=document.getElementById('cd-j');if(cj)cj.textContent=padCD(j);
+  const ch=document.getElementById('cd-h');if(ch)ch.textContent=padCD(h);
+  const cm=document.getElementById('cd-m');if(cm)cm.textContent=padCD(m);
+  const cs=document.getElementById('cd-s');if(cs)cs.textContent=padCD(s);
+}
+tickCD();setInterval(tickCD,1000);
+
+// Cacher la nav globale au démarrage (accueil a sa propre nav)
+var _globalNav=document.querySelector('body > nav.nav');
+if(_globalNav) _globalNav.style.display='none';
 
 loadDemo();
 document.querySelectorAll('.page').forEach(p=>p.style.display='none');
